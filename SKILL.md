@@ -1,8 +1,8 @@
 --
 name: r-ui
-description: Universal UI/UX Design System, Multi-Theme, Modular Color Accent, 9-Pillar Complete Dashboard Kit Architecture (45+ Production Components), Spatial Harmony & Layout Precision Doctrine, Project-Adaptive & Live Playground Architecture Skill. Enforces anti-slop aesthetic standards, anti-rigid project adaptation (5 project archetypes & 4 visual dials), zero-neon and anti-heavy shadow discipline, visual-first density, dual-layer theming (5 Canvas Themes + 8 Calibrated Color Themes), strict componentized form policy (zero raw native forms), headless/unstyled component flexibility, live interactive showcase, multi-framework integration (React, Next.js, Tailwind v3/v4, Vue, Svelte, Ink CLI), fluid cross-platform responsiveness (Web, Windows, macOS, Linux, Android, iOS, Foldables, Smart TV), and integration with curated design references (jiro.build, designspells.com, styles.refero.design, supahero.io, mobbin.com).
+description: Universal UI/UX Design System, Multi-Theme, Modular Color Accent, 9-Pillar Complete Dashboard Kit Architecture (45+ Production Components), Spatial Harmony & Layout Precision Doctrine, Color Science & Palette Architecture (60-30-10, Tonal Ramps, Undertones), Typographic Composition Doctrine (3-Tier Font Pairing, Modular Scale, Leading Ratios, Tracking Inversion, 3-Weight Discipline), Project-Adaptive & Live Playground Architecture Skill. Enforces anti-slop aesthetic standards, anti-rigid project adaptation (5 project archetypes & 4 visual dials), zero-neon and anti-heavy shadow discipline, visual-first density, dual-layer theming (5 Canvas Themes + 8 Calibrated Color Themes), strict componentized form policy (zero raw native forms), headless/unstyled component flexibility, live interactive showcase, multi-framework integration (React, Next.js, Tailwind v3/v4, Vue, Svelte, Ink CLI), fluid cross-platform responsiveness (Web, Windows, macOS, Linux, Android, iOS, Foldables, Smart TV), and integration with curated design references (jiro.build, designspells.com, styles.refero.design, supahero.io, mobbin.com).
 when_to_use: Use whenever designing, building, auditing, refactoring, or reviewing user interfaces (UI), user experiences (UX), dashboard kits, admin consoles, SaaS platforms, responsive layouts, design systems, design tokens, micro-interactions, components, color themes, project adaptation, interactive showcases, or cross-platform web/app experiences.
-version: 2.3.0
+version: 2.4.0
 ---
 
 # r-ui: Universal UI/UX Design System & Visual-First Architecture
@@ -131,7 +131,7 @@ flowchart TD
 
 ---
 
-## 8. PRE-FLIGHT UI/UX AUDIT CHECKLIST (20-Point Gate)
+## 8. PRE-FLIGHT UI/UX AUDIT CHECKLIST (22-Point Gate)
 
 ```text
 [ ] 1.  Anti-Slop Check: Bebas dari AI-purple mesh gradient, bento seragam, & teks dummy "Lorem".
@@ -154,6 +154,8 @@ flowchart TD
 [ ] 18. Dashboard Completeness Gate: Meliputi ke-9 pilar arsitektur dashboard kit (Shell, Telemetri, Data Table, Visualisasi, Form kustom, Overlay, Navigasi, Identitas, dan Konsol DevOps).
 [ ] 19. Existing Color & Theme Conformance: Telah melakukan audit sistem warna eksisting dan memastikan 100% elemen baru/modifikasi tunduk pada CSS variables, tokens, dan tema yang sudah ada (zero rogue hardcoded hex/rgb).
 [ ] 20. Spatial Rhythm & Layout Harmony: Rasio ruang kosong (macro/micro whitespace) pas, rapi, dan teratur mengikuti skala 4pt/8pt; padding kontainer seimbang dengan konten; zero trapped dead-space, zero layout breaking, dan alignment presisi.
+[ ] 21. Color Palette & Undertone Coherence: Menerapkan rasio proporsi 60-30-10; nuansa netral konsisten (cool/slate, neutral/zinc, atau warm/stone); aksen terkalibrasi (<=10%); bebas dari warna neon fluorescent menusuk mata.
+[ ] 22. Typographic Composition & Tracking Discipline: Mematuhi pasangan 3-tier font (Display, UI/Body, Tabular Mono); leading proporsional (tight 1.1-1.2 untuk judul besar, compact 1.35 untuk UI, 1.6 untuk prosa); menerapkan hukum inversi tracking (-0.02em pada judul, +0.06em pada micro-label/caps); disiplin maks 3 font-weight.
 ```
 
 ---
@@ -326,3 +328,109 @@ Sebelum menyatakan layout atau komponen selesai dibuat:
 4. `[ ]` Apakah seluruh angka numerik menggunakan `tabular-nums` dan tersusun rapi?
 5. `[ ]` Apakah kontainer merespons ukuran layar secara fleksibel tanpa horizontal scrollbar yang tidak disengaja?
 
+
+---
+
+## 13. COLOR SCIENCE & PALETTE ARCHITECTURE (The 60-30-10 Rule, Undertone Families, 9-Step Tonal Ramps & Semantic Feedback Harmony)
+
+Penggunaan warna pada antarmuka kelas dunia bukanlah sekadar dekorasi, melainkan **sistem komunikasi hierarki optis yang presisi**. Agen yang menggunakan `r-ui` wajib memahami dan menerapkan sains pewarnaan berikut:
+
+```text
++-----------------------------------------------------------------------------------------+
+|                         THE 60-30-10 SPATIAL COLOR FORMULA                              |
++------------------------------------+--------------------------------+-------------------+
+| 60% DOMINANT FOUNDATION             | 30% STRUCTURAL SECONDARY       | 10% FOCAL ACCENT  |
+| Canvas, Surfaces, Cards, Dialogs   | Hairlines, Borders, Subtitles  | Primary CTA, Ring |
+| Unified Neutral Undertone Family   | Table Headers, Neutral Badges  | Active Tab, Dot   |
++------------------------------------+--------------------------------+-------------------+
+```
+
+### 13.1. Formula Proporsi Ruang Warna 60-30-10
+1. **60% Fondasi Netral Dominan**: Meliputi kanvas latar (`--r-ui-color-canvas`), panel permukaan (`--r-ui-color-surface`), dan kartu kontainer (`--r-ui-color-surface-elevated`). Latar belakang netral ini memberikan panggung tenang bagi konten tanpa distraksi visual.
+2. **30% Struktur Sekunder & Batas**: Garis hairline 1px (`--r-ui-color-border-subtle`), divider standar (`--r-ui-color-border-standard`), teks tubuh sekunder (`--r-ui-color-text-secondary`), latar hover, dan badge netral.
+3. **10% Aksen Vokal Terkalibrasi**: Tombol aksi utama (*primary CTA*), cincin fokus keyboard (*focus ring*), indikator tab aktif, dan pulse dot status kritis. **Jika semua elemen berwarna-warni, tidak ada satupun yang menonjol.**
+
+### 13.2. Taksonomi 4 Rumpun Nuansa Netral (Neutral Undertones)
+Dilarang menggunakan warna abu-abu mentah `#808080` atau hitam mati `#000000` tanpa temperatur. Pilih satu rumpun undertone netral yang konsisten:
+- **Cool Slate (Hue 215°–225°)**: Arketipe Tech, Cloud, DevOps, Keamanan Jaringan. Karakter: dingin, analitis, presisi (`#07090e` / `#0f1422`).
+- **Neutral Zinc (Hue 240°, saturasi 4–8%)**: Arketipe Linear/Apple, SaaS modern, workspace minimalis. Karakter: seimbang, bersih, serbaguna (`#09090b` / `#141418`).
+- **Warm Stone / Oat (Hue 35°–45°)**: Arketipe Editorial, Luxury, Media Publikasi, Lifestyle. Karakter: organik, nyaman di mata, mewah (`#0f0e0c` / `#faf8f5`).
+- **OLED Obsidian (Hue 260°, saturasi 2–4%)**: Arketipe Creative Studio, AI Labs, Media Player. Karakter: pekat, kontras sinematik (`#040405` / `#0d0e12`).
+> **Hukum Anti-Disimilaritas**: Dilarang mencampur dua undertone berbeda dalam satu antarmuka (misal card warm stone ditaruh di atas canvas cool slate).
+
+### 13.3. Arsitektur Tangga Warna 9-Langkah (50–950 Tonal Ramp)
+Setiap rona aksen dan netral mematuhi tangga luminansi seragam:
+- `50` & `100`: Tint ultra-halus untuk latar hover dan badge lembut.
+- `200` & `300`: Border hairline dan kontrol interaktif mode terang.
+- `400` & `500`: Warna aksen utama mode terang dan teks disabled mode gelap.
+- `600` & `700`: Aksen primer mode gelap dan state hover/pressed.
+- `800` & `900`: Permukaan kartu dan kontainer elevasi mode gelap.
+- `950`: Dasar kanvas terdalam mode gelap.
+
+### 13.4. Kuartet Status Semantik Tanpa Neon (Semantic Feedback Quartet)
+Status umpan balik wajib jelas terbaca namun tetap tenang (bebas dari warna neon yang menusuk mata):
+- **Success (Hijau Emerald)**: `--r-ui-color-success: #10b981;` dengan soft tint `rgba(16, 185, 129, 0.12)`.
+- **Warning (Kuning Amber)**: `--r-ui-color-warning: #f59e0b;` dengan soft tint `rgba(245, 158, 11, 0.12)`.
+- **Error (Merah Rose/Crimson)**: `--r-ui-color-error: #ef4444;` dengan soft tint `rgba(239, 68, 68, 0.12)`.
+- **Info (Biru Sky/Cyan)**: `--r-ui-color-info: #0ea5e9;` dengan soft tint `rgba(14, 165, 233, 0.12)`.
+> **Prinsip Multi-Kanal**: Jangan pernah mengandalkan warna saja untuk menyampaikan status; selalu sertakan ikon atau teks penjelas.
+
+---
+
+## 14. TYPOGRAPHIC COMPOSITION DOCTRINE (3-Tier Font Hierarchy, Modular Scaling, Leading Ratios, The Tracking Inversion Law & 3-Weight Discipline)
+
+Tipografi adalah 90% dari desain antarmuka. Tata huruf yang berkelas dicapai melalui **keseimbangan skala matematis, rasio leading proporsional, dan disiplin tracking mikro**.
+
+```text
++-----------------------------------------------------------------------------------------+
+|                        THE 3-TIER TYPOGRAPHIC ARCHITECTURE                              |
++-----------------------------+-----------------------------+-----------------------------+
+| TIER 1: DISPLAY & BRAND     | TIER 2: INTERFACE & BODY    | TIER 3: MONOSPACE TABULAR   |
+| Character, Geometry, Scale  | Legibility, x-Height, Crisp | Fixed Pitch, Tabular Nums   |
+| Plus Jakarta Sans / Geist   | Geist Sans / Inter Display  | JetBrains Mono / Geist Mono |
+| Leading: 1.05 - 1.20 (Tight)| Leading: 1.50 - 1.65 (Prose)| Leading: 1.30 (Monospace)   |
+| Tracking: -0.025em (Tight)  | Tracking: -0.005em (Neutral)| Tracking: 0.00em (Tabular)  |
++-----------------------------+-----------------------------+-----------------------------+
+```
+
+### 14.1. Arsitektur 3 Tingkat Pasangan Font (3-Tier Font Pairing)
+1. **Tier 1 — Display & Judul Brand**: Memberikan identitas dan karakter visual (`Plus Jakarta Sans`, `Geist`, `Clash Display`, `Space Grotesk`). Digunakan untuk H1, H2, dan Hero headlines.
+2. **Tier 2 — Antarmuka & Teks Tubuh (UI & Body)**: Memiliki x-height tinggi, bukaan glif lebar (*open apertures*), dan keterbacaan superior pada ukuran kecil (`Geist Sans`, `Plus Jakarta Sans`, `Inter Display`, `Satoshi`). Digunakan untuk formulir, tombol, tabel, dan paragraf deskripsi.
+3. **Tier 3 — Tabular & Monospace (Data & Telemetri)**: Lebar glif seragam (*fixed pitch*) untuk angka statistik, tabel komparasi, log audit, timestamp, dan kode (`JetBrains Mono`, `Geist Mono`, `SF Mono`).
+
+### 14.2. Skala Modular & Tipografi Fluida (Clamp-Based Scaling)
+Hindari ukuran font acak; gunakan formula `clamp()` yang beradaptasi mulus tanpa breakpoint patah:
+- **Hero Title**: `clamp(2.25rem, 1.5rem + 3.75vw, 4.25rem)` (36px–68px).
+- **H1**: `clamp(1.85rem, 1.25rem + 2.5vw, 3rem)` (30px–48px).
+- **H2**: `clamp(1.5rem, 1.15rem + 1.6vw, 2.25rem)` (24px–36px).
+- **H3**: `clamp(1.25rem, 1.05rem + 1vw, 1.75rem)` (20px–28px).
+- **Body Base**: `clamp(0.875rem, 0.85rem + 0.15vw, 1rem)` (14px–16px).
+- **Caption / UI Label**: `0.8125rem` (13px).
+- **Micro Badge / Eyebrow**: `0.6875rem`–`0.75rem` (11px–12px).
+
+### 14.3. Disiplin Rasio Leading (Line-Height Vertical Rhythm)
+Tinggi baris wajib berbanding terbalik dengan ukuran font:
+1. **Judul Besar (Display & H1/H2)**: Leading **Tight (1.05–1.20)**. Jika teks berukuran besar memakai line-height longgar, kata-kata akan terputus dan tampak terpisah secara visual.
+2. **Elemen UI, Form Input & Tombol**: Leading **Snug (1.25–1.35)**. Memastikan teks terpusat vertikal (*optically centered*) di dalam tombol/input 36px–40px tanpa memotong aksen atau ekor huruf (*descender*).
+3. **Paragraf & Teks Bacaan Panjang**: Leading **Relaxed (1.50–1.65)** dengan batasan panjang baris `max-width: 65ch–72ch` untuk menjaga kelancaran mata saat berpindah baris.
+
+### 14.4. Hukum Inversi Tracking (Letter-Spacing Inversion Law)
+> **Hukum Emas Spasi Huruf**:  
+> *Semakin besar ukuran font, semakin rapat tracking-nya. Semakin kecil ukuran font, semakin renggang tracking-nya.*
+- **Judul Besar (>= 24px)**: Tracking Negatif (`letter-spacing: -0.025em` hingga `-0.020em`). Menarik huruf besar agar saling mengikat dan membentuk kata yang solid dan padat.
+- **Teks Tubuh Normal (14px–18px)**: Tracking Netral (`letter-spacing: 0` atau `-0.005em`).
+- **Label Mikro & Eyebrow All-Caps (<= 12px)**: Tracking Positif Renggang (`letter-spacing: 0.05em` hingga `0.08em; text-transform: uppercase;`). Mencegah huruf kapital kecil saling menabrak dan tampak seperti noda tinta yang sulit dibaca.
+
+### 14.5. Disiplin Maksimal 3 Font-Weight (Anti-Weight Explosion)
+Jangan pernah menggunakan lebih dari 3 ketebalan huruf (*font weights*) dalam satu tampilan layar:
+- `Regular (400)`: Teks tubuh, sel data tabel, deskripsi panjang.
+- `Medium (500)`: Label formulir, header tabel, navigasi, tombol sekunder.
+- `Semi-Bold / Bold (600 / 700)`: Judul utama, angka metrik stat card, label tombol utama.
+> **Larangan**: Mencampur-adukkan font-weight 300, 400, 500, 600, 700, 800, 900 secara sembarangan di satu halaman.
+
+### 14.6. Hierarki 3-Tingkat Kontras Teks (Luminance Hierarchy)
+- **Teks Primer (100% legibilitas)**: Judul, nilai angka utama, tab terpilih (`--r-ui-color-text-primary`).
+- **Teks Sekunder (65–70% kontras)**: Subtitle, label input, key metadata (`--r-ui-color-text-secondary`).
+- **Teks Tersier / Redup (45–50% kontras)**: Timestamp, placeholder, divider breadcrumb, shortcut (`--r-ui-color-text-tertiary`).
+
+*Spesifikasi teknis warna & tipografi lengkap:* [r-ui-color-and-typography-doctrine.md](references/r-ui-color-and-typography-doctrine.md).

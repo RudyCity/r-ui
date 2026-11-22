@@ -6,13 +6,13 @@ div align="center">
 
 *A production-grade, anti-slop, project-adaptive design system & AI skill. Zero-dependency, zero-neon, anti-heavy shadows, strict componentized form policy, and 100% intellectual property (HAKI) compliant.*
 
-[![Version](https://img.shields.io/badge/version-2.3.0-blue.svg?style=flat-square)](https://github.com/RudyCity/r-ui)
+[![Version](https://img.shields.io/badge/version-2.4.0-blue.svg?style=flat-square)](https://github.com/RudyCity/r-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=flat-square)](LICENSE)
 [![Zero Dependency](https://img.shields.io/badge/dependencies-0-violet.svg?style=flat-square)](#)
 [![WCAG](https://img.shields.io/badge/WCAG-2.2_AAA-yellow.svg?style=flat-square)](#)
 [![Anti-Slop](https://img.shields.io/badge/Anti--Slop-Certified-rose.svg?style=flat-square)](#)
 
-[Live Interactive Playground](references/examples/r-ui-showcase.html) • [Dashboard Kit Spec](references/r-ui-dashboard-kit-spec.md) • [Design Tokens](references/r-ui-tokens.css) • [Themes](references/r-ui-themes.css) • [Component Specs](references/r-ui-component-specs.md) • [Framework Adapters](references/r-ui-framework-adapters.md)
+[Live Interactive Playground](references/examples/r-ui-showcase.html) • [Dashboard Kit Spec](references/r-ui-dashboard-kit-spec.md) • [Color & Typography](references/r-ui-color-and-typography-doctrine.md) • [Design Tokens](references/r-ui-tokens.css) • [Themes](references/r-ui-themes.css) • [Component Specs](references/r-ui-component-specs.md) • [Framework Adapters](references/r-ui-framework-adapters.md)
 
 </div>
 
@@ -243,6 +243,67 @@ World-class interfaces are defined by mathematical precision, visual cleanliness
 4. **Zero Trapped Dead-Space & Content Bounds**: Prevents lonely floating elements inside massive 1400px containers. Text lines are bounded to optimal reading lengths (65ch - 72ch), forms to 640px - 720px, and cards adapt with responsive `minmax(260px, 1fr)` grids.
 5. **Optical Alignment & Tabular Metrics**: All numbers, metrics, currency, and table data mandate `font-variant-numeric: tabular-nums;` and right-alignment to eliminate visual jitter. Icon + text pairs are locked with `display: inline-flex; align-items: center; gap: 6px;`.
 
+
+---
+
+## 🎨 Color Science & Tonal Palette Architecture
+
+`r-ui` replaces arbitrary color guessing with mathematical color science and perceptual contrast:
+
+```text
++-----------------------------------------------------------------------------------------+
+|                         THE 60-30-10 SPATIAL COLOR FORMULA                              |
++------------------------------------+--------------------------------+-------------------+
+| 60% DOMINANT FOUNDATION             | 30% STRUCTURAL SECONDARY       | 10% FOCAL ACCENT  |
+| Canvas, Surfaces, Cards, Dialogs   | Hairlines, Borders, Subtitles  | Primary CTA, Ring |
+| Unified Neutral Undertone Family   | Table Headers, Neutral Badges  | Active Tab, Dot   |
++------------------------------------+--------------------------------+-------------------+
+```
+
+- **60-30-10 Spatial Allocation**: 60% dominant neutral foundation (canvas, cards, panels), 30% structural secondary (1px hairlines, secondary text, hover tints), 10% focal accent (primary actions, focus rings, status dots).
+- **4 Coherent Neutral Undertones**: Choose one consistent family per workspace:
+  - **Cool Slate** (Hue 215°–225°): DevOps, Cloud, Telemetry (`#07090e` / `#0f1422`).
+  - **Neutral Zinc** (Hue 240°, Sat 4–8%): Minimalist, Linear-style, SaaS (`#09090b` / `#141418`).
+  - **Warm Stone** (Hue 35°–45°): Editorial Luxury, Lifestyle, Docs (`#0f0e0c` / `#faf8f5`).
+  - **OLED Obsidian** (Hue 260°): Media Viewers, AI Labs, Creative Studios (`#040405` / `#0d0e12`).
+- **9-Step Tonal Ramps (50 to 950)**: Standardized lightness curves for seamless transitions from ultra-subtle hover states (`50/100`) to deep dark surfaces (`800/900`) and canvas bases (`950`).
+- **Semantic Feedback Quartet**: Calibrated non-fluorescent shades for Success (`#10b981`), Warning (`#f59e0b`), Error (`#ef4444`), and Info (`#0ea5e9`), paired with mandatory multi-channel icon/shape cues.
+
+---
+
+## 🔤 Typographic Composition & Micro-Hierarchy
+
+Typography accounts for 90% of UI design. `r-ui` enforces strict mathematical scale and optical rhythm:
+
+```text
++-----------------------------------------------------------------------------------------+
+|                        THE 3-TIER TYPOGRAPHIC ARCHITECTURE                              |
++-----------------------------+-----------------------------+-----------------------------+
+| TIER 1: DISPLAY & BRAND     | TIER 2: INTERFACE & BODY    | TIER 3: MONOSPACE TABULAR   |
+| Character, Geometry, Scale  | Legibility, x-Height, Crisp | Fixed Pitch, Tabular Nums   |
+| Plus Jakarta Sans / Geist   | Geist Sans / Inter Display  | JetBrains Mono / Geist Mono |
+| Leading: 1.05 - 1.20 (Tight)| Leading: 1.50 - 1.65 (Prose)| Leading: 1.30 (Monospace)   |
+| Tracking: -0.025em (Tight)  | Tracking: -0.005em (Neutral)| Tracking: 0.00em (Tabular)  |
++-----------------------------+-----------------------------+-----------------------------+
+```
+
+1. **3-Tier Font Pairing Engine**:
+   - **Tier 1 (Display/Brand)**: H1, H2, and Hero headlines (*Plus Jakarta Sans*, *Geist*, *Clash Display*, *Space Grotesk*).
+   - **Tier 2 (Interface/Body)**: Forms, buttons, data grids, and prose (*Geist Sans*, *Plus Jakarta Sans*, *Inter Display*, *Satoshi*).
+   - **Tier 3 (Tabular/Mono)**: Counters, financial ledgers, telemetry, timestamps (*JetBrains Mono*, *Geist Mono*, *SF Mono*).
+2. **The Tracking Inversion Law**:
+   - **Headings (>= 24px)**: Negative tracking (`-0.025em` to `-0.020em`) pulls large glyphs together for punchy, cohesive words.
+   - **Standard Body**: Neutral tracking (`0` to `-0.005em`).
+   - **Micro-Labels & Eyebrow Caps (<= 12px)**: Positive expanded tracking (`+0.05em` to `+0.08em` / `uppercase`) prevents ink-blob illegibility.
+3. **Leading (Line-Height) Rhythm**:
+   - Display Headings: Tight (`1.05` – `1.20`) to eliminate word fracturing.
+   - UI Elements & Buttons: Snug (`1.25` – `1.35`) for optical vertical centering in fixed-height inputs.
+   - Body & Prose: Relaxed (`1.50` – `1.65`) bounded to `max-width: 65ch–72ch`.
+4. **Strict 3-Weight Discipline**: Only 3 weights per view: Regular (400), Medium (500), and Semi-Bold/Bold (600/700). Arbitrary weight proliferation is strictly banned.
+5. **Tabular Figures Mandate**: All numerical data must include `font-variant-numeric: tabular-nums;` and right-alignment for zero-jitter visual scanning.
+
+*Detailed technical specifications:* [r-ui-color-and-typography-doctrine.md](references/r-ui-color-and-typography-doctrine.md).
+
 ---
 
 ## 📚 Curated Design References
@@ -260,7 +321,7 @@ World-class interfaces are defined by mathematical precision, visual cleanliness
 
 ```text
 r-ui/
-├── SKILL.md                          # Main operational AI skill manual (v2.3.0)
+├── SKILL.md                          # Main operational AI skill manual (v2.4.0)
 ├── README.md                         # Public repository documentation
 ├── LICENSE                           # MIT License
 └── references/
