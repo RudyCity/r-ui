@@ -11,11 +11,11 @@ version: 2.2.0
 
 ---
 
-## 1. THE 9 ANTI-SLOP VISUAL LAWS (Non-Negotiable)
+## 1. THE 10 ANTI-SLOP VISUAL LAWS (Non-Negotiable)
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                       THE 9 ANTI-SLOP DESIGN LAWS                           │
+│                       THE 10 ANTI-SLOP DESIGN LAWS                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │  1. BAN THE PURPLE HAZE     ──► No generic AI-purple/pink mesh gradients    │
 │  2. BAN SYMMETRIC BENTO     ──► Asymmetric weights & hierarchy (2:1 spans)  │
@@ -26,6 +26,7 @@ version: 2.2.0
 │  7. BAN HEAVY MUDDY SHADOWS ──► Zero thick black blur; crisp micro-elevate  │
 │  8. BAN NEON & CYBERPUNK    ──► Calibrated optical tones; zero glow rings   │
 │  9. BAN RAW NATIVE FORMS    ──► Zero unstyled <select>; 100% componentized  │
+│ 10. BAN COLOR HIJACKING     ──► Honor existing color system; zero rogue hex │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -130,7 +131,7 @@ flowchart TD
 
 ---
 
-## 8. PRE-FLIGHT UI/UX AUDIT CHECKLIST (18-Point Gate)
+## 8. PRE-FLIGHT UI/UX AUDIT CHECKLIST (19-Point Gate)
 
 ```text
 [ ] 1.  Anti-Slop Check: Bebas dari AI-purple mesh gradient, bento seragam, & teks dummy "Lorem".
@@ -151,6 +152,7 @@ flowchart TD
 [ ] 16. Zero-Dependency: Tidak ada library eksternal wajib yang dipaksakan.
 [ ] 17. Componentized Form Check: 100% bebas dari elemen raw native <select>, checkbox, atau radio; seluruhnya menggunakan r-ui Custom Form Components.
 [ ] 18. Dashboard Completeness Gate: Meliputi ke-9 pilar arsitektur dashboard kit (Shell, Telemetri, Data Table, Visualisasi, Form kustom, Overlay, Navigasi, Identitas, dan Konsol DevOps).
+[ ] 19. Existing Color & Theme Conformance: Telah melakukan audit sistem warna eksisting dan memastikan 100% elemen baru/modifikasi tunduk pada CSS variables, tokens, dan tema yang sudah ada (zero rogue hardcoded hex/rgb).
 ```
 
 ---
@@ -189,4 +191,45 @@ Setiap kali diminta membuat Dashboard Kit atau UI Kit dengan `r-ui`, agen **WAJI
 10. **Interactive Component Showcase**: Wajib menyertakan tab/halaman katalog interaktif di mana seluruh komponen dari ke-9 pilar dapat diuji fungsionalitas dan respon temanya secara live.
 
 *Spesifikasi teknis & blueprint lengkap:* [r-ui-dashboard-kit-spec.md](references/r-ui-dashboard-kit-spec.md).
+
+---
+
+## 11. MANDATORY EXISTING COLOR & THEME CONFORMANCE PROTOCOL
+
+Setiap kali agen membuat komponen baru, merefaktor kode, atau memodifikasi antarmuka di proyek yang sudah ada, agen **WAJIB MEMATUHI PROTOKOL 4 LANGKAH INI SEBELUM MEMULAI CODING**:
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│             EXISTING COLOR & THEME CONFORMANCE WORKFLOW                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 1. DISCOVERY & MAPPING ──► Audit :root, tokens, CSS vars, & active themes   │
+│ 2. ZERO ROGUE COLORS   ──► Ban hardcoded hex/rgb; 100% map to existing vars │
+│ 3. THEME REACTIVITY    ──► Ensure dynamic adaptation to dark/light/accents  │
+│ 4. FORMAL EXTENSION    ──► Derive only from existing ramps (50-950 / alpha) │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Langkah 1: Audit Sistem Warna & Tema Eksisting (Pre-Flight Inspection)
+Sebelum menulis satu baris pun CSS atau styling:
+1. **Telusuri Berkas Token & Styling**: Periksa `:root`, `tokens.css`, `themes.css`, `globals.css`, `tailwind.config`, atau atribut HTML seperti `data-theme`, `data-r-ui-theme`, `data-r-ui-accent`.
+2. **Petakan Peran Semantik (Semantic Roles)**:
+   - **Kanvas & Permukaan**: Cari token background dasar (misal `--r-ui-color-canvas`, `--r-ui-color-surface`, `--r-ui-color-surface-elevated`).
+   - **Batas & Hairlines**: Cari token border (misal `--r-ui-color-border-standard`, `--r-ui-color-border-subtle`).
+   - **Hierarki Teks**: Cari token tipografi (misal `--r-ui-color-text-primary`, `--r-ui-color-text-secondary`, `--r-ui-color-text-tertiary`).
+   - **Aksen & State Interaktif**: Cari token brand/aksen (misal `--r-ui-color-accent-primary`, `--r-ui-color-focus-ring`, `--r-ui-color-success`, `--r-ui-color-error`).
+
+### Langkah 2: Dilarang Keras Memasukkan Hex/RGB Liar (Zero Rogue Hardcoded Colors)
+- **Hukum Mutlak**: Agen **DILARANG KERAS** menuliskan warna hardcoded sembarangan seperti `background: #1e293b; color: #64748b;` jika proyek sudah memiliki sistem CSS variables seperti `var(--r-ui-color-surface-elevated)` atau `var(--r-ui-color-text-secondary)`.
+- Seluruh elemen baru atau modifikasi **100% WAJIB MEMAKAI CSS VARIABLES / DESIGN TOKENS EKSISTING**.
+- Pelanggaran terhadap sistem warna eksisting dianggap sebagai **SLOP & DESAIN INKONSISTEN**.
+
+### Langkah 3: Pengujian Reaktivitas Multi-Tema (Theme-Reactivity)
+- Seluruh elemen yang dimodifikasi atau baru ditambahkan wajib diuji terhadap perubahan tema aktif (misal dari mode Dark Nebula ke Clean Light atau Slate Obsidian).
+- Tidak boleh ada elemen dengan warna teks/background statis yang menjadi tidak terbaca (*contrast broken*) saat pengguna berpindah tema.
+
+### Langkah 4: Protokol Ekstensi Warna Terkendali
+- Jika sebuah komponen membutuhkan transparansi atau variasi warna yang belum tersedia, **DILARANG** mengarang warna baru.
+- Gunakan fungsi `rgba()` berbasis token aksen yang ada (misal `rgba(var(--r-ui-color-accent-primary-rgb), 0.15)`) atau gunakan skala ramp terdaftar (`--r-ui-color-accent-50` hingga `950`).
+- Jika penambahan token permanen memang diperlukan, daftarkan token tersebut secara formal di file token utama proyek terlebih dahulu dengan persetujuan hierarki desain.
+
 

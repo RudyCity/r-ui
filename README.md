@@ -32,11 +32,11 @@ All tokens and classes operate under the original `--r-ui-*` namespace, guarante
 
 ---
 
-## 🛡️ The 9 Anti-Slop Visual Laws
+## 🛡️ The 10 Anti-Slop Visual Laws
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                       THE 9 ANTI-SLOP DESIGN LAWS                           │
+│                       THE 10 ANTI-SLOP DESIGN LAWS                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │  1. BAN THE PURPLE HAZE     ──► No generic AI-purple/pink mesh gradients    │
 │  2. BAN SYMMETRIC BENTO     ──► Asymmetric weights & hierarchy (2:1 spans)  │
@@ -47,6 +47,7 @@ All tokens and classes operate under the original `--r-ui-*` namespace, guarante
 │  7. BAN HEAVY MUDDY SHADOWS ──► Zero thick black blur; crisp micro-elevate  │
 │  8. BAN NEON & CYBERPUNK    ──► Calibrated optical tones; zero glow rings   │
 │  9. BAN RAW NATIVE FORMS    ──► Zero unstyled <select>; 100% componentized  │
+│ 10. BAN COLOR HIJACKING     ──► Honor existing color system; zero rogue hex │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -89,6 +90,16 @@ flowchart TD
 
 - **Strictly Bans Raw Native `<select>` & `<option>`**: Raw OS popups (Win32 / Cocoa) break dark themes with blinding white contrast and uncontrolled styling.
 - **Mandates Accessible Custom Popover Components**: Trigger button, floating popover, live search filtering, full keyboard navigation (`ArrowUp`/`ArrowDown`/`Enter`/`Esc`), and W3C ARIA compliance (`role="combobox"`, `role="listbox"`, `role="option"`).
+
+---
+
+## 🎨 Law 10: Mandatory Existing Color & Theme Conformance
+
+Whenever building new components or modifying existing UI, the agent **MUST DISCOVER AND HONOR THE EXISTING DESIGN SYSTEM**:
+1. **Pre-Flight Color & Theme Audit**: Discover `:root`, CSS variables, active canvas themes (`data-theme`, `data-r-ui-theme`), and accent scales before writing any code.
+2. **Zero Rogue Hardcoded Hex/RGB**: Banning arbitrary hardcoded colors (e.g. `background: #1e293b`). Every single style mutation **MUST strictly consume existing CSS variables / design tokens**.
+3. **Multi-Theme Reactivity**: Modifications must seamlessly adapt to canvas switches (dark/light/sepia) and accent changes without contrast breakage.
+4. **Controlled Color Extension**: If new depth or transparency is required, derive strictly from existing token alpha channels or registered accent ramps (`50–950`).
 
 ---
 
