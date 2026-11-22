@@ -1,4 +1,4 @@
-<div align="center">
+div align="center">
 
 # 💎 r-ui
 
@@ -6,7 +6,7 @@
 
 *A production-grade, anti-slop, project-adaptive design system & AI skill. Zero-dependency, zero-neon, anti-heavy shadows, strict componentized form policy, and 100% intellectual property (HAKI) compliant.*
 
-[![Version](https://img.shields.io/badge/version-2.2.0-blue.svg?style=flat-square)](https://github.com/RudyCity/r-ui)
+[![Version](https://img.shields.io/badge/version-2.3.0-blue.svg?style=flat-square)](https://github.com/RudyCity/r-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=flat-square)](LICENSE)
 [![Zero Dependency](https://img.shields.io/badge/dependencies-0-violet.svg?style=flat-square)](#)
 [![WCAG](https://img.shields.io/badge/WCAG-2.2_AAA-yellow.svg?style=flat-square)](#)
@@ -219,6 +219,30 @@ Open [`references/examples/r-ui-showcase.html`](references/examples/r-ui-showcas
 - **Smart TV Spatial Nav**: Use arrow keys to experience 1.08x D-pad navigation and crisp outlines.
 - **Modality Detection**: Detects touch vs precision mouse pointer automatically.
 
+
+---
+
+## 📐 Spatial Harmony & Precision Layout Doctrine
+
+World-class interfaces are defined by mathematical precision, visual cleanliness, and an exquisite balance between negative space (*whitespace*) and container contents. `r-ui` enforces 5 strict layout laws:
+
+```text
++---------------------------------------------------------------------------------+
+|                     THE 5 PILLARS OF SPATIAL HARMONY                            |
++-----------------+-----------------+-----------------+-------------+-------------+
+| 1. 4pt/8pt Grid | 2. Gestalt Space| 3. Nested Radius| 4. Density  | 5. Optical  |
+| Strict Harmonic | Macro vs Micro  | R_outer =       | Zero Dead   | Tabular &   |
+| Multiples Only  | Proximity Ratios| R_inner + P     | Space Bounds| Axis Lock   |
++-----------------+-----------------+-----------------+-------------+-------------+
+```
+
+1. **Strict 4pt / 8pt Harmonic Grid**: All `padding`, `margin`, and `gap` values strictly adhere to the 4pt/8pt scale (`4px`, `8px`, `12px`, `16px`, `24px`, `32px`, `48px`, `64px`). Arbitrary odd numbers (`13px`, `17px`, `23px`) are permanently banned.
+2. **Gestalt Proximity & Macro/Micro Spacing**: Elements that belong together functionally share micro-spacing (4px - 8px), while separate containers maintain macro-spacing (16px - 32px). Hierarchy rule: `Section Gap >= Card Padding > Item Gap > Label-to-Input`.
+3. **Mathematical Nested Radius Formula**: To prevent visual corner collisions and clipping, inner element border radii strictly obey:
+   $R_{\text{inner}} = \max(0, R_{\text{outer}} - \text{Padding})$
+4. **Zero Trapped Dead-Space & Content Bounds**: Prevents lonely floating elements inside massive 1400px containers. Text lines are bounded to optimal reading lengths (65ch - 72ch), forms to 640px - 720px, and cards adapt with responsive `minmax(260px, 1fr)` grids.
+5. **Optical Alignment & Tabular Metrics**: All numbers, metrics, currency, and table data mandate `font-variant-numeric: tabular-nums;` and right-alignment to eliminate visual jitter. Icon + text pairs are locked with `display: inline-flex; align-items: center; gap: 6px;`.
+
 ---
 
 ## 📚 Curated Design References
@@ -236,7 +260,7 @@ Open [`references/examples/r-ui-showcase.html`](references/examples/r-ui-showcas
 
 ```text
 r-ui/
-├── SKILL.md                          # Main operational AI skill manual (v2.2.0)
+├── SKILL.md                          # Main operational AI skill manual (v2.3.0)
 ├── README.md                         # Public repository documentation
 ├── LICENSE                           # MIT License
 └── references/
@@ -269,3 +293,4 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
 <div align="center">
   <b>Built with precision by <a href="https://github.com/RudyCity">RudyCity</a></b>
 </div>
+
