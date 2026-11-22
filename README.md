@@ -28,7 +28,7 @@
 - 📖 **Foldables & Dual-Screen**: Hinge-aware responsive CSS spanning.
 - 📺 **10-Foot UI (Smart TV)**: D-Pad Spatial Navigation, 3-meter legibility, 5% overscan protection.
 
-All tokens and classes operate under the original `--r-ui-*` namespace, guaranteeing **100% protection against third-party trademark and IP infringement**.
+All tokens and classes operate under the original `--r-ui-*` namespace for greenfield setups, guaranteeing **100% protection against third-party trademark and IP infringement**, while seamlessly adopting existing project tokens and conventions when working in established codebases without forcing external prefixes.
 
 ---
 
@@ -135,10 +135,11 @@ Every UI component must explicitly implement the **6 Universal Visual States**:
 ## 🎨 Law 10: Mandatory Existing Color & Theme Conformance
 
 Whenever building new components or modifying existing UI, the agent **MUST DISCOVER AND HONOR THE EXISTING DESIGN SYSTEM**:
-1. **Pre-Flight Color & Theme Audit**: Discover `:root`, CSS variables, active canvas themes (`data-theme`, `data-r-ui-theme`), and accent scales before writing any code.
-2. **Zero Rogue Hardcoded Hex/RGB**: Banning arbitrary hardcoded colors (e.g. `background: #1e293b`). Every single style mutation **MUST strictly consume existing CSS variables / design tokens**.
-3. **Multi-Theme Reactivity**: Modifications must seamlessly adapt to canvas switches (dark/light/sepia) and accent changes without contrast breakage.
-4. **Controlled Color Extension**: If new depth or transparency is required, derive strictly from existing token alpha channels or registered accent ramps (`50–950`).
+1. **Context-Aware Token Adaptation (Never Force `--r-ui-*`)**: If an existing project already has defined design tokens, CSS variables, or class conventions (e.g. `--background`, `--primary`, `--border`, Tailwind `@theme`, Shadcn tokens, or custom `:root` tokens), `r-ui` components **MUST** adapt directly to the project's native token vocabulary. Do NOT force `--r-ui-*` prefixing onto existing architectures.
+2. **Pre-Flight Color & Theme Audit**: Discover `:root`, CSS variables, active canvas themes (`data-theme`, `data-r-ui-theme`), and accent scales before writing any code.
+3. **Zero Rogue Hardcoded Hex/RGB**: Banning arbitrary hardcoded colors (e.g. `background: #1e293b`). Every single style mutation **MUST strictly consume existing CSS variables / design tokens**.
+4. **Multi-Theme Reactivity**: Modifications must seamlessly adapt to canvas switches (dark/light/sepia) and accent changes without contrast breakage.
+5. **Controlled Color Extension**: If new depth or transparency is required, derive strictly from existing token alpha channels or registered accent ramps (`50–950`).
 
 ---
 
@@ -370,7 +371,7 @@ Every UI component, screen, or dashboard kit engineered with `r-ui` must pass th
 18. [x] **Optical Alignment**: Sub-pixel balance between icons, text labels, and form controls.
 19. [x] **Touch Target Ergonomics**: Minimum 44x44px touch targets on mobile viewports.
 20. [x] **Cross-Platform Responsive**: Flawless reflow across Desktop, Mobile, and Smart TV.
-21. [x] **Zero Third-Party Trademark Conflicts**: 100% original `--r-ui-*` naming.
+21. [x] **Context-Aware Token Adaptation**: For existing projects, strictly adopt and reuse existing project tokens/classes (do NOT force `--r-ui-*`). For greenfield projects, use standard `--r-ui-*` tokens.
 22. [x] **Zero Mock Vagueness**: Realistic domain-specific mock data; zero "Lorem Ipsum".
 23. [x] **Kinetic Physics & Springs**: Snappy spring curves and tactile `scale(0.975)` micro-press.
 24. [x] **WCAG 2.2 AAA Double-Ring Focus**: 2px inner canvas offset + 2px outer accent outline.

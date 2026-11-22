@@ -1,6 +1,7 @@
 /**
- * r-ui Design Tokens (v1.8.0)
- * Namespace: --r-ui-*
+ * r-ui Design Tokens (v3.0.0)
+ * Default Namespace: --r-ui-* (Baseline for greenfield projects)
+ * Adaptive Rule: In projects with an existing design system/tokens, map directly to project tokens without forcing --r-ui-*
  * Principles: Zero-Neon, Anti-Heavy Shadows, Crisp Micro-Elevation, W3C Standards
  */
 

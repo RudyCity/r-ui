@@ -7,7 +7,7 @@ version: 3.0.0
 
 # r-ui: Universal UI/UX Design System & Visual-First Architecture
 
-`r-ui` is the authoritative operational skill for engineering production-grade user interfaces (UI) and user experiences (UX) with top-tier agency aesthetics: **Visual-First**, **Dense & Concise (Anti-Wall-of-Text)**, **Free of Murky Heavy Shadows**, **Free of Neon & Cyberpunk Glows**, **Adaptive to Project DNA**, and **Zero Intellectual Property (IP) Risk** (100% native `--r-ui-*` namespace).
+`r-ui` is the authoritative operational skill for engineering production-grade user interfaces (UI) and user experiences (UX) with top-tier agency aesthetics: **Visual-First**, **Dense & Concise (Anti-Wall-of-Text)**, **Free of Murky Heavy Shadows**, **Free of Neon & Cyberpunk Glows**, **Adaptive to Project DNA**, and **Context-Aware Token Architecture** (Standard clean `--r-ui-*` namespace for greenfield projects, with zero-friction adaptation to any existing project token system).
 
 ---
 
@@ -140,7 +140,7 @@ When designing, reviewing, or refactoring UI/UX, verify patterns against the 5 e
 [ ] 3.  Anti-Heavy Shadow Check: Free of murky thick black drop-shadows; use crisp 1-3px micro-elevations.
 [ ] 4.  Visual Density: Concise, high-density copy, strong visual hierarchy, strict 4pt/8pt harmonic spacing.
 [ ] 5.  Project DNA Match: Dials (Density, Radius, Motion, Contrast) calibrated to project archetype.
-[ ] 6.  IP Compliance: All design tokens and CSS classes use original --r-ui-* prefix.
+[ ] 6.  Token & Namespace Adaptation: For existing projects, strictly adopt and reuse existing project tokens/classes (do NOT force --r-ui-*). For greenfield projects, use standard --r-ui-* tokens.
 [ ] 7.  Mobile Ergonomics: Min 44x44px touch targets, bottom-sheets on mobile viewports, safe-area-inset.
 [ ] 8.  Desktop Multi-Window: Crisp fractional DPI scaling, explicit navigation shortcuts.
 [ ] 9.  10-Foot UI (TV): D-Pad spatial navigation (Arrow keys), 1.08x focus magnification, high-contrast outlines.
@@ -212,33 +212,37 @@ Whenever creating new components, refactoring code, or modifying user interfaces
 |             EXISTING COLOR & THEME CONFORMANCE WORKFLOW                         |
 +---------------------------------------------------------------------------------+
 | 1. DISCOVERY & MAPPING ---> Audit :root, tokens, CSS vars, & active themes      |
-| 2. ZERO ROGUE COLORS   ---> Ban hardcoded hex/rgb; 100% map to existing vars    |
-| 3. THEME REACTIVITY    ---> Ensure dynamic adaptation to dark/light/accents     |
-| 4. FORMAL EXTENSION    ---> Derive only from existing ramps (50-950 / alpha)    |
+| 2. ZERO FORCED NAMESPACE -> Never force --r-ui-* if project has its own tokens  |
+| 3. ZERO ROGUE COLORS   ---> Ban hardcoded hex/rgb; 100% map to existing vars    |
+| 4. THEME REACTIVITY    ---> Ensure dynamic adaptation to dark/light/accents     |
 +---------------------------------------------------------------------------------+
 ```
+
+### Context-Aware Token & Namespace Rule: Never Force `--r-ui-*` on Existing Codebases
+- **Existing Projects**: If the project already has its own design tokens, CSS variables, or class utility conventions (such as `--background`, `--foreground`, `--primary`, `--border` in Shadcn/Radix, or `--color-*`, `--theme-*`, or Tailwind `@theme` utilities), the agent **MUST NOT** force `--r-ui-*` variables onto the project. Instead, adapt component styles directly to the project's native variables and conventions!
+- **Greenfield / Standalone**: If the project is greenfield or has no established design tokens, default to the standard `--r-ui-*` namespace as the pristine foundation.
 
 ### Step 1: Pre-Flight Color & Theme Discovery Audit
 Before writing a single line of CSS or component styling:
 1. **Inspect Token & Style Files**: Search for `:root`, `tokens.css`, `themes.css`, `globals.css`, `tailwind.config`, or HTML attributes like `data-theme`, `data-r-ui-theme`, `data-r-ui-accent`.
-2. **Map Semantic Roles**:
-   - **Canvas & Surface**: Identify background base tokens (e.g. `--r-ui-color-canvas`, `--r-ui-color-surface`, `--r-ui-color-surface-elevated`).
-   - **Borders & Hairlines**: Identify border tokens (e.g. `--r-ui-color-border-standard`, `--r-ui-color-border-subtle`).
-   - **Typography Hierarchy**: Identify text tokens (e.g. `--r-ui-color-text-primary`, `--r-ui-color-text-secondary`, `--r-ui-color-text-tertiary`).
-   - **Accents & Interactive States**: Identify brand/accent tokens (e.g. `--r-ui-color-accent-primary`, `--r-ui-color-focus-ring`, `--r-ui-color-success`, `--r-ui-color-error`).
+2. **Map Semantic Roles to Project Variables**:
+   - **Canvas & Surface**: Identify background base tokens (e.g. project's `--background`, `--color-canvas`, or `--r-ui-color-canvas`).
+   - **Borders & Hairlines**: Identify border tokens (e.g. project's `--border`, `--color-border-standard`, or `--r-ui-color-border-standard`).
+   - **Typography Hierarchy**: Identify text tokens (e.g. project's `--foreground`, `--color-text-primary`, or `--r-ui-color-text-primary`).
+   - **Accents & Interactive States**: Identify brand/accent tokens (e.g. project's `--primary`, `--ring`, `--color-accent-primary`, or `--r-ui-color-accent-primary`).
 
 ### Step 2: Strict Ban on Rogue Hardcoded Colors (Zero Rogue Hex/RGB)
-- **Absolute Rule**: Agents are **STRICTLY FORBIDDEN** from writing arbitrary hardcoded colors like `background: #1e293b; color: #64748b;` when the project already provides CSS variables such as `var(--r-ui-color-surface-elevated)` or `var(--r-ui-color-text-secondary)`.
+- **Absolute Rule**: Agents are **STRICTLY FORBIDDEN** from writing arbitrary hardcoded colors like `background: #1e293b; color: #64748b;` when the project already provides CSS variables such as `var(--background)`, `var(--color-surface)`, or `var(--r-ui-color-surface-elevated)`.
 - All new and modified elements **100% MUST CONSUME EXISTING CSS VARIABLES / DESIGN TOKENS**.
 - Violating an existing color system is classified as **UNACCEPTABLE SLOP & DESIGN INCONSISTENCY**.
 
 ### Step 3: Multi-Theme Reactivity Verification
-- Every added or modified component must be validated across active canvas themes (e.g. switching from Dark Nebula to Clean Light or Slate Obsidian).
+- Every added or modified component must be validated across active canvas themes (e.g. switching from dark to light mode or between custom palettes).
 - No static hardcoded text or background color may be used that results in broken contrast when the user changes themes.
 
 ### Step 4: Controlled Color Extension Protocol
 - If a component requires a transparency or shade not yet exposed, **NEVER invent arbitrary colors**.
-- Derive strictly using `rgba()` with registered accent tokens (e.g. `rgba(var(--r-ui-color-accent-primary-rgb), 0.15)`) or standard ramps (`--r-ui-color-accent-50` through `950`).
+- Derive strictly using `rgba()` with registered accent tokens (e.g. `rgba(var(--primary-rgb), 0.15)` or `rgba(var(--r-ui-color-accent-primary-rgb), 0.15)`) or standard ramps (`50` through `950`).
 - If a new permanent design token is genuinely required, declare it formally in the project's primary design token registry first.
 
 ---
