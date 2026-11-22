@@ -1,13 +1,13 @@
 # r-ui: Multi-Framework Integration Adapters
 
-Panduan dan pola implementasi komponen orisinal `r-ui` pada berbagai framework terpopuler: **React & Next.js**, **Tailwind CSS (v3 & v4)**, **Vue 3**, **Svelte 5**, dan **Ink (Terminal UI)**.
+Implementation guide and architectural patterns for native -ui components across modern frameworks: **React & Next.js**, **Tailwind CSS (v3 & v4)**, **Vue 3**, **Svelte 5**, and **Ink (Terminal UI)**.
 
 ---
 
 ## 1. React & Next.js Integration
 
 ### A. Strict Variant Props Contract (TypeScript)
-Gunakan pola varian terstandardisasi agar seluruh komponen atomik memiliki nama prop yang konsisten:
+Use standardized variant patterns so all atomic components expose consistent prop interfaces:
 
 ```typescript
 // types/r-ui-props.ts
@@ -22,8 +22,8 @@ export interface RUiBaseProps {
 }
 ```
 
-### B. Compound Component Pattern (Contoh: Card)
-Pola compound component mencegah "prop drilling" dan memungkinkan kustomisasi layout yang fleksibel namun tetap konsisten:
+### B. Compound Component Pattern (Example: Card)
+The compound component pattern eliminates prop drilling and enables flexible yet visually consistent layout composition:
 
 ```tsx
 // components/r-ui/Card.tsx
@@ -190,14 +190,14 @@ withDefaults(defineProps<{
 
 ## 4. Ink Terminal UI Adapter (Modern Precision CLI)
 
-Untuk aplikasi CLI berbasis Node.js/Bun yang menggunakan Ink, petakan token `--r-ui-*` ke terminal styling presisi:
+For Node.js/Bun CLI applications using Ink, map --r-ui-* tokens to terminal chalk/ink styling:
 
 ```tsx
 // cli/components/RUiTerminalCard.tsx
 import React from 'react';
 import { Box, Text } from 'ink';
 
-// Palet warna terminal r-ui (zero-neon)
+// r-ui terminal color palette (zero-neon)
 export const R_UI_TERMINAL_THEME = {
   canvas: '#090a0f',
   accent: '#38bdf8',

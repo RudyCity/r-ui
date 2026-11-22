@@ -78,7 +78,7 @@ flowchart TD
     P5 --> P5_items["Custom Select, Multi-Select Chips, Date Range Picker, Spring Switch, Dropzone"]
     P6 --> P6_items["Modal Dialogs, Slide-Over Drawers, Toast Stack, Destructive Alerts, Tooltips"]
     P7 --> P7_items["Command Palette Ctrl+K, Segmented Controls, Steppers, Tree Views"]
-    P8 --> P8_items["Avatar Groups, Status Badges dengan Pulse Dot, Audit Timeline, Key-Value Grid"]
+    P8 --> P8_items["Avatar Groups, Status Badges with Pulse Dot, Audit Timeline, Key-Value Grid"]
     P9 --> P9_items["Live Terminal Stream, Latency Pulse, Env Var Editor, Metric Dials"]
 ```
 

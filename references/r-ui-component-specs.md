@@ -1,12 +1,12 @@
 # r-ui: Complete Component Anatomy & Interaction Specifications (v2.0.0)
 
-Spesifikasi lengkap pustaka komponen modular berskala produksi untuk Universal UI/UX Design System.
-**Visual-first**, anti-slop, bebas dari shadow keruh pekat, bebas dari efek neon/glow, dan 100% menggunakan token orisinal `--r-ui-*`.
+Comprehensive modular component specifications for production-grade Universal UI/UX Design System.
+**Visual-first**, anti-slop, free of murky dark shadows, free of neon/glow effects, and 100% powered by native --r-ui-* tokens.
 
 ---
 
 ## 1. Action Button System
-Tombol interaktif dengan respons fisik pegas alami (*tactile spring physics*), state aksesibel, dan zero-neon.
+Interactive buttons with tactile spring physics, accessible state management, and zero-neon discipline.
 
 ```css
 .r-ui-btn {
@@ -83,7 +83,7 @@ Tombol interaktif dengan respons fisik pegas alami (*tactile spring physics*), s
 
 ## 3. Custom Accessible Select Component (BANS RAW NATIVE <select>)
 
-Elemen native `<select>` dan `<option>` **dilarang keras** karena popup OS bawaan merusak tema gelap/variabel CSS. Wajib gunakan `r-ui Custom Select Component`:
+Raw native <select> and <option> elements are **strictly banned** because OS popups break dark themes and CSS custom properties. Use -ui Custom Select Component:
 
 ```css
 .r-ui-custom-select {

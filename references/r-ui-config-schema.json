@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "RUiProjectConfiguration",
-  "description": "Skema konfigurasi adaptasi proyek untuk r-ui Design System",
+  "description": "Project adaptation configuration schema for r-ui Design System",
   "type": "object",
   "properties": {
     "projectName": {
       "type": "string",
-      "description": "Nama proyek"
+      "description": "Project name"
     },
     "archetype": {
       "type": "string",
@@ -18,7 +18,7 @@
         "regulated-public-sector"
       ],
       "default": "b2b-cockpit",
-      "description": "Arketipe desain utama yang menentukan kepadatan dan radius dasar"
+      "description": "Primary design archetype governing base density and corner radius"
     },
     "dials": {
       "type": "object",
@@ -60,7 +60,7 @@
         "customAccentHex": {
           "type": "string",
           "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
-          "description": "Hex warna brand kustom jika ingin override accent bawaan"
+          "description": "Custom brand hex color to override default accent"
         }
       }
     },

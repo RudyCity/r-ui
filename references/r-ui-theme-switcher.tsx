@@ -45,7 +45,7 @@ export function RUiThemeSwitcher({ className = '' }: { className?: string }) {
   }, []);
 
   const applyTheme = (newTheme: RUiCanvasTheme, newAccent: RUiColorAccent) => {
-    // Aktifkan transisi halus sementara saat pergantian tema
+    // Enable smooth transition temporarily during theme switch
     document.documentElement.style.transition = 'background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease';
     document.documentElement.setAttribute('data-r-ui-theme', newTheme);
     document.documentElement.setAttribute('data-r-ui-accent', newAccent);
@@ -83,11 +83,11 @@ export function RUiThemeSwitcher({ className = '' }: { className?: string }) {
         borderRadius: 'var(--r-ui-radius-md)',
       }}
     >
-      {/* Dropdown Tema Kanvas */}
+      {/* Canvas Theme Dropdown */}
       <select
         value={theme}
         onChange={handleThemeChange}
-        aria-label="Pilih Tema Kanvas"
+        aria-label="Select Canvas Theme"
         style={{
           background: 'transparent',
           color: 'var(--r-ui-color-text-primary)',
@@ -106,8 +106,8 @@ export function RUiThemeSwitcher({ className = '' }: { className?: string }) {
         ))}
       </select>
 
-      {/* Palet Pilihan Warna Aksen */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} role="radiogroup" aria-label="Warna Aksen">
+      {/* Accent Color Swatches */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }} role="radiogroup" aria-label="Accent Color">
         {ACCENT_COLORS.map((c) => (
           <button
             key={c.id}

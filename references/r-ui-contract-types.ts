@@ -36,8 +36,8 @@ export interface RUiComponentContract {
 }
 
 /**
- * Helper Zero-Dependency untuk menghasilkan class name terstruktur r-ui
- * Mencegah magic strings dan inkonsistensi styling.
+ * Zero-Dependency helper to generate structured r-ui class names.
+ * Prevents magic strings and styling inconsistencies.
  */
 export function buildRUiClasses(
   baseClass: string,

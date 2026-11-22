@@ -1,12 +1,12 @@
-# r-ui Interactive Showcase & Playground (v1.8.0)
+# r-ui Interactive Showcase & Playground (v2.4.0)
 
-Playground interaktif mandiri (*zero-dependency playground*) untuk menguji kapabilitas desain dan rekayasa antarmuka pengguna `r-ui`.
+Self-contained zero-dependency interactive playground for evaluating the visual design and engineering capabilities of `r-ui`.
 
 ---
 
-## Cara Menjalankan
+## Getting Started
 
-Tidak memerlukan Node.js, server, atau proses kompilasi. Buka file secara langsung di peramban:
+Requires zero Node.js setup, dev server, or build step. Open the file directly in any modern browser:
 
 ```text
 references/examples/r-ui-showcase.html
@@ -14,21 +14,21 @@ references/examples/r-ui-showcase.html
 
 ---
 
-## Fitur Interaktif Visual-First
+## Interactive Visual-First Features
 
 1. **Dual-Layer Theme Switcher**:
-   - Pilih tema kanvas (Dark Nebula, Clean Light, Slate Obsidian, Warm Sepia, High Contrast) via dropdown pojok kanan atas.
-   - Pilih palet warna aksen (8 warna terkalibrasi) via swatch lingkaran.
-   - Transisi warna halus bebas kedipan (*anti-flicker*).
+   - Choose canvas themes (Dark Nebula, Clean Light, Slate Obsidian, Warm Sepia, High Contrast) via top-right dropdown.
+   - Choose accent color palettes (8 calibrated tones) via circular swatches.
+   - Smooth, flicker-free CSS variable transitions (*anti-flicker*).
 2. **Adaptive Modal vs Mobile Bottom-Sheet**:
-   - Klik tombol **"Buka Adaptive Modal"**.
-   - Pada desktop: modal berada di tengah layar dengan micro-elevation.
-   - Pada layar mobile (< 768px): dialog otomatis bergeser menjadi bottom-sheet dengan safe area.
+   - Click the **"Open Adaptive Modal"** button.
+   - On desktop: modal is centered with crisp micro-elevation.
+   - On mobile viewports (< 768px): dialog automatically converts to a native-feel bottom-sheet with safe-area insets.
 3. **Smart TV Spatial Navigation (10-Foot UI)**:
-   - Arahkan fokus ke salah satu kotak di area **Smart TV Spatial Navigation**.
-   - Gunakan tombol keyboard (**Panah Kanan, Panah Kiri, Panah Atas, Panah Bawah**).
-   - Efek perbesaran visual 1.08x dengan outline kontras tinggi tanpa glow blur.
+   - Focus any tile within the **Smart TV Spatial Navigation** section.
+   - Use keyboard navigation (**Arrow Right, Left, Up, Down**).
+   - Crisp 1.08x focus magnification with high-contrast outlines and zero blur glow.
 4. **Input Modality Detection**:
-   - Mendeteksi pointer secara otomatis (Mouse/Trackpad vs Layar Sentuh).
+   - Automatically detects active pointer modality (Precision Mouse/Trackpad vs Coarse Touchscreen).
 5. **Toggle Unstyled Mode**:
-   - Klik tombol **"Toggle Unstyled Mode"** untuk melihat fleksibilitas komponen headless tanpa ikatan styling kaku.
+   - Click the **"Toggle Unstyled Mode"** button to witness headless component flexibility without styling lock-in.

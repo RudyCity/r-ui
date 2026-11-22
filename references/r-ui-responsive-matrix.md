@@ -1,6 +1,6 @@
 # r-ui: Universal Multi-Device Responsive Matrix & Recipes
 
-Panduan implementasi kode siap pakai untuk mendukung responsivitas universal di seluruh ekosistem: **Web & PWA**, **Desktop (Windows, macOS, Linux)**, **Mobile & Tablet (Android, iOS)**, **Foldables**, dan **Smart TV (10-Foot UI)**. Bebas dari penjiplakan merek dagang pihak ketiga.
+Production implementation guide for universal responsiveness across platforms: **Web & PWA**, **Desktop OS (Windows, macOS, Linux)**, **Mobile & Tablet (Android, iOS)**, **Foldables**, and **Smart TV (10-Foot UI)**. 100% original intellectual property.
 
 ---
 
@@ -8,7 +8,7 @@ Panduan implementasi kode siap pakai untuk mendukung responsivitas universal di 
 
 ### A. Safari / iOS Rubber-Banding Elimination
 ```css
-/* Cegah bounce/rubber banding liar pada container internal */
+/* Prevent unwanted rubber-band bounce on nested containers */
 .r-ui-scroll-surface {
   overflow-y: auto;
   overscroll-behavior-y: contain;
@@ -16,9 +16,9 @@ Panduan implementasi kode siap pakai untuk mendukung responsivitas universal di 
 }
 ```
 
-### B. Dynamic Viewport Height (Eliminasi Bug 100vh)
+### B. Dynamic Viewport Height (100vh Bug Elimination)
 ```css
-/* 100vh di mobile browser sering tertutup address bar dinamis */
+/* 100vh on mobile browsers is frequently obscured by dynamic address bars */
 .r-ui-screen-fill {
   min-height: 100dvh;
   height: 100svh; /* Fallback small viewport */
@@ -27,7 +27,7 @@ Panduan implementasi kode siap pakai untuk mendukung responsivitas universal di 
 
 ### C. Standalone PWA Adaptation
 ```css
-/* Deteksi saat aplikasi dibuka dalam mode terinstal (standalone PWA) */
+/* Detection when app is launched in standalone installed mode (PWA) */
 @media (display-mode: standalone) {
   .r-ui-header {
     padding-top: max(var(--r-ui-space-4), env(safe-area-inset-top));
@@ -45,7 +45,7 @@ Panduan implementasi kode siap pakai untuk mendukung responsivitas universal di 
 
 ### A. Windows Modern Non-Intrusive Scrollbars
 ```css
-/* Standar W3C & WebKit engine untuk Windows */
+/* W3C standard & WebKit engine for Windows fractional DPI */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--r-ui-color-border-strong) transparent;
@@ -85,7 +85,7 @@ body {
 
 ### C. Precision Pointer vs Coarse Touch Separation
 ```css
-/* Hanya jalankan efek hover jika perangkat menggunakan mouse/pointer presisi */
+/* Only enable hover effects if device utilizes precision mouse/pointer */
 @media (hover: hover) and (pointer: fine) {
   .r-ui-interactive-item:hover {
     transform: translateY(-2px);
@@ -94,7 +94,7 @@ body {
   }
 }
 
-/* Untuk layar sentuh: matikan hover mengambang, ganti dengan active state */
+/* For touchscreens: disable floating hover, replace with active state */
 @media (hover: none) and (pointer: coarse) {
   .r-ui-interactive-item:active {
     transform: scale(0.98);
@@ -119,7 +119,7 @@ body {
 
 ### B. Touch Target 48px Minimum Expansion
 ```css
-/* Elemen visual kecil (ikon 20px) tetap memenuhi standar sentuh 48px */
+/* Small visual elements (20px icons) still fulfill 48px touch target standard */
 .r-ui-touch-target {
   position: relative;
   display: inline-flex;
@@ -137,16 +137,16 @@ body {
 
 ### CSS Viewport Segments API (Hinge Safety)
 ```css
-/* Penanganan layar lipat horizontal (dual-pane horizontal) */
+/* Dual-screen horizontal fold posture handling */
 @media (horizontal-viewport-segments: 2) {
   .r-ui-foldable-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: env(viewport-segment-width 0 0); /* Mengosongkan area lipatan engsel */
+    gap: env(viewport-segment-width 0 0); /* Clear the hardware hinge crease area */
   }
 }
 
-/* Penanganan layar ditekuk 90 derajat di meja (tabletop posture) */
+/* 90-degree tabletop fold posture handling */
 @media (vertical-viewport-segments: 2) {
   .r-ui-foldable-app {
     display: flex;
@@ -168,7 +168,7 @@ body {
 
 ### A. TV Focus Glow & Scale State
 ```css
-/* Indikator fokus TV yang terbaca dari jarak 3 meter */
+/* TV focus indicator legible from 3 meters */
 .r-ui-tv-node {
   outline: none;
   transition: transform var(--r-ui-duration-fast) var(--r-ui-ease-spring),

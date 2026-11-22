@@ -1,17 +1,17 @@
-# r-ui Universal Dashboard Kit Architecture Specification (v2.2.0)
+# r-ui Universal Dashboard Kit Architecture Specification (v2.4.0)
 
 > **The Definitive Industry Blueprint for High-Agency, Production-Grade Analytical Consoles & SaaS Dashboards**  
-> Built upon the **9 Anti-Slop Visual Laws**, **Dual-Layer Theming**, **Dashboard Hardening**, and **Strict Componentized Form Policy**.
+> Built upon the **10 Anti-Slop Visual Laws**, **Dual-Layer Theming**, **Dashboard Hardening**, and **Strict Componentized Form Policy**.
 
 ---
 
 ## 🏛️ Executive Summary & Design Philosophy
 
-Dashboard modern bukanlah sekadar kumpulan kartu metrik acak dengan gradasi ungu generic (*slop*). Dashboard kelas dunia (seperti pada Stripe, Vercel, Supabase, Linear, Cloudflare, dan Datadog) mengutamakan:
-1. **High Visual Density & Information Hierarchy**: Tata letak berorientasi data (*data-dense*), menggunakan micro-elevation (1–3px) dan hairline borders (1px), bukan shadow hitam pekat.
-2. **Dashboard Hardening (Anti-Card Overuse)**: Menggabungkan metrik ke dalam **Architectural Telemetry Ribbons** dan pembagi vertikal bergaris tipis tanpa mengurung setiap angka ke dalam kotak terpisah.
-3. **Zero Raw Native Forms**: 100% komponen form (terutama Select, Multi-Select, Checkbox, Toggle) menggunakan custom accessible DOM popovers yang mematuhi token tema dan WCAG 2.2 AA.
-4. **Actionable Workflows**: Data table dilengkapi pencarian instan, filter facet, aksi massal (*bulk actions*), pagination responsif, dan slide-over inspector drawer.
+A modern dashboard is not merely an arbitrary cluster of metric cards with generic purple gradients (*AI slop*). World-class dashboards (such as Stripe, Vercel, Supabase, Linear, Cloudflare, and Datadog) prioritize:
+1. **High Visual Density & Information Hierarchy**: Data-dense layouts utilizing crisp micro-elevations (1–3px) and 1px hairlines rather than murky black drop-shadows.
+2. **Dashboard Hardening (Anti-Card Overuse)**: Unifying related metrics into **Architectural Telemetry Ribbons** with thin vertical hairline dividers instead of boxing every single metric into isolated floating cards.
+3. **Zero Raw Native Forms**: 100% of form components (especially Select, Multi-Select, Checkbox, Toggle) utilize custom accessible DOM popovers adhering to theme tokens and WCAG 2.2 AA.
+4. **Actionable Workflows**: Data tables featuring instant search, faceted filters, bulk action floating bars, responsive pagination, and slide-over inspector drawers.
 
 ---
 
@@ -46,243 +46,242 @@ flowchart TD
 
 ## PILLAR 1: SHELL & NAVIGATION ARCHITECTURE
 
-Struktur kerangka dasar antarmuka aplikasi berskala enterprise.
+Enterprise-grade application scaffold framework.
 
 ### 1.1 Collapsible Sidebar Navigation (`.r-ui-sidebar`)
-- **Expanded State (240px–260px)**: Menampilkan logo sistem, workspace switcher, kategori menu (`.r-ui-nav-group-title`), link navigasi dengan leading icon, label teks, dan trailing badge counter.
-- **Mini Rail State (56px–64px)**: Mode ramping hemat ruang untuk perangkat tablet/desktop sekunder; hanya menampilkan ikon dengan floating tooltip saat hover.
-- **Organization / Workspace Switcher**: Dropdown popover di bagian atas sidebar untuk berpindah organisasi/proyek dengan status dot aktif.
-- **User Profile Pill**: Di dasar sidebar, menampilkan avatar, nama user, role (`Admin`), dan tombol popover status.
+- **Expanded State (240px–260px)**: Displays system logo, workspace switcher, menu groups (`.r-ui-nav-group-title`), navigation links with leading icons, labels, and trailing badge counters.
+- **Mini Rail State (56px–64px)**: Space-saving compact rail for secondary tablet/desktop viewports; displays icons only with floating tooltips on hover.
+- **Organization / Workspace Switcher**: Top popover dropdown for instant project/organization switching with active status indicator.
+- **User Profile Pill**: Bottom-pinned profile dock displaying user avatar, name, role badge (`Admin`), and popover status triggers.
 
 ### 1.2 App Navigation Header (`.r-ui-header`)
-- **Breadcrumb Trail**: Jalur navigasi dinamis (`Infrastruktur / Kluster Edge / US-East-1`) dengan pemisah slash tipis dan auto-truncation pada layar sempit.
-- **Command Palette Trigger Button**: Input semu atau tombol pintas (`Ctrl + K` / `⌘ + K`) dengan badge kustom.
-- **Environment & Branch Selector**: Indikator pill lingkungan aktif (misal `production • main` vs `staging • pr-42`).
-- **Action Group**: Notification Center trigger dengan pulsating badge dot untuk unread alert, Help/Docs button, dan Theme/Accent Switcher.
+- **Breadcrumb Trail**: Dynamic path hierarchy (`Infrastructure / Edge Clusters / US-East-1`) with subtle slash dividers and responsive truncation.
+- **Command Palette Trigger Button**: Search button / shortcut indicator (`Ctrl + K` / `⌘ + K`) with custom shortcut keycaps.
+- **Environment & Branch Selector**: Active environment pill badge (e.g. `production • main` vs `staging • pr-42`).
+- **Action Group**: Notification center trigger with unread alert pulse dot, Help/Docs link, and live Theme/Accent Switcher.
 
 ### 1.3 Page Header & Action Hero Bar (`.r-ui-page-header`)
-- **Header Metadata**: Title (h1, semi-bold 1.25rem), status tag (`Healthy`), dan subtitle deskriptif singkat.
-- **Action Toolbar**: Date-Range Picker popover, tombol Filter, tombol Export data (`CSV/JSON`), dan tombol aksi utama (`+ New Deployment`).
+- **Header Metadata**: Page title (h1, semi-bold 1.25rem), status tag (`Healthy`), and concise subtitle description.
+- **Action Toolbar**: Date-Range picker popover, filter drawer trigger, export button (`CSV/JSON`), and primary action button (`+ New Deployment`).
 
 ### 1.4 Master-Detail Splitter & Right Inspector Drawer
-- Membagi layar kerja menjadi daftar entitas utama dan panel inspeksi cepat di sisi kanan tanpa harus memuat ulang halaman (*zero context loss*).
+- Splits workspace into primary entity list and quick inspection panel on the right with zero page reload (*zero context loss*).
 
 ---
 
 ## PILLAR 2: METRICS & TELEMETRY DISPLAYS
 
-Visualisasi KPI utama yang padat, bebas dari isolasi card yang berlebihan.
+Dense KPI visualization free from unnecessary card isolation.
 
 ### 2.1 Metric / Stat Card (`.r-ui-stat-card`)
-- **Label**: Tipografi kecil (0.75rem), warna sekunder dengan ikon bantuan atau info tooltip.
-- **Big Value**: Angka metrik berukuran tebal (1.5rem–1.75rem) dengan formatting angka lokal (misal: `$148,290.00`, `99.99%`, `14.2 ms`).
-- **Delta Trend Badge**: Badge kenaikan/penurunan persentase (`+14.8% ↑` hijau untuk revenue/positif, `-3.2% ↓` merah untuk penurunan performa/error).
-- **Comparison Context**: Micro-text perbandingan ("vs 30 hari sebelumnya").
-- **Mini Sparkline**: Grafik tren micro SVG tertanam di bagian bawah kartu.
+- **Label**: Micro-typography (0.75rem), secondary color with helper tooltip icon.
+- **Primary Value**: Bold numeric telemetry (1.5rem–1.75rem) with localized formatting (e.g. `$148,290.00`, `99.99%`, `14.2 ms`).
+- **Delta Trend Badge**: Percentage delta indicator (`+14.8% ↑` in emerald green for positive growth, `-3.2% ↓` in crimson red for errors or drops).
+- **Comparison Context**: Micro-text comparison subtitle ("vs previous 30 days").
+- **Mini Sparkline**: Embedded SVG trend chart at the card base.
 
 ### 2.2 Architectural Telemetry Ribbon (`.r-ui-telemetry-ribbon`)
-- Strip metrik horizontal satu baris yang menyatukan 4–6 metrik tanpa kotak kartu terpisah.
-- Dibatasi oleh hairline divider 1px vertikal (`--r-ui-color-border-standard`).
-- Menghemat ruang vertikal secara drastis (*high agency density*).
+- Single-row horizontal telemetry strip uniting 4–6 metrics without individual card wrappers.
+- Separated by crisp 1px vertical hairline dividers (`--r-ui-color-border-standard`).
+- Dramatically conserves vertical viewport space (*high-density agency craft*).
 
 ### 2.3 Progress & Quota Gauges (`.r-ui-gauge-bar`, `.r-ui-radial-gauge`)
-- **Segmented Bar**: Menampilkan kuota penggunaan kapasitas (misal: Storage 72/100 GB) dengan transisi mulus.
-- **Radial Donut Meter**: Menampilkan persentase performa beban CPU / RAM dengan indikator warna status optik.
+- **Segmented Bar**: Visualizes quota and capacity utilization (e.g. Storage 72/100 GB) with smooth state transitions.
+- **Radial Donut Meter**: Displays CPU / RAM utilization percentage with optical status colors.
 
 ### 2.4 Uptime & Latency Pulse Strip (`.r-ui-uptime-strip`)
-- Deretan 90 balok micro-bar yang mewakili ketersediaan sistem selama 90 hari terakhir.
-- Warna hijau untuk operasional normal, kuning untuk insiden minor, merah untuk downtime.
-- Dilengkapi dengan ping latensi real-time beranimasi pulse dot (`14ms Ping`).
+- Sequence of 90 micro-bars representing 90-day historical system availability.
+- Emerald green for normal operations, amber for degraded performance, crimson for downtime.
+- Equipped with real-time ping indicator featuring an animated pulse dot (`14ms Ping`).
 
 ---
 
 ## PILLAR 3: DATA TABLES & COLLECTIONS (CORE WORKHORSE)
 
-Pusat kendali dan manajemen data utama pada dashboard.
+The command center for data management in production applications.
 
 ### 3.1 High-Density Data Grid (`.r-ui-table`)
-- **Sortable Header**: Kolom dengan header klik untuk sort asc/desc/neutral disertai ikon panah halus.
-- **Row Selection**: Checkbox kustom di setiap baris dan di header dengan dukungan status *indeterminate* ("Select All").
-- **Hover & Selected States**: Baris berubah warna lembut saat di-hover dan mendapat aksen outline tipis saat dipilih.
-- **Monospace Numerical Alignment**: Kolom angka (harga, latensi, persentase) wajib menggunakan font monospaced rata kanan (`text-align: right; font-family: var(--r-ui-font-family-mono);`).
-- **Action Kebab Menu**: Dropdown popover aksi baris (`...`) berisi Edit, View Logs, Clone, Delete.
-- **Expandable Rows**: Baris yang dapat dibuka untuk melihat detail sub-entitas atau JSON trace.
+- **Sortable Header**: Clickable column headers for asc/desc/neutral sorting with subtle directional chevron icons.
+- **Row Selection**: Custom accessible checkbox in each row and table header with indeterminate ("Select All") support.
+- **Hover & Selected States**: Smooth background transitions on row hover and subtle active outline when selected.
+- **Monospace Numerical Alignment**: Numeric columns (prices, latency, percentages) strictly declare right alignment and monospace font (`text-align: right; font-family: var(--r-ui-font-family-mono); font-variant-numeric: tabular-nums;`).
+- **Action Menu**: Row kebab dropdown (`...`) exposing Edit, View Logs, Clone, Delete actions.
+- **Expandable Rows**: Accordion drawer for nested sub-entities, stack traces, or JSON payloads.
 
 ### 3.2 Faceted Filter Bar & Active Filter Chips (`.r-ui-filter-bar`)
-- **Search Input**: Input pencarian real-time dengan tombol clear (`×`) dan icon pencarian.
-- **Facet Filter Popovers**: Tombol filter berbasis kategori (Status, Role, Wilayah) yang membuka menu checkbox popover.
-- **Active Chips Strip**: Menampilkan filter aktif dalam bentuk chip mini yang dapat dihapus per satuan atau sekaligus (*Clear all*).
-- **Preset Views / View Switcher**: Tab bar segmen cepat: *"All (1,240)"*, *"Active (890)"*, *"Suspended (42)"*, *"Requires Attention (5)"*.
+- **Search Input**: Real-time filtering input with clear button (`×`) and leading search icon.
+- **Facet Filter Popovers**: Category-based filter triggers (Status, Role, Region) opening checkbox popover menus.
+- **Active Chips Strip**: Displays applied filters as dismissible mini-chips with single or bulk removal (*Clear all*).
+- **Preset Segmented Views**: Fast view tabs: *"All (1,240)"*, *"Active (890)"*, *"Suspended (42)"*, *"Requires Attention (5)"*.
 
 ### 3.3 Bulk Action Bar (`.r-ui-bulk-bar`)
-- Bar aksi mengambang (*floating dock*) di bagian bawah layar yang muncul otomatis saat `> 0` baris dipilih.
-- Menampilkan counter: *"3 entitas dipilih"*.
-- Tombol aksi massal: *Export Selected*, *Tag*, *Suspend*, *Delete Selected*, dan tombol *Deselect All*.
+- Floating action dock anchored to the bottom viewport, automatically appearing when `> 0` rows are selected.
+- Displays selection counter: *"3 entities selected"*.
+- Bulk actions: *Export Selected*, *Tag*, *Suspend*, *Delete Selected*, and *Deselect All*.
 
 ### 3.4 Table Pagination & Page Size Controller (`.r-ui-pagination`)
-- **Counter Info**: *"Menampilkan 1–25 dari 1,420 data"*.
-- **Page Size Select**: Custom Select dropdown (`10`, `25`, `50`, `100` per halaman).
-- **Navigation Buttons**: First, Prev, Nomor halaman aktif, Next, Last, serta input lompat halaman langsung.
+- **Counter Info**: *"Showing 1–25 of 1,420 entries"*.
+- **Page Size Select**: Custom Select dropdown (`10`, `25`, `50`, `100` per page).
+- **Navigation Controls**: First, Previous, Active Page Number, Next, Last, and direct page jump input.
 
 ### 3.5 Empty State & Skeleton Shimmer Loaders
-- **Empty State**: Ikon vektor minimalis berlatar netral, judul jelas (*"Belum ada transaksi ditemukan"*), deskripsi solusi (*"Coba ubah filter pencarian Anda atau buat transaksi baru"*), dan tombol CTA aksi.
-- **Skeleton Shimmer**: Baris tabel beranimasi shimmer berkas cahaya halus untuk menghindari layout shift saat data dimuat.
+- **Empty State**: Minimalist vector icon, clear title (*"No transactions found"*), actionable resolution hint (*"Adjust your active filters or record a new transaction"*), and primary CTA button.
+- **Skeleton Shimmer**: Smooth light-wave animated placeholders preventing Cumulative Layout Shift (CLS) during data fetching.
 
 ---
 
 ## PILLAR 4: DATA VISUALIZATION & ANALYTICS WIDGETS
 
-Grafik berbasis SVG terintegrasi yang menghormati token palet tema kanvas dan aksen.
+Integrated SVG charts respecting canvas and accent theme tokens.
 
 ### 4.1 Time-Series Area & Line Charts (`.r-ui-chart-area`)
-- Garis kurva Bezier halus dengan area gradien lembut beropasitas rendah di bawah kurva (maksimal 15% opacity).
-- Interactive hover vertical ruler (crosshair tracker).
-- Floating Tooltip Card yang mengikuti kursor mouse, menampilkan timestamp dan rincian angka tiap seri.
+- Smooth cubic Bezier curves with low-opacity gradient fills (maximum 15% opacity).
+- Interactive vertical crosshair ruler tracking mouse position.
+- Floating tooltip card following cursor, detailing timestamps and series values.
 
 ### 4.2 Grouped & Stacked Bar Charts (`.r-ui-chart-bar`)
-- Batang vertikal atau horizontal dengan ujung atas membulat halus (radius 2–3px).
-- Penanganan visual nilai negatif yang tegas di bawah garis batas nol.
+- Vertical or horizontal bars with subtle rounded caps (2–3px radius).
+- Distinct negative value rendering below the baseline axis.
 
 ### 4.3 Donut & Radial Distribution Charts (`.r-ui-chart-donut`)
-- Cincin SVG dengan label tengah yang menampilkan nilai agregat utama (*"Total 100%"* atau *"4,821 Permintaan"*).
-- Daftar legenda pill interaktif di samping atau di bawah grafik.
+- SVG donut ring with centered aggregate label (*"Total 100%"* or *"4,821 Requests"*).
+- Interactive legend chips positioned beside or below chart canvas.
 
 ### 4.4 Latency Histogram & Real-Time Sparklines
-- Distribusi latensi P50, P90, P99 dalam balok-balok proporsional.
-- Micro-sparkline interaktif yang dapat disematkan di dalam sel tabel data.
+- P50, P90, P99 latency bucket distribution.
+- Micro-sparklines embeddable within table cells.
 
 ---
 
 ## PILLAR 5: COMPONENTIZED FORM CONTROLS (ZERO NATIVE FORMS)
 
-Sesuai **Hukum Desain ke-9 r-ui**: Seluruh elemen form wajib menggunakan komponen DOM kustom yang terisolasi dan aksesibel.
+Per **r-ui Law 9**: All form controls must utilize custom, isolated, and accessible DOM components.
 
 ### 5.1 Custom Accessible Select (`.r-ui-custom-select`)
-- Trigger button dengan label aktif, status icon, dan chevron SVG berputar.
-- Floating popover menu yang selaras dengan tema kanvas aktif, micro-elevation, max-height scrollable, keyboard navigation, dan ARIA combobox/listbox attributes.
+- Trigger button displaying active selection, status indicator, and rotating SVG chevron.
+- Floating popover menu matching active canvas theme, micro-elevated, scrollable, with full keyboard navigation and W3C ARIA combobox/listbox attributes.
 
 ### 5.2 Multi-Select with Removable Chips (`.r-ui-multi-select`)
-- Item terpilih langsung ditampilkan dalam bentuk tag chip kompak dengan tombol hapus (`×`) di dalam trigger.
-- Popover menu dengan kolom pencarian instan, opsi "Pilih Semua", dan checkbox untuk tiap item.
+- Selected items rendered as compact removable chips (`×`) inside trigger button.
+- Popover menu with real-time search, "Select All" toggle, and individual option checkboxes.
 
 ### 5.3 Date & Date-Range Picker (`.r-ui-date-picker`)
-- Preset range cepat: *"Hari Ini"*, *"7 Hari Terakhir"*, *"30 Hari Terakhir"*, *"Bulan Ini"*, *"Kustom"*.
-- Kalender ganda popover untuk memilih rentang tanggal awal dan akhir dengan visual range highlight.
+- Quick preset range buttons: *"Today"*, *"Last 7 Days"*, *"Last 30 Days"*, *"This Month"*, *"Custom"*.
+- Dual calendar popover for start and end date selection with highlighted visual range.
 
 ### 5.4 Text, Search & Number Inputs (`.r-ui-input`)
-- Input dengan slot prefix (ikon / prefix mata uang) dan suffix (tombol clear, tombol copy, indikator satuan `ms`, `GB`).
-- Number input dengan tombol stepper up/down berpresisi tinggi.
-- Validasi state visual terpadu: `.is-error`, `.is-warning`, `.is-success` lengkap dengan pesan bantuan di bawah input.
+- Prefix slots (icons / currency symbols) and suffix slots (clear button, copy action, unit indicators `ms`, `GB`).
+- Precision number steppers with increment/decrement buttons.
+- Standardized visual validation states: `.is-error`, `.is-warning`, `.is-success` with helper micro-text.
 
 ### 5.5 Tactile Spring Switch, Checkbox & Radio Cards
-- **Spring Switch**: Penggeser taktil dengan kurva pegas alami.
-- **Custom Checkbox**: Kotak seleksi kustom dengan centang SVG halus dan status indeterminate.
-- **Radio Cards**: Pilihan radio berbentuk kartu kontur dengan judul, deskripsi fitur, harga, dan radio ring terintegrasi.
+- **Spring Switch**: Tactile toggle slider with physical spring curve.
+- **Custom Checkbox**: Accessible checkbox with crisp SVG checkmark and indeterminate state.
+- **Radio Cards**: Outlined card options featuring title, description, badge, and integrated radio ring.
 
 ### 5.6 Drag-and-Drop File Upload Zone (`.r-ui-dropzone`)
-- Area dropzone bergaris putus-putus tipis (*dashed border*) dengan ikon upload, instruksi tipe berkas, dan batas ukuran maksimal.
-- Daftar file terunggah dengan progress bar aktif, nama berkas, ukuran, dan tombol batalkan/hapus.
+- Dashed border dropzone with upload icon, allowed MIME type descriptions, and size limits.
+- Uploaded file list with progress bar, filename, file size, and remove/cancel action.
 
 ---
 
-## PILLAR 6: FEEDBACK, MODALS & OVERLAYS
+## PILLAR 6: FEEDBACK, OVERLAYS & DRAWERS
 
-Mekanisme umpan balik kontekstual tanpa merusak alur fokus pengguna.
+Non-intrusive notifications, dialogs, and contextual inspection panels.
 
-### 6.1 Modal Dialog (`.r-ui-modal`)
-- Backdrop dengan efek blur halus (`backdrop-filter: blur(8px); background: rgba(0,0,0,0.6)`).
-- Modal container dengan header jelas, tombol close silang (`Esc` hotkey), area konten scrollable, dan fixed action footer.
-- Focus-trap otomatis untuk aksesibilitas keyboard.
+### 6.1 Modal Dialogs (`.r-ui-modal`)
+- Centered overlay with hardware-accelerated backdrop blur (`backdrop-filter: blur(8px)`).
+- Distinct header with title and close button (`×`), scrollable body, and right-aligned footer action bar.
 
 ### 6.2 Slide-Over Sheet / Inspector Drawer (`.r-ui-drawer`)
-- Panel menggeser dari sisi kanan (lebar 420px–640px) untuk inspeksi rincian entitas tanpa berpindah URL.
-- Memiliki header tersendiri, tab rincian internal, riwayat audit, dan tombol aksi cepat.
+- Right-sliding drawer for deep entity inspection without leaving the primary view.
+- Header with entity status, multi-tab details, and sticky footer action buttons.
 
 ### 6.3 Slide-in Notification Toast Stack (`.r-ui-toast`)
-- Kontainer tetap di pojok kanan bawah dengan tumpukan toast animasi pegas (*spring entrance*).
-- Varian: Success (hijau), Error (merah), Warning (amber), Info (aksen tema).
-- Dilengkapi dengan pesan ringkas, ikon status, tombol aksi (*"Undo"*), dan auto-dismiss timeout bar.
+- Fixed container in bottom-right viewport with spring-animated toast stack.
+- Variants: Success (emerald), Error (crimson), Warning (amber), Info (theme accent).
+- Equipped with concise message, status icon, action link (*"Undo"*), and auto-dismiss timer bar.
 
 ### 6.4 Destructive Confirmation Dialog
-- Dialog pencegah kesalahan krusial (misal penghapusan basis data atau pembatalan instance produksi).
-- Memerlukan input ketik nama entitas secara eksplisit sebelum tombol konfirmasi merah dapat diaktifkan.
+- Failsafe modal for irreversible operations (e.g. database drop or terminating production instance).
+- Requires explicit entity name typing before enabling the destructive confirmation button.
 
 ### 6.5 Tooltips & Context Menus (`.r-ui-tooltip`, `.r-ui-popover`)
-- Tooltip mikro dengan panah arah penunjuk (*directional arrow*) yang muncul instan pada hover/fokus keyboard.
-- Context menu popover untuk klik kanan atau tombol tiga titik (`...`).
+- Micro-tooltips with directional pointer arrows, appearing instantly on hover/keyboard focus.
+- Context menu popovers for right-click or kebab actions (`...`).
 
 ---
 
 ## PILLAR 7: NAVIGATION & WAYFINDING
 
-Navigasi instan yang memungkinkan pengguna profesional berpindah konteks secepat kilat.
+Lightning-fast contextual navigation for power users.
 
 ### 7.1 Command Palette (`Ctrl + K` / `⌘ + K`) (`.r-ui-command-palette`)
-- Jendela pencarian global instan di tengah layar dengan backdrop blur.
-- Fuzzy search yang mengelompokkan hasil ke dalam kategori: *Halaman Navigasi*, *Aksi Cepat*, *Pengaturan*, *Dokumentasi*.
-- Navigasi penuh via tombol panah keyboard (`ArrowUp` / `ArrowDown`) dan eksekusi via `Enter`.
+- Centered global modal with backdrop blur.
+- Fuzzy search categorized into: *Navigation Pages*, *Quick Actions*, *Settings*, *Documentation*.
+- Full keyboard navigation (`ArrowUp` / `ArrowDown`) and execution via `Enter`.
 
 ### 7.2 Segmented Control & Tabs (`.r-ui-segmented`, `.r-ui-tabs`)
-- **Segmented Control**: Pengalih mode dengan latar surface elevated dan tombol aktif berbentuk kapsul mengambang dengan spring physics.
-- **Line Tabs**: Tab bergaris bawah dengan indikator aktif yang bergeser dinamis.
+- **Segmented Control**: Mode switcher with elevated surface backdrop and spring-physics active capsule slider.
+- **Line Tabs**: Clean underline tabs with dynamically sliding active indicator.
 
 ### 7.3 Multi-Step Wizard / Stepper (`.r-ui-stepper`)
-- Rangkaian proses bertahap (*Langkah 1 dari 4*) dengan ikon centang selesai, lingkaran langkah aktif, dan garis progres penghubung.
+- Sequential progress bar (*Step 1 of 4*) with completed checkmarks, active step ring, and connecting progress track.
 
 ---
 
 ## PILLAR 8: IDENTITY, CONTENT & DISPLAY
 
-Penyajian data atribut, identitas pengguna, dan format teknis.
+Technical metadata, user identity, and structured display formatting.
 
 ### 8.1 Avatars & Stacked Avatar Groups (`.r-ui-avatar-group`)
-- Avatar dengan foto atau inisial fallback berlatar aksen.
-- Status dot kehadiran online/offline di pojok avatar.
-- Stacked avatar group dengan tumpukan margin negatif dan badge sisa (*"+4"*).
+- Avatars with user photos or accent fallback initials.
+- Online/offline presence dot pinned to avatar corner.
+- Stacked avatar groups with negative margin offsets and remainder badge (*"+4"*).
 
 ### 8.2 Status Badges with Pulse Animation (`.r-ui-badge`)
-- Badge semantik bertipografi monospaced dengan border halus dan latar pastel redup.
-- Dilengkapi dengan *pulsing animated dot* untuk menandakan status live/aktif secara instan.
+- Monospaced semantic badges with hairline borders and soft background tints.
+- Equipped with an animated pulsing dot for live status indication.
 
 ### 8.3 Activity Timeline & Audit Feed (`.r-ui-timeline`)
-- Garis vertikal penghubung dengan node ikon status di setiap peristiwa.
-- Menampilkan avatar pelaku, aksi perubahan (*"Deploy build #8942 ke production"*), badge commit hash, dan waktu relatif (*"4 menit yang lalu"*).
+- Vertical timeline track with status icon nodes at each event.
+- Displays actor avatar, action summary (*"Deploy build #8942 to production"*), commit hash badge, and relative timestamp (*"4 minutes ago"*).
 
 ### 8.4 Key-Value / Description List (`.r-ui-kv-list`)
-- Pasangan label dan nilai dalam grid dua kolom yang bersih.
-- Dilengkapi dengan tombol salin satu-klik (*copy button*) untuk ID, API key, atau URL publik.
+- Clean two-column grid pairing metadata keys with values.
+- One-click copy button for IDs, API keys, or public endpoints.
 
 ### 8.5 Code Snippet & JSON Inspector (`.r-ui-code-box`)
-- Kotak kode monospace bergaya terminal dengan syntax highlighting, nomor baris, dan tombol salin ke clipboard.
+- Terminal-styled monospace code block with syntax highlighting, line numbers, and copy-to-clipboard button.
 
 ---
 
 ## PILLAR 9: REAL-TIME & DEVOPS / HIGH-AGENCY CONSOLES
 
-Fitur spesifik untuk engineer, operator infrastruktur, dan administrator sistem.
+Mission-critical tooling for engineers, infrastructure operators, and system administrators.
 
 ### 9.1 Live Streaming Terminal Console (`.r-ui-terminal`)
-- Layar konsol bergaya dark tech dengan log stream monospaced real-time.
-- Pewarnaan log level: `INFO` (cyan/hijau), `WARN` (amber), `ERROR` (crimson), `DEBUG` (abu-abu).
-- Fitur auto-scroll lock toggle, kolom pencarian log, dan tombol bersihkan/unduh log.
+- Dark-tech console screen with streaming real-time monospaced logs.
+- Log level color coding: `INFO` (cyan/emerald), `WARN` (amber), `ERROR` (crimson), `DEBUG` (muted gray).
+- Auto-scroll lock toggle, search filter bar, and clear/download log actions.
 
 ### 9.2 Key-Value Environment Variable Editor
-- Editor dinamis untuk menambah, mengedit, dan menghapus pasangan variable konfigurasi (`KEY=VALUE`) lengkap dengan tombol sembunyikan/tampilkan rahasia (*masking eye toggle*).
+- Dynamic editor for adding, editing, and deleting configuration variables (`KEY=VALUE`) with secret masking eye toggles.
 
 ---
 
 ## 📋 Comprehensive Dashboard Kit Implementation Checklist
 
-Saat diminta membuat Dashboard Kit atau merancang antarmuka admin/analitik, agen wajib mengonfirmasi ketersediaan komponen dari ke-9 pilar ini:
+When asked to construct a Dashboard Kit or admin console, agents must verify inclusion of all 9 pillars:
 
 ```text
-[ ] PILAR 1: Sidebar (Collapsible), Header, Breadcrumbs, Page Action Toolbar.
-[ ] PILAR 2: Stat KPI Cards dengan Delta %, Telemetry Ribbon bergaris tipis, Sparklines, Uptime Strip.
-[ ] PILAR 3: High-Density Table, Sortable Header, Row Checkbox, Bulk Action Bar, Pagination, Facet Filter.
-[ ] PILAR 4: Area Chart, Bar Chart, Donut Distribution, Real-time Histogram.
-[ ] PILAR 5: Custom Select, Multi-Select Chips, Date-Range Picker, Spring Switch, Checkbox, Dropzone (Zero Native Form!).
-[ ] PILAR 6: Modal Dialog, Slide-Over Sheet / Drawer, Toast Stack, Destructive Confirm Dialog, Tooltips.
-[ ] PILAR 7: Command Palette (Ctrl+K), Segmented Control, Line Tabs, Stepper.
-[ ] PILAR 8: Avatar Group, Status Badges dengan Pulse Dot, Activity Audit Timeline, Key-Value List, Code Box.
-[ ] PILAR 9: Live Terminal Console, Uptime / Latency Ping, Secret Masking Editor.
+[ ] PILLAR 1: Sidebar (Collapsible), Header, Breadcrumbs, Page Action Toolbar.
+[ ] PILLAR 2: Stat KPI Cards with Delta %, Telemetry Ribbon, Sparklines, Uptime Strip.
+[ ] PILLAR 3: High-Density Table, Sortable Header, Row Checkbox, Bulk Action Bar, Pagination, Facet Filters.
+[ ] PILLAR 4: Area Chart, Bar Chart, Donut Distribution, Real-time Histogram.
+[ ] PILLAR 5: Custom Select, Multi-Select Chips, Date-Range Picker, Spring Switch, Checkbox, Dropzone (Zero Native Forms!).
+[ ] PILLAR 6: Modal Dialog, Slide-Over Sheet / Drawer, Toast Stack, Destructive Confirm Dialog, Tooltips.
+[ ] PILLAR 7: Command Palette (Ctrl+K), Segmented Control, Line Tabs, Stepper.
+[ ] PILLAR 8: Avatar Group, Status Badges with Pulse Dot, Activity Audit Timeline, Key-Value List, Code Box.
+[ ] PILLAR 9: Live Terminal Console, Uptime / Latency Ping, Secret Masking Editor.
 ```

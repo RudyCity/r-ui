@@ -257,7 +257,7 @@
 
       <div style="display: flex; align-items: center; gap: var(--r-ui-space-3); flex-wrap: wrap;">
         <!-- Canvas Theme Selector -->
-        <select id="canvasSelector" aria-label="Pilih Tema Kanvas" style="padding: 6px 12px; border-radius: var(--r-ui-radius-sm); background: var(--r-ui-color-surface-elevated); color: var(--r-ui-color-text-primary); border: 1px solid var(--r-ui-color-border-standard); font-size: 13px; cursor: pointer; outline: none;">
+        <select id="canvasSelector" aria-label="Select Canvas Theme" style="padding: 6px 12px; border-radius: var(--r-ui-radius-sm); background: var(--r-ui-color-surface-elevated); color: var(--r-ui-color-text-primary); border: 1px solid var(--r-ui-color-border-standard); font-size: 13px; cursor: pointer; outline: none;">
           <option value="dark-nebula">Dark Nebula</option>
           <option value="clean-light">Clean Light</option>
           <option value="slate-obsidian">Slate Obsidian</option>
@@ -266,7 +266,7 @@
         </select>
 
         <!-- 8 Color Accent Swatches -->
-        <div id="swatchGroup" style="display: flex; align-items: center; gap: 6px;" role="radiogroup" aria-label="Pilih Warna Aksen">
+        <div id="swatchGroup" style="display: flex; align-items: center; gap: 6px;" role="radiogroup" aria-label="Select Accent Color">
           <button type="button" data-accent="cyan" style="width: 18px; height: 18px; border-radius: 50%; background: #38bdf8; border: 2px solid white; cursor: pointer;" aria-label="Cyan"></button>
           <button type="button" data-accent="emerald" style="width: 18px; height: 18px; border-radius: 50%; background: #10b981; border: 1px solid transparent; cursor: pointer;" aria-label="Emerald"></button>
           <button type="button" data-accent="violet" style="width: 18px; height: 18px; border-radius: 50%; background: #a855f7; border: 1px solid transparent; cursor: pointer;" aria-label="Violet"></button>
@@ -284,10 +284,10 @@
       <div style="display: flex; align-items: center; gap: var(--r-ui-space-2);">
         <span class="r-ui-badge">Precision Design System</span>
       </div>
-      <h1>Universal UI/UX Tanpa Template Kaku.</h1>
-      <p>Sistem antarmuka agensi modern lintas platform: Web, Desktop, Mobile, dan Smart TV. Lolos WCAG AAA, bebas dari efek neon berlebih, dan zero heavy shadows.</p>
+      <h1>Universal UI/UX Without Rigid Templates.</h1>
+      <p>Modern agency-grade interface system across platforms: Web, Desktop, Mobile, and Smart TV. WCAG AAA compliant, zero-neon discipline, and anti-heavy shadows.</p>
       <div style="display: flex; gap: var(--r-ui-space-3); margin-top: var(--r-ui-space-2);">
-        <button class="r-ui-btn r-ui-btn-primary" id="openModalBtn">Buka Adaptive Modal</button>
+        <button class="r-ui-btn r-ui-btn-primary" id="openModalBtn">Open Adaptive Modal</button>
         <button class="r-ui-btn r-ui-btn-secondary" id="toggleUnstyledBtn">Toggle Unstyled Mode</button>
       </div>
     </section>
@@ -297,7 +297,7 @@
       <!-- Card 1: Bento Asymmetric -->
       <article class="r-ui-card r-ui-bento-hero">
         <h2 style="font-size: var(--r-ui-font-h2); font-weight: 700;">Asymmetric Bento Architecture</h2>
-        <p style="color: var(--r-ui-color-text-secondary);">Hierarki visual asimetris yang mematahkan kebosanan layout kartu seragam ala AI generik. Berbasis skala spasial 4pt/8pt.</p>
+        <p style="color: var(--r-ui-color-text-secondary);">Asymmetric visual hierarchy breaking the monotony of uniform generic AI cards. Built on a strict 4pt/8pt spatial grid.</p>
         <div style="display: flex; gap: var(--r-ui-space-2); flex-wrap: wrap; margin-top: auto;">
           <span class="r-ui-badge">4pt / 8pt Grid</span>
           <span class="r-ui-badge">Fluid clamp() Type</span>
@@ -308,10 +308,10 @@
       <!-- Card 2: Accessible Form -->
       <article class="r-ui-card">
         <h3 style="font-size: var(--r-ui-font-h3); font-weight: 700;">Accessible FieldGroup</h3>
-        <p style="color: var(--r-ui-color-text-secondary); font-size: 14px;">Kontras tinggi, zero-glow focus outline, dan touch target min 44px.</p>
+        <p style="color: var(--r-ui-color-text-secondary); font-size: 14px;">High contrast, zero-glow focus outline, and min 44px touch targets.</p>
         <div style="display: flex; flex-direction: column; gap: var(--r-ui-space-2);">
-          <label for="demoEmail" style="font-size: 13px; font-weight: 500; color: var(--r-ui-color-text-secondary);">Email Proyek</label>
-          <input type="email" id="demoEmail" placeholder="developer@project.id" style="width: 100%; min-height: 44px; padding: 8px 12px; border-radius: var(--r-ui-radius-sm); border: 1px solid var(--r-ui-color-border-standard); background: var(--r-ui-color-surface-elevated); color: var(--r-ui-color-text-primary); outline: none;" />
+          <label for="demoEmail" style="font-size: 13px; font-weight: 500; color: var(--r-ui-color-text-secondary);">Project Email</label>
+          <input type="email" id="demoEmail" placeholder="developer@company.com" style="width: 100%; min-height: 44px; padding: 8px 12px; border-radius: var(--r-ui-radius-sm); border: 1px solid var(--r-ui-color-border-standard); background: var(--r-ui-color-surface-elevated); color: var(--r-ui-color-text-primary); outline: none;" />
         </div>
         <button class="r-ui-btn r-ui-btn-primary" style="margin-top: auto;">Submit Field</button>
       </article>
@@ -319,7 +319,7 @@
       <!-- Card 3: Smart TV Spatial Navigation -->
       <article class="r-ui-card r-ui-bento-hero">
         <h3 style="font-size: var(--r-ui-font-h3); font-weight: 700;">Smart TV Spatial Navigation (10-Foot UI)</h3>
-        <p style="color: var(--r-ui-color-text-secondary);">Gunakan tombol panah keyboard (Atas, Bawah, Kiri, Kanan) untuk berpindah antar kotak di bawah. Menggunakan outline kontras tinggi tanpa glow blur:</p>
+        <p style="color: var(--r-ui-color-text-secondary);">Use directional arrow keys (Up, Down, Left, Right) to navigate across the tiles below. Features high-contrast outlines without blur glow:</p>
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--r-ui-space-3); margin-top: var(--r-ui-space-2);" class="r-ui-tv-grid">
           <div tabindex="0" class="r-ui-tv-box">Item 1</div>
           <div tabindex="0" class="r-ui-tv-box">Item 2</div>
@@ -331,9 +331,9 @@
       <!-- Card 4: Device Modality -->
       <article class="r-ui-card">
         <h3 style="font-size: var(--r-ui-font-h3); font-weight: 700;">Modality & Ergonomics</h3>
-        <p id="modalityText" style="color: var(--r-ui-color-text-secondary); font-size: 14px;">Mendeteksi pointer input...</p>
+        <p id="modalityText" style="color: var(--r-ui-color-text-secondary); font-size: 14px;">Detecting pointer input...</p>
         <div style="margin-top: auto; padding: var(--r-ui-space-3); background: var(--r-ui-color-surface-elevated); border-radius: var(--r-ui-radius-sm); font-size: 12px; color: var(--r-ui-color-text-muted);">
-          Otomatis menyesuaikan hit-box sentuh di layar mobile vs hover di mouse.
+          Automatically adjusts touch hit-boxes on mobile screens vs hover on mouse.
         </div>
       </article>
     </main>
@@ -343,8 +343,8 @@
   <div class="r-ui-modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
     <div class="r-ui-modal-box">
       <h2 style="font-size: var(--r-ui-font-h2); font-weight: 700; margin-bottom: var(--r-ui-space-2);">Adaptive Modal Dialog</h2>
-      <p style="color: var(--r-ui-color-text-secondary); margin-bottom: var(--r-ui-space-4);">Di layar desktop komponen ini berada di tengah layar dengan micro-elevation. Di layar ponsel bergeser otomatis menjadi bottom-sheet dengan safe area.</p>
-      <button class="r-ui-btn r-ui-btn-primary" style="width: 100%;" id="closeModalBtn">Tutup Dialog</button>
+      <p style="color: var(--r-ui-color-text-secondary); margin-bottom: var(--r-ui-space-4);">On desktop screens this component centers with micro-elevation. On mobile screens it shifts into a bottom-sheet with safe area insets.</p>
+      <button class="r-ui-btn r-ui-btn-primary" style="width: 100%;" id="closeModalBtn">Close Dialog</button>
     </div>
   </div>
 
@@ -401,8 +401,8 @@
     const modalityText = document.getElementById('modalityText');
     const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     modalityText.textContent = isTouch
-      ? 'Pointer: Layar Sentuh Terdeteksi (Target sentuh min 44px diaktifkan)'
-      : 'Pointer: Mouse / Trackpad Presisi Terdeteksi (Efek hover aktif)';
+      ? 'Pointer: Touchscreen Detected (Min 44px touch target active)'
+      : 'Pointer: Precision Mouse / Trackpad Detected (Hover states active)';
 
     // TV D-Pad Spatial Navigation
     const tvBoxes = Array.from(document.querySelectorAll('.r-ui-tv-box'));

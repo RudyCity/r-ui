@@ -17,7 +17,7 @@ interface CardContextValue {
 const CardContext = createContext<CardContextValue>({ variant: 'default', unstyled: false });
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement>, RUiComponentContract {
-  /** Matikan styling bawaan untuk kebebasan kustomisasi 100% dengan Tailwind / CSS kustom */
+  /** Disable default styling for 100% customization freedom with Tailwind / custom CSS */
   unstyled?: boolean;
 }
 
@@ -197,7 +197,7 @@ Modal.Footer = function ModalFooter({ className = '', children, ...props }: Reac
   return <div className={unstyled ? className : `r-ui-modal__footer ${className}`} {...props}>{children}</div>;
 };
 
-Modal.Close = function ModalClose({ className = '', children = 'Tutup', ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+Modal.Close = function ModalClose({ className = '', children = 'Close', ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const { onClose, unstyled } = useContext(ModalContext);
   return (
     <button
