@@ -1,8 +1,8 @@
 ---
 name: r-ui
-description: Universal UI/UX Design System, Multi-Theme, Modular Color Accent, Project-Adaptive & Live Playground Architecture Skill. Enforces anti-slop aesthetic standards, anti-rigid project adaptation (5 project archetypes & 4 visual dials), zero-neon and anti-heavy shadow discipline, visual-first density, dual-layer theming (5 Canvas Themes + 8 Calibrated Color Themes), headless/unstyled component flexibility, live interactive showcase, multi-framework integration (React, Next.js, Tailwind v3/v4, Vue, Svelte, Ink CLI), fluid cross-platform responsiveness (Web, Windows, macOS, Linux, Android, iOS, Foldables, Smart TV), and integration with curated design references (jiro.build, designspells.com, styles.refero.design, supahero.io, mobbin.com).
-when_to_use: Use whenever designing, building, auditing, refactoring, or reviewing user interfaces (UI), user experiences (UX), responsive layouts, design systems, design tokens, micro-interactions, components, color themes, project adaptation, interactive showcases, or cross-platform web/app experiences.
-version: 1.8.0
+description: Universal UI/UX Design System, Multi-Theme, Modular Color Accent, 9-Pillar Complete Dashboard Kit Architecture (45+ Production Components), Project-Adaptive & Live Playground Architecture Skill. Enforces anti-slop aesthetic standards, anti-rigid project adaptation (5 project archetypes & 4 visual dials), zero-neon and anti-heavy shadow discipline, visual-first density, dual-layer theming (5 Canvas Themes + 8 Calibrated Color Themes), strict componentized form policy (zero raw native forms), headless/unstyled component flexibility, live interactive showcase, multi-framework integration (React, Next.js, Tailwind v3/v4, Vue, Svelte, Ink CLI), fluid cross-platform responsiveness (Web, Windows, macOS, Linux, Android, iOS, Foldables, Smart TV), and integration with curated design references (jiro.build, designspells.com, styles.refero.design, supahero.io, mobbin.com).
+when_to_use: Use whenever designing, building, auditing, refactoring, or reviewing user interfaces (UI), user experiences (UX), dashboard kits, admin consoles, SaaS platforms, responsive layouts, design systems, design tokens, micro-interactions, components, color themes, project adaptation, interactive showcases, or cross-platform web/app experiences.
+version: 2.2.0
 ---
 
 # r-ui: Universal UI/UX Design System & Visual-First Architecture
@@ -11,11 +11,11 @@ version: 1.8.0
 
 ---
 
-## 1. THE 8 ANTI-SLOP VISUAL LAWS (Non-Negotiable)
+## 1. THE 9 ANTI-SLOP VISUAL LAWS (Non-Negotiable)
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                       THE 8 ANTI-SLOP DESIGN LAWS                           │
+│                       THE 9 ANTI-SLOP DESIGN LAWS                           │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │  1. BAN THE PURPLE HAZE     ──► No generic AI-purple/pink mesh gradients    │
 │  2. BAN SYMMETRIC BENTO     ──► Asymmetric weights & hierarchy (2:1 spans)  │
@@ -25,6 +25,7 @@ version: 1.8.0
 │  6. BAN MOCK DATA VAGUENESS ──► Realistic domain data, zero "Lorem Ipsum"   │
 │  7. BAN HEAVY MUDDY SHADOWS ──► Zero thick black blur; crisp micro-elevate  │
 │  8. BAN NEON & CYBERPUNK    ──► Calibrated optical tones; zero glow rings   │
+│  9. BAN RAW NATIVE FORMS    ──► Zero unstyled <select>; 100% componentized  │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -109,6 +110,7 @@ flowchart TD
 
 ## 6. MODULAR CODE DELIVERABLES
 
+- 🏛️ **Master Blueprint Dashboard Kit (9 Pilar & 45+ Komponen)**: [r-ui-dashboard-kit-spec.md](references/r-ui-dashboard-kit-spec.md)
 - 📜 **Boilerplate Kontrak Tipe TS**: [r-ui-contract-types.ts](references/r-ui-contract-types.ts)
 - 📦 **Compound Components (`unstyled?: boolean`)**: [r-ui-compound-components.tsx](references/r-ui-compound-components.tsx)
 - 🎛️ **Widget Pemilih Tema & Aksen Interaktif**: [r-ui-theme-switcher.tsx](references/r-ui-theme-switcher.tsx)
@@ -120,6 +122,7 @@ flowchart TD
 
 ## 7. COMPLETE TECHNICAL REFERENCES
 
+- 🏛️ **Spesifikasi Lengkap Dashboard Kit**: [r-ui-dashboard-kit-spec.md](references/r-ui-dashboard-kit-spec.md)
 - 🎨 **Token Desain Standar**: [r-ui-tokens.css](references/r-ui-tokens.css)
 - 📐 **Spesifikasi Komponen Visual**: [r-ui-component-specs.md](references/r-ui-component-specs.md)
 - 📱 **Panduan Responsif Multi-Device**: [r-ui-responsive-matrix.md](references/r-ui-responsive-matrix.md)
@@ -127,7 +130,7 @@ flowchart TD
 
 ---
 
-## 8. PRE-FLIGHT UI/UX AUDIT CHECKLIST (16-Point Gate)
+## 8. PRE-FLIGHT UI/UX AUDIT CHECKLIST (18-Point Gate)
 
 ```text
 [ ] 1.  Anti-Slop Check: Bebas dari AI-purple mesh gradient, bento seragam, & teks dummy "Lorem".
@@ -146,4 +149,44 @@ flowchart TD
 [ ] 14. Modality Awareness: Komponen membedakan input sentuh (touch) vs mouse presisi.
 [ ] 15. Unstyled Flexibility: Mendukung mode unstyled?: boolean untuk styling bebas.
 [ ] 16. Zero-Dependency: Tidak ada library eksternal wajib yang dipaksakan.
+[ ] 17. Componentized Form Check: 100% bebas dari elemen raw native <select>, checkbox, atau radio; seluruhnya menggunakan r-ui Custom Form Components.
+[ ] 18. Dashboard Completeness Gate: Meliputi ke-9 pilar arsitektur dashboard kit (Shell, Telemetri, Data Table, Visualisasi, Form kustom, Overlay, Navigasi, Identitas, dan Konsol DevOps).
 ```
+
+---
+
+## 9. STRICT COMPONENTIZED FORM POLICY (Zero Raw Native Forms)
+
+Agen **DILARANG KERAS** menggunakan elemen form HTML mentah bawaan browser (*raw native unstyled form elements*), terutama elemen native `<select>` dan `<option>`.
+
+### Mengapa Native `<select>` Dilarang?
+- Menu popup `<option>` bawaan sistem operasi (Windows Win32, macOS popup) tidak mematuhi CSS variables, merusak mode gelap (*dark canvas*), tidak dapat disesuaikan tipografinya, dan merusak keselarasan visual antarmuka.
+- Dropdown native tidak mendukung *search filtering*, *multi-select chips*, *custom icons*, maupun animasi transisi spring.
+
+### Standar Wajib: r-ui Custom Accessible Form Components
+Setiap form pemilihan wajib menggunakan **r-ui Custom Select Component**:
+- **Trigger Button**: Memiliki label aktif, ikon status, dan custom chevron SVG yang berputar halus saat dibuka.
+- **Floating Popover Menu**: Permukaan mengambang dengan micro-elevation tajam (`--r-ui-shadow-lg`), border 1px halus, dan latar yang sepenuhnya selaras dengan tema kanvas aktif.
+- **Searchable / Filterable**: Mendukung penyaringan opsi secara instan saat opsi berjumlah > 5.
+- **Full Keyboard Navigation**: Mendukung navigasi panah (`ArrowUp` / `ArrowDown`), pemilihan via `Enter` / `Space`, dan penutupan via `Escape`.
+- **W3C ARIA Accessible**: Menggunakan atribut `role="listbox"`, `role="option"`, `aria-expanded`, dan `aria-selected`.
+
+---
+
+## 10. MANDATORY 9-PILLAR (45+ COMPONENT) ARCHITECTURE FOR DASHBOARD KITS
+
+Setiap kali diminta membuat Dashboard Kit atau UI Kit dengan `r-ui`, agen **WAJIB MENYEDIAKAN SUITE LENGKAP 9 PILAR (45+ KOMPONEN)**, tidak boleh hanya layout monitoring/cockpit parsial:
+
+1. **Pilar 1 — Shell & Navigation**: Collapsible Sidebar (Expanded 240px & Mini-Rail 60px), Workspace/Org Switcher, Top Header, Breadcrumb Trail, Page Action Toolbar, Master-Detail Inspector Drawer.
+2. **Pilar 2 — Metrics & Telemetry**: High-Density Stat Cards (Value, Delta %, Context Subtitle), Architectural Telemetry Ribbon (Anti-Card Overuse), Segmented Quota Gauges, 90-Day Uptime Strip & Live Latency Pulse Dot.
+3. **Pilar 3 — Data Tables & Collections**: High-Density Data Grid, Sortable Headers, Custom Row Checkbox (Indeterminate Support), Floating Bulk Action Bar, Pagination & Page Size Selector, Faceted Filter Popovers & Active Filter Chips, Empty States, Skeleton Shimmer.
+4. **Pilar 4 — Data Visualization**: Time-Series Area Curves dengan interactive crosshair, Grouped/Stacked Bar Charts, Donut Distribution dengan center aggregate & legend, Latency Histogram, Interactive Chart Tooltips.
+5. **Pilar 5 — Form & Inputs (Zero Native Forms)**: Custom Accessible Select (Searchable, Popover), Multi-Select with Removable Chips, Date & Date-Range Picker, Prefix/Suffix Inputs, Number Steppers, Textarea with Counter, Tactile Spring Switch, Custom Checkbox & Radio Cards, Dual-Thumb Range Slider, Drag-and-Drop Dropzone.
+6. **Pilar 6 — Feedback, Overlays & Drawers**: Modal Dialogs dengan backdrop blur, Slide-Over Sheet / Inspector Drawer kanan, Slide-in Toast Stack (Success/Error/Warning/Info/Undo), Alert Banners, Destructive Confirmation Dialog, Tooltips mikro, Context Menu Popover.
+7. **Pilar 7 — Navigation & Wayfinding**: Command Palette (`Ctrl+K` / `⌘+K`) dengan fuzzy search, Segmented Controls, Line/Pill Tabs, Stepper / Multi-Step Wizard, Tree Views.
+8. **Pilar 8 — Identity, Display & Content**: Avatars & Stacked Avatar Groups dengan online presence dot, Status Badges dengan animasi pulse dot, Activity Timeline / Audit Feed, Key-Value Metadata Grid, Code Snippet & JSON Inspector.
+9. **Pilar 9 — Real-Time & DevOps Consoles**: Live Streaming Monospace Terminal Console (INFO/WARN/ERR/DEBUG, auto-scroll lock, log search), Secret Masking Env Var Editor, Latency Ping Meter.
+10. **Interactive Component Showcase**: Wajib menyertakan tab/halaman katalog interaktif di mana seluruh komponen dari ke-9 pilar dapat diuji fungsionalitas dan respon temanya secara live.
+
+*Spesifikasi teknis & blueprint lengkap:* [r-ui-dashboard-kit-spec.md](references/r-ui-dashboard-kit-spec.md).
+

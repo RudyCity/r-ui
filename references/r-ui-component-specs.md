@@ -1,11 +1,11 @@
-# r-ui: Component Anatomy & Interaction Specifications (v1.8.0)
+# r-ui: Complete Component Anatomy & Interaction Specifications (v2.0.0)
 
-Spesifikasi komponen modular berskala produksi. **Visual-first**, bebas dari penjelasan berlebih, bebas dari shadow keruh pekat, dan bebas dari efek neon/glow. 100% menggunakan token `--r-ui-*`.
+Spesifikasi lengkap pustaka komponen modular berskala produksi untuk Universal UI/UX Design System.
+**Visual-first**, anti-slop, bebas dari shadow keruh pekat, bebas dari efek neon/glow, dan 100% menggunakan token orisinal `--r-ui-*`.
 
 ---
 
 ## 1. Action Button System
-
 Tombol interaktif dengan respons fisik pegas alami (*tactile spring physics*), state aksesibel, dan zero-neon.
 
 ```css
@@ -14,230 +14,690 @@ Tombol interaktif dengan respons fisik pegas alami (*tactile spring physics*), s
   align-items: center;
   justify-content: center;
   gap: var(--r-ui-space-2);
-  padding: var(--r-ui-space-2) var(--r-ui-space-4);
-  min-height: 44px; /* Standar aksesibilitas sentuh */
+  padding: 6px var(--r-ui-space-3);
+  min-height: 34px;
   font-family: inherit;
-  font-size: var(--r-ui-font-body);
-  font-weight: 500;
-  line-height: 1;
-  border-radius: var(--r-ui-radius-sm);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--r-ui-radius-xs);
   border: 1px solid transparent;
   cursor: pointer;
   user-select: none;
   touch-action: manipulation;
   transition: transform var(--r-ui-duration-fast) var(--r-ui-ease-spring),
               background-color var(--r-ui-duration-fast) ease,
-              border-color var(--r-ui-duration-fast) ease,
-              box-shadow var(--r-ui-duration-fast) ease;
+              border-color var(--r-ui-duration-fast) ease;
 }
-
-/* Crisp focus ring tanpa blur neon */
-.r-ui-btn:focus-visible {
-  outline: var(--r-ui-focus-outline);
-  outline-offset: var(--r-ui-focus-offset);
-}
-
-.r-ui-btn:active {
-  transform: scale(0.97); /* Tactile tap-down */
-}
-
-/* Primary Button */
-.r-ui-btn-primary {
+.r-ui-btn:active { transform: scale(0.98); }
+.r-ui-btn--primary {
   background-color: var(--r-ui-color-accent-primary);
   color: var(--r-ui-color-text-inverse);
   box-shadow: var(--r-ui-shadow-xs);
 }
-
-@media (hover: hover) and (pointer: fine) {
-  .r-ui-btn-primary:hover {
-    background-color: var(--r-ui-color-accent-primary-hover);
-    box-shadow: var(--r-ui-shadow-sm); /* Subtle ambient elevation, NO neon glow */
-  }
-}
-
-/* Secondary Button */
-.r-ui-btn-secondary {
+.r-ui-btn--secondary {
   background-color: var(--r-ui-color-surface-elevated);
   border-color: var(--r-ui-color-border-standard);
   color: var(--r-ui-color-text-primary);
+  box-shadow: var(--r-ui-border-inner-glass);
 }
+.r-ui-btn--ghost { background: transparent; color: var(--r-ui-color-text-secondary); }
+.r-ui-btn--destructive { background: var(--r-ui-color-error-bg); border-color: rgba(244, 63, 94, 0.2); color: var(--r-ui-color-error); }
+.r-ui-btn--outline { background: transparent; border-color: var(--r-ui-color-border-standard); color: var(--r-ui-color-text-primary); }
+```
 
-@media (hover: hover) and (pointer: fine) {
-  .r-ui-btn-secondary:hover {
-    border-color: var(--r-ui-color-border-strong);
-    background-color: var(--r-ui-color-surface-overlay);
-  }
+---
+
+## 2. Accessible Form Inputs (Text, Password, Search)
+```css
+.r-ui-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.r-ui-input {
+  width: 100%;
+  min-height: 34px;
+  padding: 6px var(--r-ui-space-3);
+  background-color: var(--r-ui-color-surface-elevated);
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-xs);
+  color: var(--r-ui-color-text-primary);
+  font-size: 0.8125rem;
+  font-family: inherit;
+  outline: none;
+  transition: all var(--r-ui-duration-fast) var(--r-ui-ease-spring);
+}
+.r-ui-input:focus {
+  border-color: var(--r-ui-color-accent-primary);
+  box-shadow: 0 0 0 1px var(--r-ui-color-focus-ring);
+  background-color: var(--r-ui-color-surface);
+}
+.r-ui-input.is-error {
+  border-color: var(--r-ui-color-error);
+  box-shadow: 0 0 0 1px var(--r-ui-color-error);
 }
 ```
 
 ---
 
-## 2. Accessible Form Input Field
+## 3. Custom Accessible Select Component (BANS RAW NATIVE <select>)
 
-Input teks dengan kontras tinggi, state validasi visual yang jelas, dan outline fokus presisi.
+Elemen native `<select>` dan `<option>` **dilarang keras** karena popup OS bawaan merusak tema gelap/variabel CSS. Wajib gunakan `r-ui Custom Select Component`:
 
 ```css
-.r-ui-field-group {
+.r-ui-custom-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.r-ui-select-trigger {
+  width: 100%;
+  min-height: 34px;
+  padding: 6px var(--r-ui-space-3);
+  background-color: var(--r-ui-color-surface-elevated);
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-xs);
+  color: var(--r-ui-color-text-primary);
+  font-size: 0.8125rem;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--r-ui-space-2);
+  cursor: pointer;
+  user-select: none;
+  box-shadow: var(--r-ui-border-inner-glass);
+  transition: all var(--r-ui-duration-fast) var(--r-ui-ease-spring);
+}
+
+.r-ui-select-trigger:hover {
+  border-color: var(--r-ui-color-border-strong);
+  background-color: var(--r-ui-color-surface-overlay);
+}
+
+.r-ui-select-trigger:focus-visible,
+.r-ui-custom-select.is-open .r-ui-select-trigger {
+  border-color: var(--r-ui-color-accent-primary);
+  box-shadow: 0 0 0 1px var(--r-ui-color-focus-ring);
+  outline: none;
+}
+
+.r-ui-select-chevron {
+  width: 14px;
+  height: 14px;
+  color: var(--r-ui-color-text-tertiary);
+  transition: transform var(--r-ui-duration-fast) var(--r-ui-ease-spring);
+  flex-shrink: 0;
+}
+
+.r-ui-custom-select.is-open .r-ui-select-chevron {
+  transform: rotate(180deg);
+  color: var(--r-ui-color-accent-primary);
+}
+
+.r-ui-select-popover {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: var(--r-ui-z-dropdown);
+  background-color: var(--r-ui-color-surface);
+  border: 1px solid var(--r-ui-color-border-strong);
+  border-radius: var(--r-ui-radius-xs);
+  box-shadow: var(--r-ui-shadow-lg), var(--r-ui-border-inner-glass);
+  max-height: 240px;
+  overflow-y: auto;
+  display: none;
+  flex-direction: column;
+  padding: 4px;
+  gap: 2px;
+  animation: r-ui-popover-in 0.16s var(--r-ui-ease-spring);
+}
+
+.r-ui-custom-select.is-open .r-ui-select-popover {
+  display: flex;
+}
+
+.r-ui-select-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-radius: 2px;
+  color: var(--r-ui-color-text-secondary);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: all var(--r-ui-duration-fast) ease;
+}
+
+.r-ui-select-option:hover,
+.r-ui-select-option.is-focused {
+  background-color: var(--r-ui-color-surface-elevated);
+  color: var(--r-ui-color-text-primary);
+}
+
+.r-ui-select-option.is-selected {
+  background-color: var(--r-ui-color-surface-overlay);
+  color: var(--r-ui-color-accent-primary);
+  font-weight: 600;
+}
+```
+
+---
+
+## 4. Tactile Spring Toggle / Switch
+```css
+.r-ui-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 40px;
+  height: 22px;
+  background-color: var(--r-ui-color-surface-overlay);
+  border-radius: var(--r-ui-radius-full);
+  border: 1px solid var(--r-ui-color-border-standard);
+  cursor: pointer;
+  transition: background-color var(--r-ui-duration-fast) ease;
+}
+.r-ui-switch.is-active {
+  background-color: var(--r-ui-color-accent-primary);
+  border-color: var(--r-ui-color-accent-primary);
+}
+.r-ui-switch__thumb {
+  position: absolute;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: var(--r-ui-shadow-xs);
+  transition: transform var(--r-ui-duration-fast) var(--r-ui-ease-spring);
+}
+.r-ui-switch.is-active .r-ui-switch__thumb {
+  transform: translateX(18px);
+  background-color: var(--r-ui-color-text-inverse);
+}
+```
+
+---
+
+## 4. Custom Checkbox & Radio
+```css
+.r-ui-checkbox, .r-ui-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--r-ui-space-2);
+  cursor: pointer;
+  font-size: 0.8125rem;
+  user-select: none;
+}
+.r-ui-checkbox__box {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--r-ui-radius-xs);
+  border: 1px solid var(--r-ui-color-border-strong);
+  background-color: var(--r-ui-color-surface-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--r-ui-duration-fast) ease;
+}
+.r-ui-checkbox.is-checked .r-ui-checkbox__box {
+  background-color: var(--r-ui-color-accent-primary);
+  border-color: var(--r-ui-color-accent-primary);
+  color: var(--r-ui-color-text-inverse);
+}
+.r-ui-radio__circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--r-ui-color-border-strong);
+  background-color: var(--r-ui-color-surface-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.r-ui-radio.is-checked .r-ui-radio__circle::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--r-ui-color-accent-primary);
+}
+```
+
+---
+
+## 5. Status Badges & Pulse Indicators
+```css
+.r-ui-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--r-ui-font-family-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: var(--r-ui-radius-xs);
+  border: 1px solid transparent;
+}
+.r-ui-badge--success { background: var(--r-ui-color-success-bg); color: var(--r-ui-color-success); border-color: rgba(16, 185, 129, 0.2); }
+.r-ui-badge--warning { background: var(--r-ui-color-warning-bg); color: var(--r-ui-color-warning); border-color: rgba(245, 158, 11, 0.2); }
+.r-ui-badge--error { background: var(--r-ui-color-error-bg); color: var(--r-ui-color-error); border-color: rgba(244, 63, 94, 0.2); }
+.r-ui-badge--info { background: var(--r-ui-color-info-bg); color: var(--r-ui-color-info); border-color: rgba(14, 165, 233, 0.2); }
+```
+
+---
+
+## 6. Avatars & Avatar Groups
+```css
+.r-ui-avatar {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--r-ui-color-surface-overlay);
+  border: 1px solid var(--r-ui-color-border-standard);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.r-ui-avatar-group {
+  display: flex;
+  align-items: center;
+}
+.r-ui-avatar-group .r-ui-avatar {
+  margin-left: -8px;
+  border: 2px solid var(--r-ui-color-surface);
+}
+.r-ui-avatar-group .r-ui-avatar:first-child { margin-left: 0; }
+```
+
+---
+
+## 7. Tabs & Accordions
+```css
+.r-ui-tabs-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--r-ui-space-2);
+  border-bottom: 1px solid var(--r-ui-color-border-standard);
+}
+.r-ui-tab-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--r-ui-color-text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 8px var(--r-ui-space-3);
+  cursor: pointer;
+  transition: all var(--r-ui-duration-fast) ease;
+}
+.r-ui-tab-btn.is-active {
+  color: var(--r-ui-color-accent-primary);
+  border-bottom-color: var(--r-ui-color-accent-primary);
+}
+.r-ui-accordion-item {
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-xs);
+  overflow: hidden;
+  background-color: var(--r-ui-color-surface);
+}
+.r-ui-accordion-header {
+  padding: var(--r-ui-space-3) var(--r-ui-space-4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background-color: var(--r-ui-color-surface-elevated);
+}
+.r-ui-accordion-content {
+  padding: var(--r-ui-space-3) var(--r-ui-space-4);
+  font-size: 0.8125rem;
+  color: var(--r-ui-color-text-secondary);
+  display: none;
+}
+.r-ui-accordion-item.is-open .r-ui-accordion-content {
+  display: block;
+}
+```
+
+---
+
+## 8. Toast Notifications & Alert Banners
+```css
+.r-ui-toast-container {
+  position: fixed;
+  bottom: var(--r-ui-space-5);
+  right: var(--r-ui-space-5);
   display: flex;
   flex-direction: column;
-  gap: var(--r-ui-space-1);
+  gap: var(--r-ui-space-2);
+  z-index: var(--r-ui-z-toast);
 }
-
-.r-ui-label {
-  font-size: var(--r-ui-font-small);
-  font-weight: 500;
-  color: var(--r-ui-color-text-secondary);
+.r-ui-toast {
+  background-color: var(--r-ui-color-surface-elevated);
+  border: 1px solid var(--r-ui-color-border-strong);
+  border-radius: var(--r-ui-radius-sm);
+  padding: var(--r-ui-space-3) var(--r-ui-space-4);
+  box-shadow: var(--r-ui-shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--r-ui-space-3);
+  font-size: 0.8125rem;
+  animation: r-ui-slide-toast 0.2s var(--r-ui-ease-spring);
 }
+```
 
-.r-ui-input {
+---
+
+## 9. High-Density Data Grid & Table Pagination
+```css
+.r-ui-table-container {
   width: 100%;
-  min-height: 44px;
-  padding: var(--r-ui-space-2) var(--r-ui-space-3);
+  overflow-x: auto;
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-sm);
+  background-color: var(--r-ui-color-surface);
+}
+
+.r-ui-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.8125rem;
+}
+
+.r-ui-table th {
+  padding: 10px 14px;
+  background-color: var(--r-ui-color-surface-elevated);
+  color: var(--r-ui-color-text-secondary);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--r-ui-color-border-standard);
+  user-select: none;
+}
+
+.r-ui-table th.is-sortable {
+  cursor: pointer;
+  transition: color var(--r-ui-duration-fast) ease;
+}
+
+.r-ui-table th.is-sortable:hover {
+  color: var(--r-ui-color-text-primary);
+}
+
+.r-ui-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--r-ui-color-border-subtle);
+  color: var(--r-ui-color-text-primary);
+  vertical-align: middle;
+}
+
+.r-ui-table tr:hover td {
+  background-color: var(--r-ui-color-surface-overlay);
+}
+
+.r-ui-table tr.is-selected td {
+  background-color: rgba(var(--r-ui-color-accent-primary-rgb, 56, 189, 248), 0.08);
+}
+
+.r-ui-table td.is-number {
+  text-align: right;
+  font-family: var(--r-ui-font-family-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.r-ui-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-top: 1px solid var(--r-ui-color-border-standard);
+  font-size: 0.8125rem;
+  color: var(--r-ui-color-text-secondary);
+  background-color: var(--r-ui-color-surface-elevated);
+}
+```
+
+---
+
+## 10. Metric KPI Cards & Architectural Telemetry Ribbon
+```css
+/* Metric Stat Card */
+.r-ui-stat-card {
   background-color: var(--r-ui-color-surface);
   border: 1px solid var(--r-ui-color-border-standard);
   border-radius: var(--r-ui-radius-sm);
-  color: var(--r-ui-color-text-primary);
-  font-size: var(--r-ui-font-body);
-  transition: border-color var(--r-ui-duration-fast) ease,
-              outline var(--r-ui-duration-fast) ease;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--r-ui-border-inner-glass);
 }
 
-/* Crisp focus outline tanpa glow blur */
-.r-ui-input:focus {
-  outline: var(--r-ui-focus-outline);
-  outline-offset: 1px;
-  border-color: var(--r-ui-color-accent-primary);
-}
-
-.r-ui-input[aria-invalid="true"] {
-  border-color: var(--r-ui-color-error);
-  outline-color: var(--r-ui-color-error);
-}
-
-.r-ui-error-message {
-  font-size: var(--r-ui-font-micro);
-  color: var(--r-ui-color-error);
+.r-ui-stat-card__label {
+  font-size: 0.75rem;
+  color: var(--r-ui-color-text-secondary);
+  font-weight: 500;
   display: flex;
   align-items: center;
-  gap: var(--r-ui-space-1);
+  justify-content: space-between;
 }
-```
 
----
+.r-ui-stat-card__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--r-ui-color-text-primary);
+  font-family: var(--r-ui-font-family-mono);
+  letter-spacing: -0.02em;
+}
 
-## 3. Asymmetric Bento Feature Card
+.r-ui-stat-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+}
 
-Blok fitur modern dengan ritme asimetris, garis 1px halus, dan ambient elevation lembut.
-
-```css
-.r-ui-bento-container {
+/* Telemetry Ribbon (Anti-Card Overuse) */
+.r-ui-telemetry-ribbon {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--r-ui-space-4);
-  container-type: inline-size;
-}
-
-@container (min-width: 640px) {
-  .r-ui-bento-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .r-ui-bento-hero-card {
-    grid-column: span 2; /* Bobot asimetris visual */
-  }
-}
-
-.r-ui-card {
-  position: relative;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   background-color: var(--r-ui-color-surface);
-  border: 1px solid var(--r-ui-color-border-subtle);
-  border-radius: var(--r-ui-radius-lg);
-  padding: var(--r-ui-space-6);
-  box-shadow: var(--r-ui-shadow-xs);
-  transition: border-color var(--r-ui-duration-fast) ease,
-              transform var(--r-ui-duration-fast) var(--r-ui-ease-spring),
-              box-shadow var(--r-ui-duration-fast) ease;
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-sm);
+  overflow: hidden;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .r-ui-card:hover {
-    border-color: var(--r-ui-color-border-strong);
-    transform: translateY(-2px);
-    box-shadow: var(--r-ui-shadow-sm); /* Subtle depth, no murky black shadow */
-  }
+.r-ui-telemetry-item {
+  padding: 12px 16px;
+  border-right: 1px solid var(--r-ui-color-border-standard);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.r-ui-telemetry-item:last-child {
+  border-right: none;
 }
 ```
 
 ---
 
-## 4. Adaptive Dialog (Desktop Modal vs Mobile Bottom Sheet)
-
-Dialog yang secara otomatis beradaptasi menjadi bottom sheet di layar ponsel.
-
+## 11. Modal Dialog & Slide-Over Inspector Drawer
 ```css
-.r-ui-overlay-backdrop {
+/* Modal Backdrop & Dialog */
+.r-ui-modal-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(9, 10, 15, 0.6);
+  background-color: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(6px);
-  z-index: 100;
   display: flex;
-  align-items: flex-end; /* Mobile: bottom sheet */
+  align-items: center;
   justify-content: center;
+  z-index: var(--r-ui-z-modal);
+  padding: var(--r-ui-space-4);
+  animation: r-ui-fade-in 0.18s ease;
 }
 
-.r-ui-modal-surface {
+.r-ui-modal {
+  background-color: var(--r-ui-color-surface);
+  border: 1px solid var(--r-ui-color-border-strong);
+  border-radius: var(--r-ui-radius-md);
+  box-shadow: var(--r-ui-shadow-lg);
   width: 100%;
-  max-height: 85dvh;
-  background-color: var(--r-ui-color-surface-elevated);
-  border-top: 1px solid var(--r-ui-color-border-standard);
-  border-radius: var(--r-ui-radius-xl) var(--r-ui-radius-xl) 0 0;
-  padding: var(--r-ui-space-6);
-  padding-bottom: max(var(--r-ui-space-6), env(safe-area-inset-bottom));
-  overflow-y: auto;
-  box-shadow: var(--r-ui-shadow-md);
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: r-ui-modal-in 0.2s var(--r-ui-ease-spring);
 }
 
-@media (min-width: 768px) {
-  .r-ui-overlay-backdrop {
-    align-items: center;
-    padding: var(--r-ui-space-6);
-  }
+.r-ui-modal-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--r-ui-color-border-standard);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
 
-  .r-ui-modal-surface {
-    max-width: 520px;
-    border: 1px solid var(--r-ui-color-border-standard);
-    border-radius: var(--r-ui-radius-lg);
-    box-shadow: var(--r-ui-shadow-lg); /* Ambient subtle elevation */
-    padding-bottom: var(--r-ui-space-6);
-  }
+.r-ui-modal-body {
+  padding: 18px;
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.r-ui-modal-footer {
+  padding: 12px 18px;
+  border-top: 1px solid var(--r-ui-color-border-standard);
+  background-color: var(--r-ui-color-surface-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--r-ui-space-2);
+}
+
+/* Slide-Over Drawer */
+.r-ui-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 460px;
+  background-color: var(--r-ui-color-surface);
+  border-left: 1px solid var(--r-ui-color-border-strong);
+  box-shadow: var(--r-ui-shadow-lg);
+  z-index: var(--r-ui-z-modal);
+  display: flex;
+  flex-direction: column;
+  animation: r-ui-slide-in-right 0.22s var(--r-ui-ease-spring);
 }
 ```
 
 ---
 
-## 5. Smart TV 10-Foot UI Spatial Card
-
-Elemen fokus D-Pad TV: pembesaran visual 1.08x dengan outline kontras tinggi tanpa glow neon.
-
+## 12. Command Palette (`Ctrl + K`)
 ```css
-.r-ui-tv-card {
-  background-color: var(--r-ui-color-surface-elevated);
-  border: 1px solid var(--r-ui-color-border-standard);
+.r-ui-command-dialog {
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--r-ui-color-surface);
+  border: 1px solid var(--r-ui-color-border-strong);
   border-radius: var(--r-ui-radius-md);
-  padding: var(--r-ui-space-6);
-  outline: none;
-  transition: transform var(--r-ui-duration-fast) var(--r-ui-ease-spring),
-              border-color var(--r-ui-duration-fast) ease,
-              box-shadow var(--r-ui-duration-fast) ease;
+  box-shadow: var(--r-ui-shadow-lg);
+  overflow: hidden;
 }
 
-.r-ui-tv-card:focus-visible,
-.r-ui-tv-card.is-focused {
-  transform: scale(1.08);
-  border-color: var(--r-ui-color-accent-primary);
-  outline: 3px solid var(--r-ui-color-focus-ring);
-  outline-offset: 3px;
-  box-shadow: var(--r-ui-shadow-lg);
-  z-index: 10;
+.r-ui-command-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--r-ui-color-border-standard);
+}
+
+.r-ui-command-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--r-ui-color-text-primary);
+  font-size: 0.9375rem;
+  outline: none;
+}
+
+.r-ui-command-list {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.r-ui-command-group-heading {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--r-ui-color-text-tertiary);
+  padding: 8px 10px 4px;
+  font-weight: 600;
+}
+
+.r-ui-command-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: var(--r-ui-radius-xs);
+  color: var(--r-ui-color-text-secondary);
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.r-ui-command-item:hover,
+.r-ui-command-item.is-active {
+  background-color: var(--r-ui-color-surface-elevated);
+  color: var(--r-ui-color-text-primary);
 }
 ```
+
+---
+
+## 13. Floating Bulk Action Bar
+```css
+.r-ui-bulk-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--r-ui-z-toast);
+  background-color: var(--r-ui-color-surface-elevated);
+  border: 1px solid var(--r-ui-color-border-strong);
+  border-radius: var(--r-ui-radius-full);
+  padding: 8px 18px;
+  box-shadow: var(--r-ui-shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: r-ui-slide-up 0.2s var(--r-ui-ease-spring);
+}
+
+.r-ui-bulk-bar__count {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--r-ui-color-text-primary);
+  padding-right: 12px;
+  border-right: 1px solid var(--r-ui-color-border-standard);
+}
+```
+

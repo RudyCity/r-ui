@@ -210,3 +210,142 @@ Modal.Close = function ModalClose({ className = '', children = 'Tutup', ...props
     </button>
   );
 };
+
+/* ==========================================================================
+   4. COMPOUND COMPONENT: CUSTOM ACCESSIBLE SELECT (BANS RAW NATIVE <select>)
+   ========================================================================== */
+interface SelectContextValue {
+  value: string;
+  onChange: (val: string) => void;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+  unstyled: boolean;
+}
+const SelectContext = createContext<SelectContextValue>({
+  value: '',
+  onChange: () => {},
+  isOpen: false,
+  setIsOpen: () => {},
+  unstyled: false
+});
+
+export interface SelectProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  unstyled?: boolean;
+  className?: string;
+  children: React.ReactNode;
+}
+
+export function Select({
+  value,
+  onChange,
+  unstyled = false,
+  className = '',
+  children
+}: SelectProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <SelectContext.Provider value={{ value, onChange, isOpen, setIsOpen, unstyled }}>
+      <div
+        className={unstyled ? className : `r-ui-custom-select ${isOpen ? 'is-open' : ''} ${className}`}
+        onBlur={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget)) {
+            setIsOpen(false);
+          }
+        }}
+      >
+        {children}
+      </div>
+    </SelectContext.Provider>
+  );
+}
+
+Select.Trigger = function SelectTrigger({
+  placeholder = 'Select option...',
+  className = '',
+  children
+}: {
+  placeholder?: string;
+  className?: string;
+  children?: React.ReactNode;
+}) {
+  const { value, isOpen, setIsOpen, unstyled } = useContext(SelectContext);
+
+  return (
+    <button
+      type="button"
+      role="combobox"
+      aria-expanded={isOpen}
+      aria-haspopup="listbox"
+      className={unstyled ? className : `r-ui-select-trigger ${className}`}
+      onClick={() => setIsOpen(!isOpen)}
+    >
+      <span>{children || value || placeholder}</span>
+      <svg
+        className={unstyled ? '' : 'r-ui-select-chevron'}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+      >
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </button>
+  );
+};
+
+Select.Content = function SelectContent({
+  className = '',
+  children
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  const { isOpen, unstyled } = useContext(SelectContext);
+  if (!isOpen) return null;
+
+  return (
+    <div
+      role="listbox"
+      className={unstyled ? className : `r-ui-select-popover ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
+
+Select.Option = function SelectOption({
+  value: optValue,
+  className = '',
+  children
+}: {
+  value: string;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  const { value, onChange, setIsOpen, unstyled } = useContext(SelectContext);
+  const isSelected = value === optValue;
+
+  return (
+    <div
+      role="option"
+      aria-selected={isSelected}
+      className={
+        unstyled
+          ? className
+          : `r-ui-select-option ${isSelected ? 'is-selected' : ''} ${className}`
+      }
+      onClick={() => {
+        onChange(optValue);
+        setIsOpen(false);
+      }}
+    >
+      <span>{children}</span>
+      {isSelected && <span>✓</span>}
+    </div>
+  );
+};
+
