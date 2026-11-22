@@ -1,18 +1,18 @@
-div align="center">
+<div align="center">
 
 # 💎 r-ui
 
 **Universal UI/UX Design System, Dual-Layer Theme Engine & 9-Pillar (45+ Component) Production Suite**
 
-*A production-grade, anti-slop, project-adaptive design system & AI skill. Zero-dependency, zero-neon, anti-heavy shadows, strict componentized form policy, and 100% intellectual property (HAKI) compliant.*
+*A production-grade, anti-slop, project-adaptive design system & AI skill. Zero-dependency, zero-neon, anti-heavy shadows, strict componentized form policy, kinetic spring physics, WCAG 2.2 AAA accessibility, and 100% intellectual property (HAKI) compliant.*
 
-[![Version](https://img.shields.io/badge/version-2.4.0-blue.svg?style=flat-square)](https://github.com/RudyCity/r-ui)
+[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg?style=flat-square)](https://github.com/RudyCity/r-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=flat-square)](LICENSE)
 [![Zero Dependency](https://img.shields.io/badge/dependencies-0-violet.svg?style=flat-square)](#)
 [![WCAG](https://img.shields.io/badge/WCAG-2.2_AAA-yellow.svg?style=flat-square)](#)
 [![Anti-Slop](https://img.shields.io/badge/Anti--Slop-Certified-rose.svg?style=flat-square)](#)
 
-[Live Interactive Playground](references/examples/r-ui-showcase.html) • [Dashboard Kit Spec](references/r-ui-dashboard-kit-spec.md) • [Color & Typography](references/r-ui-color-and-typography-doctrine.md) • [Design Tokens](references/r-ui-tokens.css) • [Themes](references/r-ui-themes.css) • [Component Specs](references/r-ui-component-specs.md) • [Framework Adapters](references/r-ui-framework-adapters.md)
+[Live Interactive Playground](references/examples/r-ui-showcase.html) • [Dashboard Kit Spec](references/r-ui-dashboard-kit-spec.md) • [Kinetic & A11y Spec](references/r-ui-interaction-and-accessibility-spec.md) • [Color & Typography](references/r-ui-color-and-typography-doctrine.md) • [Design Tokens](references/r-ui-tokens.css) • [Themes](references/r-ui-themes.css) • [Component Specs](references/r-ui-component-specs.md) • [Framework Adapters](references/r-ui-framework-adapters.md)
 
 </div>
 
@@ -83,6 +83,45 @@ flowchart TD
 ```
 
 *Comprehensive blueprint & implementation guide:* [r-ui-dashboard-kit-spec.md](references/r-ui-dashboard-kit-spec.md).
+
+---
+
+## ⚡ Kinetic Micro-Interactions, Accessibility & State Exhaustiveness (v3.0.0)
+
+In version 3.0.0, `r-ui` introduces an enterprise kinetic physics engine, rigorous focus management, and complete visual state exhaustiveness:
+
+```text
++-----------------------------------------------------------------------------------------+
+|                       THE v3.0.0 ADVANCED INTERACTION TRIAD                             |
++-----------------------------+-----------------------------+-----------------------------+
+| 1. KINETIC PHYSICS          | 2. ACCESSIBILITY & FOCUS    | 3. 6-STATE EXHAUSTIVENESS   |
+| Snappy Springs (cubic-bezier| WCAG 2.2 AAA Double-Ring    | Idle, Hover, Active, Focus, |
+| 0.16, 1, 0.3, 1), Tactile   | Focus (2px offset + 2px     | Disabled, Loading Skeleton, |
+| scale(0.975) depression,    | accent), Roving tabindex,   | Empty States with action    |
+| Staggered cascade delays    | Modal Focus Trap, ARIA Live | triggers, & Error Boundaries|
++-----------------------------+-----------------------------+-----------------------------+
+```
+
+### 1. Kinetic Physics & Tactile Depression
+- **Tactile Click Depression**: Interactive buttons and cards simulate real mechanical switches by depressing to `scale(0.975)` with instant timing (`100ms`).
+- **Snappy Spring Curves**: All interactive controls transition using `--r-ui-ease-spring-snappy: cubic-bezier(0.16, 1, 0.3, 1)`.
+- **Staggered Cascade Delays**: Dynamic collections stagger their entrance with `calc(var(--item-index, 0) * 35ms)` delays.
+
+### 2. Focus Management & Keyboard Spatial Navigation (WCAG 2.2 AAA)
+- **Double-Ring Focus System**: Eliminates invisible focus indicators by combining a 2px inner canvas offset with a 2px outer accent outline: `box-shadow: 0 0 0 2px var(--r-ui-color-canvas), 0 0 0 4px var(--r-ui-color-accent-primary);`.
+- **Roving Tabindex Architecture**: Menus, toolbars, and tab lists maintain a single active `tabindex="0"` item while remaining items receive `tabindex="-1"`, enabling seamless arrow-key navigation.
+- **Strict Modal Focus Trapping**: Modals and slide-over drawers trap keyboard focus within the dialog, restore focus to the trigger on escape, and lock body scroll.
+
+### 3. Component State Machine Exhaustiveness
+Every UI component must explicitly implement the **6 Universal Visual States**:
+1. **Idle**: Pristine resting state with crisp optical alignment.
+2. **Hover**: Smooth elevation shift (`translateY(-1px)`) and subtle border-color brightening.
+3. **Active (Press)**: Tactile depression (`scale(0.975)`) and instantaneous surface darkening.
+4. **Focus-Visible**: High-contrast double-ring indicator visible exclusively during keyboard navigation.
+5. **Disabled**: Reduced opacity (`0.45`), `not-allowed` cursor, zero hover elevation, and suppressed click handlers.
+6. **Loading / Skeleton**: Shimmer gradient placeholder preserving identical height and layout geometry to eliminate cumulative layout shift (CLS = 0).
+
+*Detailed technical specifications:* [r-ui-interaction-and-accessibility-spec.md](references/r-ui-interaction-and-accessibility-spec.md).
 
 ---
 
@@ -215,10 +254,12 @@ Strip all opinionated styles and apply pure utility classes without conflict:
 Open [`references/examples/r-ui-showcase.html`](references/examples/r-ui-showcase.html) directly in any modern browser—no server or build tools required:
 
 - **Theme & Accent Switcher**: Switch canvas and 8 accents live with zero-flicker transitions.
+- **Law 9 Custom Select**: Test accessible combobox popover with full keyboard support.
+- **Kinetic Switches & Micro-Press**: Feel tactile `scale(0.975)` click depression and spring transitions.
+- **6 Universal Visual States**: Side-by-side inspection of Idle, Hover, Active, Double-Ring Focus, Disabled, and Shimmer Skeleton.
 - **Adaptive Modal**: Desktop popup transforms into a mobile bottom-sheet on smaller screens.
 - **Smart TV Spatial Nav**: Use arrow keys to experience 1.08x D-pad navigation and crisp outlines.
 - **Modality Detection**: Detects touch vs precision mouse pointer automatically.
-
 
 ---
 
@@ -239,10 +280,9 @@ World-class interfaces are defined by mathematical precision, visual cleanliness
 1. **Strict 4pt / 8pt Harmonic Grid**: All `padding`, `margin`, and `gap` values strictly adhere to the 4pt/8pt scale (`4px`, `8px`, `12px`, `16px`, `24px`, `32px`, `48px`, `64px`). Arbitrary odd numbers (`13px`, `17px`, `23px`) are permanently banned.
 2. **Gestalt Proximity & Macro/Micro Spacing**: Elements that belong together functionally share micro-spacing (4px - 8px), while separate containers maintain macro-spacing (16px - 32px). Hierarchy rule: `Section Gap >= Card Padding > Item Gap > Label-to-Input`.
 3. **Mathematical Nested Radius Formula**: To prevent visual corner collisions and clipping, inner element border radii strictly obey:
-   $R_{\text{inner}} = \max(0, R_{\text{outer}} - \text{Padding})$
+   $$R_{\text{inner}} = \max(0, R_{\text{outer}} - \text{Padding})$$
 4. **Zero Trapped Dead-Space & Content Bounds**: Prevents lonely floating elements inside massive 1400px containers. Text lines are bounded to optimal reading lengths (65ch - 72ch), forms to 640px - 720px, and cards adapt with responsive `minmax(260px, 1fr)` grids.
 5. **Optical Alignment & Tabular Metrics**: All numbers, metrics, currency, and table data mandate `font-variant-numeric: tabular-nums;` and right-alignment to eliminate visual jitter. Icon + text pairs are locked with `display: inline-flex; align-items: center; gap: 6px;`.
-
 
 ---
 
@@ -306,6 +346,38 @@ Typography accounts for 90% of UI design. `r-ui` enforces strict mathematical sc
 
 ---
 
+## 📋 The 25-Point Master UI/UX Audit Gate
+
+Every UI component, screen, or dashboard kit engineered with `r-ui` must pass the **25-Point Quality Gate**:
+
+1. [x] **Zero Raw `<select>` Elements**: Every dropdown is an accessible custom popover component.
+2. [x] **Zero Rogue Hex/RGB**: 100% of styles consume registered `--r-ui-*` or existing project variables.
+3. [x] **Harmonic 4pt/8pt Spatial Scale**: All margins, paddings, and gaps adhere to 4px/8px multiples.
+4. [x] **Mathematical Nested Radius**: Inner radius matches outer radius minus padding.
+5. [x] **Anti-Heavy Shadows**: Micro-elevations only; zero thick black blur or murky overlays.
+6. [x] **Zero Neon Halos**: Optical accent tones without fluorescent glow rings.
+7. [x] **Asymmetric Grid Spans**: Purposeful 2:1 bento hierarchy; zero uniform card matrices.
+8. [x] **Micro-Elevation Scale**: Depth created via hairlines (`1px solid`) and surface tone shifts.
+9. [x] **60-30-10 Color Allocation**: 60% neutral surface, 30% structural secondary, 10% focal accent.
+10. [x] **WCAG 2.2 AAA Contrast**: >= 7:1 for normal text, >= 4.5:1 for large display headers.
+11. [x] **4 Neutral Undertones**: Monolithic undertone family (Slate, Zinc, Stone, or Obsidian).
+12. [x] **Dual-Layer Theming**: Clean decoupling between canvas themes and accent scales.
+13. [x] **Anti-Flicker Transitions**: CSS variable transitions on theme switches without flash.
+14. [x] **3-Tier Font System**: Distinct display font, legible body font, tabular monospace.
+15. [x] **Tracking Inversion**: Negative tracking on large titles, positive tracking on micro-labels.
+16. [x] **Tabular Numeric Figures**: `tabular-nums` and right-alignment on all metrics/tables.
+17. [x] **Max-Width Prose Bounds**: Text lines bounded between 65ch and 72ch.
+18. [x] **Optical Alignment**: Sub-pixel balance between icons, text labels, and form controls.
+19. [x] **Touch Target Ergonomics**: Minimum 44x44px touch targets on mobile viewports.
+20. [x] **Cross-Platform Responsive**: Flawless reflow across Desktop, Mobile, and Smart TV.
+21. [x] **Zero Third-Party Trademark Conflicts**: 100% original `--r-ui-*` naming.
+22. [x] **Zero Mock Vagueness**: Realistic domain-specific mock data; zero "Lorem Ipsum".
+23. [x] **Kinetic Physics & Springs**: Snappy spring curves and tactile `scale(0.975)` micro-press.
+24. [x] **WCAG 2.2 AAA Double-Ring Focus**: 2px inner canvas offset + 2px outer accent outline.
+25. [x] **6-State Exhaustiveness**: Idle, Hover, Active, Focus, Disabled, and Shimmer Skeleton.
+
+---
+
 ## 📚 Curated Design References
 
 `r-ui` incorporates audited design patterns from the world's best design archives:
@@ -321,26 +393,28 @@ Typography accounts for 90% of UI design. `r-ui` enforces strict mathematical sc
 
 ```text
 r-ui/
-├── SKILL.md                          # Main operational AI skill manual (v2.4.0)
-├── README.md                         # Public repository documentation
-├── LICENSE                           # MIT License
+├── SKILL.md                                        # Main operational AI skill manual (v3.0.0)
+├── README.md                                       # Public repository documentation (v3.0.0)
+├── LICENSE                                         # MIT License
 └── references/
-    ├── r-ui-dashboard-kit-spec.md    # 9-Pillar (45+ Component) Master Blueprint
-    ├── r-ui-tokens.css               # Core W3C CSS design tokens
-    ├── r-ui-themes.css               # 5 Canvas themes
-    ├── r-ui-color-themes.css         # 8 Calibrated accent color themes
-    ├── r-ui-component-specs.md       # Visual component specifications (Buttons, Inputs, Select, Tables, Modals, etc.)
-    ├── r-ui-project-adapter.md       # 4 Project dials & 5 archetypes guide
-    ├── r-ui-config-schema.json       # Formal JSON Schema for project configuration
-    ├── r-ui-responsive-matrix.md     # Cross-platform engineering recipes
-    ├── r-ui-framework-adapters.md    # React, Tailwind, Vue, Svelte, Ink CLI guides
-    ├── r-ui-modular-architecture.md  # 5-level atomic modular hierarchy
-    ├── r-ui-contract-types.ts        # Zero-dependency TypeScript contracts
-    ├── r-ui-compound-components.tsx  # Production Compound Components (Select, Card, Modal, etc.)
-    ├── r-ui-theme-switcher.tsx       # Interactive Theme & Accent Switcher widget
+    ├── r-ui-dashboard-kit-spec.md                  # 9-Pillar (45+ Component) Master Blueprint
+    ├── r-ui-interaction-and-accessibility-spec.md  # Kinetic physics, WCAG 2.2 AAA & 6-state engine
+    ├── r-ui-color-and-typography-doctrine.md       # Color science, 60-30-10 rule & typography spec
+    ├── r-ui-tokens.css                             # Core W3C CSS design tokens
+    ├── r-ui-themes.css                             # 5 Canvas themes
+    ├── r-ui-color-themes.css                       # 8 Calibrated accent color themes
+    ├── r-ui-component-specs.md                     # 14 Visual component specifications
+    ├── r-ui-project-adapter.md                     # 4 Project dials & 5 archetypes guide
+    ├── r-ui-config-schema.json                     # Formal JSON Schema for project configuration
+    ├── r-ui-responsive-matrix.md                   # Cross-platform engineering recipes
+    ├── r-ui-framework-adapters.md                  # React, Tailwind, Vue, Svelte, Ink CLI guides
+    ├── r-ui-modular-architecture.md                # 5-level atomic modular hierarchy
+    ├── r-ui-contract-types.ts                      # Zero-dependency TypeScript contracts
+    ├── r-ui-compound-components.tsx                # Production Compound Components (Select, Card, Modal, etc.)
+    ├── r-ui-theme-switcher.tsx                     # Interactive Theme & Accent Switcher widget
     └── examples/
-        ├── r-ui-showcase.html        # Zero-dependency interactive live playground
-        └── README.md                 # Playground testing instructions
+        ├── r-ui-showcase.html                      # Zero-dependency interactive live playground
+        └── README.md                               # Playground testing instructions
 ```
 
 ---
@@ -354,4 +428,3 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
 <div align="center">
   <b>Built with precision by <a href="https://github.com/RudyCity">RudyCity</a></b>
 </div>
-

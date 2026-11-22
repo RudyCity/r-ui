@@ -92,14 +92,21 @@
   --r-ui-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
   --r-ui-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
 
-  /* Focus & Focus-Visible Outlines (Crisp 2px Offset Ring, Zero Blur) */
+  /* Focus & Focus-Visible Outlines (WCAG 2.2 AAA Double-Ring System) */
   --r-ui-focus-outline: 2px solid var(--r-ui-color-focus-ring);
   --r-ui-focus-offset: 2px;
+  --r-ui-focus-ring-inner: 0 0 0 2px var(--r-ui-color-canvas);
+  --r-ui-focus-ring-outer: 0 0 0 4px var(--r-ui-color-accent-primary);
+  --r-ui-focus-ring-double: 0 0 0 2px var(--r-ui-color-canvas), 0 0 0 4px var(--r-ui-color-accent-primary);
 
   /* ==========================================================================
-     6. MOTION PHYSICS & SPRINGS
+     6. MOTION PHYSICS & KINETIC SPRINGS
      ========================================================================== */
   --r-ui-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --r-ui-ease-spring-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+  --r-ui-ease-spring-gentle: cubic-bezier(0.25, 1, 0.5, 1);
+  --r-ui-ease-spring-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --r-ui-ease-spring-exit: cubic-bezier(0.7, 0, 0.84, 0);
   --r-ui-ease-snappy: cubic-bezier(0.2, 0.9, 0.2, 1);
   --r-ui-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 

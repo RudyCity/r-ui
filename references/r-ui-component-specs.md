@@ -1,4 +1,4 @@
-# r-ui: Complete Component Anatomy & Interaction Specifications (v2.0.0)
+# r-ui: Complete Component Anatomy & Interaction Specifications (v3.0.0)
 
 Comprehensive modular component specifications for production-grade Universal UI/UX Design System.
 **Visual-first**, anti-slop, free of murky dark shadows, free of neon/glow effects, and 100% powered by native --r-ui-* tokens.
@@ -223,7 +223,7 @@ Raw native <select> and <option> elements are **strictly banned** because OS pop
 
 ---
 
-## 4. Custom Checkbox & Radio
+## 5. Custom Checkbox & Radio
 ```css
 .r-ui-checkbox, .r-ui-radio {
   display: inline-flex;
@@ -270,7 +270,7 @@ Raw native <select> and <option> elements are **strictly banned** because OS pop
 
 ---
 
-## 5. Status Badges & Pulse Indicators
+## 6. Status Badges & Pulse Indicators
 ```css
 .r-ui-badge {
   display: inline-flex;
@@ -291,7 +291,7 @@ Raw native <select> and <option> elements are **strictly banned** because OS pop
 
 ---
 
-## 6. Avatars & Avatar Groups
+## 7. Avatars & Avatar Groups
 ```css
 .r-ui-avatar {
   position: relative;
@@ -319,7 +319,7 @@ Raw native <select> and <option> elements are **strictly banned** because OS pop
 
 ---
 
-## 7. Tabs & Accordions
+## 8. Tabs & Accordions
 ```css
 .r-ui-tabs-nav {
   display: flex;
@@ -371,7 +371,7 @@ Raw native <select> and <option> elements are **strictly banned** because OS pop
 
 ---
 
-## 8. Toast Notifications & Alert Banners
+## 9. Toast Notifications & Alert Banners
 ```css
 .r-ui-toast-container {
   position: fixed;
@@ -398,7 +398,7 @@ Raw native <select> and <option> elements are **strictly banned** because OS pop
 
 ---
 
-## 9. High-Density Data Grid & Table Pagination
+## 10. High-Density Data Grid & Table Pagination
 ```css
 .r-ui-table-container {
   width: 100%;
@@ -471,7 +471,7 @@ Raw native <select> and <option> elements are **strictly banned** because OS pop
 
 ---
 
-## 10. Metric KPI Cards & Architectural Telemetry Ribbon
+## 11. Metric KPI Cards & Architectural Telemetry Ribbon
 ```css
 /* Metric Stat Card */
 .r-ui-stat-card {
@@ -534,7 +534,7 @@ Raw native <select> and <option> elements are **strictly banned** because OS pop
 
 ---
 
-## 11. Modal Dialog & Slide-Over Inspector Drawer
+## 12. Modal Dialog & Slide-Over Inspector Drawer
 ```css
 /* Modal Backdrop & Dialog */
 .r-ui-modal-backdrop {
@@ -609,7 +609,7 @@ Raw native <select> and <option> elements are **strictly banned** because OS pop
 
 ---
 
-## 12. Command Palette (`Ctrl + K`)
+## 13. Command Palette (`Ctrl + K`)
 ```css
 .r-ui-command-dialog {
   width: 100%;
@@ -673,7 +673,7 @@ Raw native <select> and <option> elements are **strictly banned** because OS pop
 
 ---
 
-## 13. Floating Bulk Action Bar
+## 14. Floating Bulk Action Bar
 ```css
 .r-ui-bulk-bar {
   position: fixed;

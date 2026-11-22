@@ -1,8 +1,8 @@
 ---
 name: r-ui
-description: Universal UI/UX Design System, Multi-Theme, Modular Color Accent, 9-Pillar Complete Dashboard Kit Architecture (45+ Production Components), Spatial Harmony & Layout Precision Doctrine, Color Science & Palette Architecture (60-30-10, Tonal Ramps, Undertones), Typographic Composition Doctrine (3-Tier Font Pairing, Modular Scale, Leading Ratios, Tracking Inversion, 3-Weight Discipline), Project-Adaptive & Live Playground Architecture Skill. Enforces anti-slop aesthetic standards, anti-rigid project adaptation (5 project archetypes & 4 visual dials), zero-neon and anti-heavy shadow discipline, visual-first density, dual-layer theming (5 Canvas Themes + 8 Calibrated Color Themes), strict componentized form policy (zero raw native forms), headless/unstyled component flexibility, live interactive showcase, multi-framework integration (React, Next.js, Tailwind v3/v4, Vue, Svelte, Ink CLI), fluid cross-platform responsiveness (Web, Windows, macOS, Linux, Android, iOS, Foldables, Smart TV), and integration with curated design references (jiro.build, designspells.com, styles.refero.design, supahero.io, mobbin.com).
+description: Universal UI/UX Design System, Multi-Theme, Modular Color Accent, 9-Pillar Complete Dashboard Kit Architecture (45+ Production Components), Spatial Harmony & Layout Precision Doctrine, Color Science & Palette Architecture (60-30-10, Tonal Ramps, Undertones), Typographic Composition Doctrine (3-Tier Font Pairing, Modular Scale, Leading Ratios, Tracking Inversion, 3-Weight Discipline), Kinetic Physics & Micro-Interactions (Designspells Delight, Spring Curves, Tactile Press), Accessibility & Keyboard Spatial Navigation (WCAG 2.2 AAA Double-Ring Focus, Roving Tabindex, ARIA Live Regions), Component State Machine Exhaustiveness (6 Universal Visual States), Project-Adaptive & Live Playground Architecture Skill. Enforces anti-slop aesthetic standards, anti-rigid project adaptation (5 project archetypes & 4 visual dials), zero-neon and anti-heavy shadow discipline, visual-first density, dual-layer theming (5 Canvas Themes + 8 Calibrated Color Themes), strict componentized form policy (zero raw native forms), headless/unstyled component flexibility, live interactive showcase, multi-framework integration (React, Next.js, Tailwind v3/v4, Vue, Svelte, Ink CLI), fluid cross-platform responsiveness (Web, Windows, macOS, Linux, Android, iOS, Foldables, Smart TV), and integration with curated design references (jiro.build, designspells.com, styles.refero.design, supahero.io, mobbin.com).
 when_to_use: Use whenever designing, building, auditing, refactoring, or reviewing user interfaces (UI), user experiences (UX), dashboard kits, admin consoles, SaaS platforms, responsive layouts, design systems, design tokens, micro-interactions, components, color themes, project adaptation, interactive showcases, or cross-platform web/app experiences.
-version: 2.4.0
+version: 3.0.0
 ---
 
 # r-ui: Universal UI/UX Design System & Visual-First Architecture
@@ -109,6 +109,8 @@ When designing, reviewing, or refactoring UI/UX, verify patterns against the 5 e
 ## 6. MODULAR CODE DELIVERABLES
 
 - 🏛️ **Master Blueprint Dashboard Kit (9 Pillars & 45+ Components)**: [r-ui-dashboard-kit-spec.md](references/r-ui-dashboard-kit-spec.md)
+- ⚡ **Kinetic Interaction, Accessibility & State Spec**: [r-ui-interaction-and-accessibility-spec.md](references/r-ui-interaction-and-accessibility-spec.md)
+- 🎨 **Color Science & Typographic Composition Doctrine**: [r-ui-color-and-typography-doctrine.md](references/r-ui-color-and-typography-doctrine.md)
 - 📜 **TypeScript Contract Types Boilerplate**: [r-ui-contract-types.ts](references/r-ui-contract-types.ts)
 - 📦 **Compound Components (`unstyled?: boolean`)**: [r-ui-compound-components.tsx](references/r-ui-compound-components.tsx)
 - 🎛️ **Interactive Theme & Accent Switcher Widget**: [r-ui-theme-switcher.tsx](references/r-ui-theme-switcher.tsx)
@@ -121,6 +123,7 @@ When designing, reviewing, or refactoring UI/UX, verify patterns against the 5 e
 ## 7. COMPLETE TECHNICAL REFERENCES
 
 - 🏛️ **Complete Dashboard Kit Specification**: [r-ui-dashboard-kit-spec.md](references/r-ui-dashboard-kit-spec.md)
+- ⚡ **Interaction Physics & Accessibility Specification**: [r-ui-interaction-and-accessibility-spec.md](references/r-ui-interaction-and-accessibility-spec.md)
 - 🎨 **Color Science & Typographic Composition Specification**: [r-ui-color-and-typography-doctrine.md](references/r-ui-color-and-typography-doctrine.md)
 - 🎨 **Standard Design Tokens**: [r-ui-tokens.css](references/r-ui-tokens.css)
 - 📐 **Visual Component Specifications**: [r-ui-component-specs.md](references/r-ui-component-specs.md)
@@ -129,7 +132,7 @@ When designing, reviewing, or refactoring UI/UX, verify patterns against the 5 e
 
 ---
 
-## 8. PRE-FLIGHT UI/UX AUDIT CHECKLIST (22-Point Gate)
+## 8. PRE-FLIGHT UI/UX AUDIT CHECKLIST (25-Point Master Gate)
 
 ```text
 [ ] 1.  Anti-Slop Check: Free of AI-purple mesh gradients, monotonous uniform bentos, & "Lorem Ipsum" dummy text.
@@ -154,6 +157,9 @@ When designing, reviewing, or refactoring UI/UX, verify patterns against the 5 e
 [ ] 20. Spatial Rhythm & Layout Harmony: Negative space (macro/micro whitespace) balanced via 4pt/8pt scale; container padding proportionate to content; zero trapped dead-space, zero layout breakages, and precision optical alignment.
 [ ] 21. Color Palette & Undertone Coherence: Follows 60-30-10 distribution; coherent neutral undertones (cool/slate, neutral/zinc, or warm/stone); calibrated accent (<=10%); free of blinding fluorescent neon.
 [ ] 22. Typographic Composition & Tracking Discipline: 3-tier font pairing (Display, UI/Body, Tabular Mono); proportional leading (tight 1.1-1.2 on large titles, compact 1.35 on UI, 1.6 on prose); tracking inversion law (-0.02em on headings, +0.06em on micro-caps); strict max 3 font weights.
+[ ] 23. Kinetic Micro-Interactions & Spring Dynamics: All transitions use calibrated cubic-bezier springs; interactive buttons feature tactile scale depression (scale 0.975); staggered cascade delays on lists.
+[ ] 24. Accessibility & Keyboard Spatial Navigation: Passes WCAG 2.2 AAA focus-visible criteria (2px ring + 2px offset + 4px canvas shadow); roving tabindex on toolbars/tabs; overlays trap focus and restore it on Escape.
+[ ] 25. State Machine Exhaustiveness: 100% of interactive components explicitly define all 6 universal states (Idle, Hover, Active, Focus-Visible, Disabled, Loading/Skeleton) with zero visual ambiguity.
 ```
 
 ---
@@ -428,4 +434,91 @@ Never use more than 3 font weights on a single screen:
 - **Secondary Text (65–70% contrast)**: Subtitles, input field labels, metadata keys (`--r-ui-color-text-secondary`).
 - **Tertiary / Muted Text (45–50% contrast)**: Timestamps, placeholder hints, breadcrumb dividers, shortcuts (`--r-ui-color-text-tertiary`).
 
-*Complete color & typography specifications:* [r-ui-color-and-typography-doctrine.md](references/r-ui-color-and-typography-doctrine.md).
+---
+
+## 15. KINETIC PHYSICS & HAPTIC MICRO-INTERACTIONS (Designspells Delight & Kinetic Feedback)
+
+Micro-interactions transform interfaces from static layouts into responsive physical instruments:
+
+```text
++---------------------------------------------------------------------------------+
+|                         KINETIC INTERACTION PROTOCOL                            |
++---------------------------------------------------------------------------------+
+| 1. SPRING PHYSICS     ---> cubic-bezier(0.16, 1, 0.3, 1) timing curves          |
+| 2. TACTILE CLICK      ---> scale(0.975) depression on mousedown / touch         |
+| 3. STAGGERED CASCADE  ---> calc(index * 35ms) entrance delays on collections    |
+| 4. MORPHING FEEDBACK  ---> Fluid icon transformation (Copy to Checkmark)        |
++---------------------------------------------------------------------------------+
+```
+
+### 15.1. Standard Haptic Click Depression
+All buttons and interactive cards must implement active physical depression:
+```css
+.r-ui-btn:active,
+.r-ui-card-interactive:active {
+  transform: scale(0.975);
+  transition: transform var(--r-ui-duration-instant) var(--r-ui-ease-spring-snappy);
+}
+```
+
+### 15.2. Staggered Cascade Entrance
+Collections, grids, and tables animate smoothly using index-based staggering:
+```css
+.r-ui-stagger-item {
+  animation: rUiFadeSlideUp var(--r-ui-duration-normal) var(--r-ui-ease-spring-snappy) backwards;
+  animation-delay: calc(var(--item-index, 0) * 35ms);
+}
+```
+
+*Complete interaction specifications:* [r-ui-interaction-and-accessibility-spec.md](references/r-ui-interaction-and-accessibility-spec.md).
+
+---
+
+## 16. ACCESSIBILITY, FOCUS MANAGEMENT & KEYBOARD SPATIAL NAVIGATION (WCAG 2.2 AAA)
+
+High-craft software guarantees complete keyboard autonomy and screen reader accessibility:
+
+```text
++---------------------------------------------------------------------------------+
+|                         KEYBOARD & ACCESSIBILITY TRIAD                          |
++---------------------------------------------------------------------------------+
+| 1. DOUBLE-RING FOCUS   ---> 2px outline + 2px offset + 4px canvas shadow        |
+| 2. ROVING TABINDEX     ---> Arrow-key navigation inside toolbars and tablists   |
+| 3. ARIA LIVE REGIONS   ---> aria-live="polite" for dynamic telemetry and toasts |
++---------------------------------------------------------------------------------+
+```
+
+### 16.1. The Double-Ring Focus State (WCAG 2.2 AAA)
+Never write `outline: none` without providing the calibrated double-ring focus replacement:
+```css
+:focus-visible {
+  outline: 2px solid var(--r-ui-color-focus-ring) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px var(--r-ui-color-canvas) !important;
+}
+```
+
+### 16.2. Roving Tabindex for Toolbars & Menus
+Toolbars, segmented buttons, and tabs maintain a single `tabindex="0"` stop in the DOM flow. Inner items are navigated using `ArrowLeft` / `ArrowRight` or `ArrowUp` / `ArrowDown`.
+
+---
+
+## 17. COMPONENT STATE EXHAUSTIVENESS (The 6 Universal States & Edge Cases)
+
+No component is declared complete until all **6 universal states** are formally defined:
+
+```text
++---------------------------------------------------------------------------------+
+|                        THE 6 UNIVERSAL COMPONENT STATES                         |
++-----------------+-----------------+-----------------+-------------+-------------+
+| 1. IDLE         | 2. HOVER        | 3. ACTIVE/PRESS | 4. FOCUS    | 5. DISABLED |
+| Base Rest State | Optical Lift    | Scale Depress   | Double-Ring | 40% Opacity |
++-----------------+-----------------+-----------------+-------------+-------------+
+| 6. LOADING / SKELETON SHIMMER     ---> aria-busy="true" animated gradient pulse |
++---------------------------------------------------------------------------------+
+```
+
+- **Empty State Requirement**: Any data collection, table, or search result must include a designated empty state with an icon, explanatory title, resolution guidance, and clear primary CTA.
+- **Form Error State**: Invalid inputs declare `.is-error` with semantic border color, error tint, and an accompanying message with icon (`role="alert"`).
+
+*Complete interaction, accessibility & state specifications:* [r-ui-interaction-and-accessibility-spec.md](references/r-ui-interaction-and-accessibility-spec.md).
