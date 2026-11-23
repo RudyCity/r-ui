@@ -6,7 +6,7 @@
 
 *A production-grade, anti-slop, project-adaptive design system & AI skill. Zero-dependency, zero-neon, anti-heavy shadows, strict componentized form policy, kinetic spring physics, WCAG 2.2 AAA accessibility, and 100% intellectual property (HAKI) compliant.*
 
-[![Version](https://img.shields.io/badge/version-3.3.0-blue.svg?style=flat-square)](https://github.com/RudyCity/r-ui)
+[![Version](https://img.shields.io/badge/version-3.5.0-blue.svg?style=flat-square)](https://github.com/RudyCity/r-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=flat-square)](LICENSE)
 [![Zero Dependency](https://img.shields.io/badge/dependencies-0-violet.svg?style=flat-square)](#)
 [![WCAG](https://img.shields.io/badge/WCAG-2.2_AAA-yellow.svg?style=flat-square)](#)
@@ -32,11 +32,11 @@ All tokens and classes operate under the original `--r-ui-*` namespace for green
 
 ---
 
-## 🛡️ The 10 Anti-Slop Visual Laws
+## 🛡️ The 12 Anti-Slop Visual Laws
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                       THE 10 ANTI-SLOP DESIGN LAWS                          │
+│                       THE 12 ANTI-SLOP DESIGN LAWS                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │  1. BAN THE PURPLE HAZE     ──► No generic AI-purple/pink mesh gradients    │
 │  2. BAN SYMMETRIC BENTO     ──► Asymmetric weights & hierarchy (2:1 spans)  │
@@ -48,6 +48,8 @@ All tokens and classes operate under the original `--r-ui-*` namespace for green
 │  8. BAN NEON & CYBERPUNK    ──► Calibrated optical tones; zero glow rings   │
 │  9. BAN RAW NATIVE FORMS    ──► Zero unstyled <select>; 100% componentized  │
 │ 10. BAN COLOR HIJACKING     ──► Honor existing color system; zero rogue hex │
+│ 11. BAN THICK LEFT BORDERS  ──► Zero border-l-4/asymmetric strips; 1px frame│
+│ 12. BAN BLOATED BUTTONS     ──► No oversized buttons; strict height harmony │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -76,7 +78,7 @@ flowchart TD
     P3 --> P3_items["Data Grid, Sortable Headers, Bulk Action Bar, Pagination, Filter Facets & Chips"]
     P4 --> P4_items["Area Curves, Bar Grids, Donut Distribution, Histograms, Chart Tooltips"]
     P5 --> P5_items["Custom Select, Multi-Select Chips, Date Range Picker, Spring Switch, Dropzone"]
-    P6 --> P6_items["Modal Dialogs, Slide-Over Drawers, Toast Stack, Destructive Alerts, Tooltips"]
+    P6 --> P6_items["Modal Dialogs, Slide-Over Drawers, Toast Stack with Tactile Copy, Above-Form Alerts, Tooltips"]
     P7 --> P7_items["Command Palette Ctrl+K, Segmented Controls, Steppers, Tree Views"]
     P8 --> P8_items["Avatar Groups, Status Badges with Pulse Dot, Audit Timeline, Key-Value Grid"]
     P9 --> P9_items["Live Terminal Stream, Latency Pulse, Env Var Editor, Metric Dials"]

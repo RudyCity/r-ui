@@ -1,8 +1,8 @@
 ---
 name: r-ui
-description: Universal UI/UX Design System, Multi-Theme, Modular Color Accent, 9-Pillar Complete Dashboard Kit Architecture (45+ Production Components), Spatial Harmony & Layout Precision Doctrine, Color Science & Palette Architecture (60-30-10, Tonal Ramps, Undertones), Typographic Composition Doctrine (3-Tier Font Pairing, Modular Scale, Leading Ratios, Tracking Inversion, 3-Weight Discipline), Kinetic Physics & Micro-Interactions (Designspells Delight, Spring Curves, Tactile Press), Accessibility & Keyboard Spatial Navigation (WCAG 2.2 AAA Double-Ring Focus, Roving Tabindex, ARIA Live Regions), Component State Machine Exhaustiveness (6 Universal Visual States), Unified Canvas & Line-less Workspace Doctrine (Seamless Master-Detail, Unified Title Bar & Floating Action Dock), On-Demand Bespoke SVG Icon Crafting Doctrine (24x24 Optical Grid, 1.5px Geometry, Zero-Dependency Theme Reactivity), Viewport-Fit Single-Screen Cockpit Doctrine (100dvh Zero-Spill Architecture, Internal Pane Bounded Scrolling), Optical Hierarchy Doctrine (Besar-Kecil Text & Multi-Tier Bespoke Icon Sizing 12px-40px), Progressive Disclosure & Interactive Space-Savers (Custom Dropdown Popovers, Searchable Selects), Horizontal Icon & Tab Scroll Rails with Fade Gradient Masks, Project-Adaptive & Live Playground Architecture Skill. Enforces anti-slop aesthetic standards (11 Anti-Slop Visual Laws: zero thick asymmetric left borders, crisp 1px uniform perimeter, zero generic purple haze, zero neon, zero heavy shadows), anti-rigid project adaptation (5 project archetypes & 4 visual dials), visual-first density, dual-layer theming (5 Canvas Themes + 8 Calibrated Color Themes), strict componentized form policy (zero raw native forms), headless/unstyled component flexibility, live interactive showcase, multi-framework integration (React, Next.js, Tailwind v3/v4, Vue, Svelte, Ink CLI), fluid cross-platform responsiveness (Web, Windows, macOS, Linux, Android, iOS, Foldables, Smart TV), and integration with curated design references (jiro.build, designspells.com, styles.refero.design, supahero.io, mobbin.com).
+description: Universal UI/UX Design System, Multi-Theme, Modular Color Accent, 9-Pillar Complete Dashboard Kit Architecture (45+ Production Components), Spatial Harmony & Layout Precision Doctrine, Color Science & Palette Architecture (60-30-10, Tonal Ramps, Undertones), Typographic Composition Doctrine (3-Tier Font Pairing, Modular Scale, Leading Ratios, Tracking Inversion, 3-Weight Discipline), Kinetic Physics & Micro-Interactions (Designspells Delight, Spring Curves, Tactile Press), Accessibility & Keyboard Spatial Navigation (WCAG 2.2 AAA Double-Ring Focus, Roving Tabindex, ARIA Live Regions), Actionable Toast Notifications with Tactile Copy Button, Above-Form Contextual In-Page Alert Anchoring, Component State Machine Exhaustiveness (6 Universal Visual States), Unified Canvas & Line-less Workspace Doctrine (Seamless Master-Detail, Unified Title Bar & Floating Action Dock), On-Demand Bespoke SVG Icon Crafting Doctrine (24x24 Optical Grid, 1.5px Geometry, Zero-Dependency Theme Reactivity), Viewport-Fit Single-Screen Cockpit Doctrine (100dvh Zero-Spill Architecture, Internal Pane Bounded Scrolling), Optical Hierarchy Doctrine (Besar-Kecil Text & Multi-Tier Bespoke Icon Sizing 12px-40px), Progressive Disclosure & Interactive Space-Savers (Custom Dropdown Popovers, Searchable Selects), Horizontal Icon & Tab Scroll Rails with Fade Gradient Masks, Project-Adaptive & Live Playground Architecture Skill. Enforces anti-slop aesthetic standards (12 Anti-Slop Visual Laws: zero bloated/oversized buttons, strict button height harmony & optical precision, zero thick asymmetric left borders, crisp 1px uniform perimeter, zero generic purple haze, zero neon, zero heavy shadows), anti-rigid project adaptation (5 project archetypes & 4 visual dials), visual-first density, dual-layer theming (5 Canvas Themes + 8 Calibrated Color Themes), strict componentized form policy (zero raw native forms), headless/unstyled component flexibility, live interactive showcase, multi-framework integration (React, Next.js, Tailwind v3/v4, Vue, Svelte, Ink CLI), fluid cross-platform responsiveness (Web, Windows, macOS, Linux, Android, iOS, Foldables, Smart TV), and integration with curated design references (jiro.build, designspells.com, styles.refero.design, supahero.io, mobbin.com).
 when_to_use: Use whenever designing, building, auditing, refactoring, or reviewing user interfaces (UI), user experiences (UX), dashboard kits, admin consoles, SaaS platforms, responsive layouts, design systems, design tokens, micro-interactions, components, color themes, project adaptation, interactive showcases, or cross-platform web/app experiences.
-version: 3.4.0
+version: 3.5.0
 ---
 
 # r-ui: Universal UI/UX Design System & Visual-First Architecture
@@ -11,11 +11,11 @@ version: 3.4.0
 
 ---
 
-## 1. THE 11 ANTI-SLOP VISUAL LAWS (Non-Negotiable)
+## 1. THE 12 ANTI-SLOP VISUAL LAWS (Non-Negotiable)
 
 ```text
 +---------------------------------------------------------------------------------+
-|                       THE 11 ANTI-SLOP DESIGN LAWS                              |
+|                       THE 12 ANTI-SLOP DESIGN LAWS                              |
 +---------------------------------------------------------------------------------+
 |  1. BAN THE PURPLE HAZE     ---> No generic AI-purple/pink mesh gradients       |
 |  2. BAN SYMMETRIC BENTO     ---> Asymmetric weights & hierarchy (2:1 spans)     |
@@ -28,6 +28,7 @@ version: 3.4.0
 |  9. BAN RAW NATIVE FORMS    ---> Zero unstyled <select>; 100% componentized     |
 | 10. BAN COLOR HIJACKING     ---> Honor existing color system; zero rogue hex    |
 | 11. BAN THICK LEFT BORDERS  ---> Zero border-l-4/asymmetric strips; 1px uniform  |
+| 12. BAN BLOATED BUTTONS     ---> No oversized/clunky buttons; strict height sync|
 +---------------------------------------------------------------------------------+
 ```
 
@@ -39,6 +40,27 @@ version: 3.4.0
   2. **Soft Tint Active Background**: Communicate selected or active states using a soft tonal background fill (`background: rgba(var(--r-ui-color-accent-primary-rgb), 0.08)`) coupled with a subtle 1px border accent (`border-color: rgba(var(--r-ui-color-accent-primary-rgb), 0.35)`).
   3. **Decoupled Floating Indicator Pill**: If a directional vertical indicator is required to indicate active selection, **decouple it completely from the container's border stroke**. Render a separate floating vertical capsule/pill inside the item padding (e.g. `width: 3px; height: 16px; border-radius: 9999px; background: var(--r-ui-color-accent-primary); margin-right: 8px;`), preserving pristine card borders.
   4. **Subtle 1px Optical Focus / Selection Ring**: Utilize an interior or exterior 1px box-shadow ring (`box-shadow: 0 0 0 1px var(--r-ui-color-accent-primary)`), never an unbalanced single-edge border width.
+
+### Detailed Mandate for Law 12: Absolute Ban on Bloated, Oversized & Imprecise/Misaligned Buttons
+- **The Visual Defect (The "Fisher-Price / Cartoonish" AI-Slop Defect)**:
+  - Generative AI models frequently generate gigantic, bloated buttons with excessive vertical padding (`py-4`, `py-5`, `height: 52px-64px`), ballooning them into clumsy, cartoonish blocks that ruin the density of SaaS applications, analytical consoles, and desktop tools.
+  - Sizing discrepancies and height mismatch between sibling buttons in the same row/toolbar (e.g. Primary submit button is 44px, while Secondary/Cancel button is 32px, resulting in jagged baselines and visual incoherence).
+  - Floating uneven padding where vertical and horizontal padding are poorly proportioned, or text and icons do not sit on an exact optical baseline.
+- **Mandatory Modern Standards (Strict Button Precision & Scale Harmony)**:
+  1. **Strict Standardized Height Tiers**:
+     - `xs (Micro / Table Actions)`: `24px` height, `font-size: 11px`, `padding: 0 8px`, `icon: 12px`.
+     - `sm (Compact SaaS / Toolbars)`: `28px - 30px` height, `font-size: 12px`, `padding: 0 10px`, `icon: 14px`.
+     - `md (Standard Dashboard Default)`: `34px - 36px` height, `font-size: 13px`, `padding: 0 14px`, `icon: 15px`.
+     - `lg (Primary Modal CTA / Hero)`: `40px` (hard ceiling `42px`), `font-size: 14px`, `padding: 0 18px`, `icon: 16px`.
+     - **Hard Ceiling**: In analytical dashboards, admin tools, SaaS consoles, and desktop apps, buttons must **NEVER exceed 42px** in height.
+  2. **100% Equal Height Harmony in Button Groups & Action Bars**:
+     - All sibling buttons within a toolbar, table action cell, form footer, or dialog action bar **MUST share identical optical height** (e.g. both Primary and Secondary must be exactly `34px` or `36px`).
+     - Never mix size tiers side-by-side. If a Primary button is `36px`, the Cancel/Secondary button beside it must also be `36px`.
+  3. **Optical Baseline & Flexbox Precision**:
+     - Strict `display: inline-flex; align-items: center; justify-content: center; gap: 6px-8px; line-height: 1;`.
+     - Locking `line-height: 1` eliminates phantom vertical padding bugs caused by varying font line-height metrics.
+  4. **Proportional Aspect Ratio & Padding Discipline**:
+     - Horizontal padding must always be `1.8x` to `2.5x` the vertical space (e.g. `8px vertical / 16px horizontal`), maintaining sleek rectangular geometry rather than bloated circular or puffy pill shapes.
 
 ---
 
@@ -215,7 +237,7 @@ Whenever tasked with building a Dashboard Kit or UI Kit with `r-ui`, agents **MU
 3. **Pillar 3 — Data Tables & Collections**: High-Density Data Grid, Sortable Headers, Custom Row Checkbox (Indeterminate Support), Floating Bulk Action Bar, Pagination & Page Size Selector, Faceted Filter Popovers & Active Filter Chips, Empty States, Skeleton Shimmer.
 4. **Pillar 4 — Data Visualization**: Time-Series Area Curves with interactive crosshair, Grouped/Stacked Bar Charts, Donut Distribution with center aggregate & legend, Latency Histogram, Interactive Chart Tooltips.
 5. **Pillar 5 — Form & Inputs (Zero Native Forms)**: Custom Accessible Select (Searchable, Popover), Multi-Select with Removable Chips, Date & Date-Range Picker, Prefix/Suffix Inputs, Number Steppers, Textarea with Counter, Tactile Spring Switch, Custom Checkbox & Radio Cards, Dual-Thumb Range Slider, Drag-and-Drop Dropzone.
-6. **Pillar 6 — Feedback, Overlays & Drawers**: Modal Dialogs with backdrop blur, Slide-Over Sheet / Inspector Drawer, Slide-in Toast Stack (Success/Error/Warning/Info/Undo), Alert Banners, Destructive Confirmation Dialog, Micro Tooltips, Context Menu Popover.
+6. **Pillar 6 — Feedback, Overlays & Drawers**: Modal Dialogs with backdrop blur, Slide-Over Sheet / Inspector Drawer, Slide-in Toast Stack with tactile copy buttons (Success/Error/Warning/Info/Undo), Above-Form Contextual Alert Banners with inline copy actions, Destructive Confirmation Dialog, Micro Tooltips, Context Menu Popover.
 7. **Pillar 7 — Navigation & Wayfinding**: Command Palette (`Ctrl+K` / `⌘+K`) with fuzzy search, Segmented Controls, Line/Pill Tabs, Stepper / Multi-Step Wizard, Tree Views.
 8. **Pillar 8 — Identity, Display & Content**: Avatars & Stacked Avatar Groups with online presence dot, Status Badges with animated pulse dot, Activity Timeline / Audit Feed, Key-Value Metadata Grid, Code Snippet & JSON Inspector.
 9. **Pillar 9 — Real-Time & DevOps Consoles**: Live Streaming Monospace Terminal Console (INFO/WARN/ERR/DEBUG, auto-scroll lock, log search), Secret Masking Env Var Editor, Latency Ping Meter.
@@ -957,4 +979,22 @@ Every single-screen interface crafted with `r-ui` responds instantly across all 
 | **Tablet / iPad** | $768\text{px} - 1023\text{px}$ | **Drawer Navigation**: Sidebar hidden behind hamburger trigger; 2-column bento grid; touch targets scaled to min 44×44px; horizontal icon rails enabled for filters. |
 | **Mobile Smartphone** | $360\text{px} - 767\text{px}$ | **Bottom-Dock Cockpit**: Top compact bar (title + avatar); 1-column vertically bounded cards; bottom navigation dock (56px) with micro icons; slide-up bottom sheets for filters/actions; `safe-area-inset-bottom` applied. |
 | **Foldables** | Unfolded ($8:7$ / $4:3$) | **Dual-Pane Book Mode**: Navigation + master list on left screen half, detail inspector on right screen half. |
+
+---
+
+## 25. ACTIONABLE NOTIFICATION ARCHITECTURE: TACTILE TOASTS & ABOVE-FORM ALERTS
+
+In version 3.5.0, `r-ui` establishes a unified actionable notification standard for temporary toasts and in-page alerts:
+
+### 1. Actionable Toast Notifications with Tactile Copy Button
+Every toast notification (`.r-ui-toast`) is actionable by design:
+- **One-Click Copy (`.r-ui-toast__copy-btn`)**: Embedded tactile micro-button allowing users to instantly copy notification messages, error traces, or transaction IDs to clipboard without manually highlighting text.
+- **Physical Spring Feedback**: Smooth state transition from copy icon to checkmark icon using `--r-ui-ease-spring-snappy: cubic-bezier(0.16, 1, 0.3, 1)`, tactile scale press (`transform: scale(0.94)`), and temporary 2000ms `.is-copied` tint.
+- **Accessible ARIA Regions**: Rendered in a fixed container (`.r-ui-toast-container`) with `role="status"` (or `role="alert"` for errors) and `aria-live="polite"`.
+
+### 2. Above-Form Contextual Alert Anchoring (`.r-ui-alert--above-form`)
+When an in-page notification relates to form submission, input validation, or prerequisite settings:
+- **Direct Form-Top Anchor**: Positioned immediately above the form container or input grid (`margin-bottom: var(--r-ui-space-4); width: 100%;`). This anchors cognitive attention before the user begins filling in form fields, preventing overlooked instructions or submission failures.
+- **Integrated Tactile Copy**: Equips in-page alerts with an optional inline copy button (`.r-ui-alert__copy-btn`) so users can copy API error payloads, stack traces, or reference IDs with one click.
+- **Strict Anti-Slop Law 11 Compliance**: 100% crisp 1px perimeter border (`border: 1px solid var(--r-ui-color-border-standard)`), soft tinted intent surface (`background: rgba(var(--intent-rgb), 0.08)`), and zero thick asymmetric left borders (`border-l-4`).
 
