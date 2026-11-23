@@ -6,13 +6,13 @@
 
 *A production-grade, anti-slop, project-adaptive design system & AI skill. Zero-dependency, zero-neon, anti-heavy shadows, strict componentized form policy, kinetic spring physics, WCAG 2.2 AAA accessibility, and 100% intellectual property (HAKI) compliant.*
 
-[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg?style=flat-square)](https://github.com/RudyCity/r-ui)
+[![Version](https://img.shields.io/badge/version-3.3.0-blue.svg?style=flat-square)](https://github.com/RudyCity/r-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=flat-square)](LICENSE)
 [![Zero Dependency](https://img.shields.io/badge/dependencies-0-violet.svg?style=flat-square)](#)
 [![WCAG](https://img.shields.io/badge/WCAG-2.2_AAA-yellow.svg?style=flat-square)](#)
 [![Anti-Slop](https://img.shields.io/badge/Anti--Slop-Certified-rose.svg?style=flat-square)](#)
 
-[Live Interactive Playground](references/examples/r-ui-showcase.html) • [Dashboard Kit Spec](references/r-ui-dashboard-kit-spec.md) • [Kinetic & A11y Spec](references/r-ui-interaction-and-accessibility-spec.md) • [Color & Typography](references/r-ui-color-and-typography-doctrine.md) • [Design Tokens](references/r-ui-tokens.css) • [Themes](references/r-ui-themes.css) • [Component Specs](references/r-ui-component-specs.md) • [Framework Adapters](references/r-ui-framework-adapters.md)
+[Live Interactive Playground](references/examples/r-ui-showcase.html) • [On-Demand Icon Crafting](references/r-ui-on-demand-icon-crafting.md) • [Dashboard Kit Spec](references/r-ui-dashboard-kit-spec.md) • [Kinetic & A11y Spec](references/r-ui-interaction-and-accessibility-spec.md) • [Color & Typography](references/r-ui-color-and-typography-doctrine.md) • [Design Tokens](references/r-ui-tokens.css) • [Themes](references/r-ui-themes.css) • [Component Specs](references/r-ui-component-specs.md) • [Framework Adapters](references/r-ui-framework-adapters.md)
 
 </div>
 
