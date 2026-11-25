@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>r-ui Interactive Showcase (v3.5.0)</title>
+  <title>r-ui Interactive Showcase (v3.6.0)</title>
   <link rel="stylesheet" href="../r-ui-tokens.css">
   <link rel="stylesheet" href="../r-ui-themes.css">
   <link rel="stylesheet" href="../r-ui-color-themes.css">
@@ -890,6 +890,226 @@
       from { opacity: 0; transform: translateY(-6px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* v3.6.0 Unified Componentized Form & Date/Date-Range Picker */
+    .r-ui-form { display: flex; flex-direction: column; gap: var(--r-ui-space-4); width: 100%; }
+    .r-ui-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--r-ui-space-4); }
+    @media (max-width: 720px) { .r-ui-form-grid { grid-template-columns: 1fr; } }
+    .r-ui-form-actions {
+      display: flex; align-items: center; justify-content: flex-end; gap: var(--r-ui-space-2);
+      padding-top: var(--r-ui-space-3); border-top: 1px solid var(--r-ui-color-border-subtle);
+    }
+    .r-ui-field-group { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+    .r-ui-field-label {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; font-weight: 600; color: var(--r-ui-color-text-primary);
+    }
+    .r-ui-field-hint { font-size: 11px; color: var(--r-ui-color-text-tertiary); }
+    .r-ui-field-error { font-size: 11px; color: #ef4444; display: none; }
+    .r-ui-field-group.is-error .r-ui-field-error { display: block; }
+    .r-ui-input {
+      width: 100%; height: var(--r-ui-control-h-md, 34px); min-height: var(--r-ui-control-h-md, 34px);
+      padding: 0 12px; background: var(--r-ui-color-surface-elevated);
+      border: 1px solid var(--r-ui-color-border-standard); border-radius: var(--r-ui-radius-xs);
+      color: var(--r-ui-color-text-primary); font-size: 13px; font-family: inherit; outline: none;
+      transition: border-color var(--r-ui-duration-fast) ease, box-shadow var(--r-ui-duration-fast) ease;
+    }
+    .r-ui-input:focus {
+      border-color: var(--r-ui-color-accent-primary);
+      box-shadow: 0 0 0 1px var(--r-ui-color-accent-primary);
+    }
+    .r-ui-input.is-error { border-color: #ef4444; box-shadow: 0 0 0 1px #ef4444; }
+    .r-ui-input-group {
+      display: flex; align-items: center; width: 100%; min-height: var(--r-ui-control-h-md, 34px);
+      background: var(--r-ui-color-surface-elevated); border: 1px solid var(--r-ui-color-border-standard);
+      border-radius: var(--r-ui-radius-xs);
+    }
+    .r-ui-input-group:focus-within {
+      border-color: var(--r-ui-color-accent-primary);
+      box-shadow: 0 0 0 1px var(--r-ui-color-accent-primary);
+    }
+    .r-ui-input-group__addon {
+      padding: 0 10px; font-size: 12px; color: var(--r-ui-color-text-tertiary);
+      font-family: ui-monospace, monospace; white-space: nowrap;
+    }
+    .r-ui-input-group .r-ui-input { border: none; box-shadow: none; background: transparent; height: 32px; min-height: 32px; }
+    .r-ui-textarea {
+      width: 100%; min-height: 76px; padding: 8px 12px; background: var(--r-ui-color-surface-elevated);
+      border: 1px solid var(--r-ui-color-border-standard); border-radius: var(--r-ui-radius-xs);
+      color: var(--r-ui-color-text-primary); font-size: 13px; font-family: inherit; resize: vertical; outline: none;
+    }
+    .r-ui-textarea:focus { border-color: var(--r-ui-color-accent-primary); box-shadow: 0 0 0 1px var(--r-ui-color-accent-primary); }
+    .r-ui-textarea-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--r-ui-color-text-tertiary); }
+    .r-ui-number-stepper {
+      display: inline-flex; align-items: center; height: var(--r-ui-control-h-md, 34px); width: fit-content;
+      border: 1px solid var(--r-ui-color-border-standard); border-radius: var(--r-ui-radius-xs);
+      background: var(--r-ui-color-surface-elevated); overflow: hidden;
+    }
+    .r-ui-number-stepper__btn {
+      width: 32px; height: 100%; border: none; background: transparent; color: var(--r-ui-color-text-secondary);
+      cursor: pointer; font-size: 14px; font-weight: 600;
+    }
+    .r-ui-number-stepper__btn:hover { background: var(--r-ui-color-surface-overlay); color: var(--r-ui-color-text-primary); }
+    .r-ui-number-stepper__input {
+      width: 56px; height: 100%; border: none; border-left: 1px solid var(--r-ui-color-border-subtle);
+      border-right: 1px solid var(--r-ui-color-border-subtle); background: transparent;
+      color: var(--r-ui-color-text-primary); text-align: center; font-family: ui-monospace, monospace; font-size: 13px; outline: none;
+    }
+    .r-ui-multi-select { position: relative; width: 100%; }
+    .r-ui-multi-trigger {
+      width: 100%; min-height: var(--r-ui-control-h-md, 34px); padding: 4px 10px;
+      background: var(--r-ui-color-surface-elevated); border: 1px solid var(--r-ui-color-border-standard);
+      border-radius: var(--r-ui-radius-xs); display: flex; flex-wrap: wrap; align-items: center; gap: 4px; cursor: pointer;
+    }
+    .r-ui-chip {
+      display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 3px;
+      background: var(--r-ui-color-surface-overlay); border: 1px solid var(--r-ui-color-border-standard);
+      font-size: 11px; font-weight: 500; color: var(--r-ui-color-text-primary);
+    }
+    .r-ui-chip__close { cursor: pointer; opacity: 0.7; }
+    .r-ui-chip__close:hover { opacity: 1; }
+    .r-ui-date-picker, .r-ui-date-range-picker { position: relative; width: 100%; }
+    .r-ui-date-trigger {
+      width: 100%; height: var(--r-ui-control-h-md, 34px); min-height: var(--r-ui-control-h-md, 34px);
+      padding: 0 10px; background: var(--r-ui-color-surface-elevated);
+      border: 1px solid var(--r-ui-color-border-standard); border-radius: var(--r-ui-radius-xs);
+      color: var(--r-ui-color-text-primary); font-size: 12px; font-family: ui-monospace, monospace;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px; cursor: pointer;
+    }
+    .r-ui-date-trigger:hover { border-color: var(--r-ui-color-border-strong); background: var(--r-ui-color-surface-overlay); }
+    .r-ui-date-popover {
+      position: absolute; top: calc(100% + 4px); left: 0; z-index: 70; min-width: 280px;
+      background: var(--r-ui-color-surface); border: 1px solid var(--r-ui-color-border-strong);
+      border-radius: var(--r-ui-radius-sm); box-shadow: var(--r-ui-shadow-lg); padding: 12px;
+      display: none; flex-direction: column; gap: 10px;
+    }
+    .r-ui-date-range-picker .r-ui-date-popover { min-width: 310px; }
+    .r-ui-date-picker.is-open .r-ui-date-popover,
+    .r-ui-date-range-picker.is-open .r-ui-date-popover { display: flex; }
+    .r-ui-date-presets { display: flex; flex-wrap: wrap; gap: 4px; padding-bottom: 8px; border-bottom: 1px solid var(--r-ui-color-border-subtle); }
+    .r-ui-date-preset-btn {
+      height: 24px; padding: 0 8px; border-radius: var(--r-ui-radius-xs);
+      border: 1px solid var(--r-ui-color-border-standard); background: var(--r-ui-color-surface-elevated);
+      color: var(--r-ui-color-text-secondary); font-size: 11px; font-weight: 600; cursor: pointer;
+    }
+    .r-ui-date-preset-btn.is-active {
+      border-color: var(--r-ui-color-accent-primary); color: var(--r-ui-color-accent-primary);
+      background: rgba(56, 189, 248, 0.12);
+    }
+    .r-ui-calendar-header { display: flex; align-items: center; justify-content: space-between; }
+    .r-ui-calendar-title { font-size: 12px; font-weight: 700; }
+    .r-ui-calendar-nav-btn {
+      width: 24px; height: 24px; border-radius: var(--r-ui-radius-xs);
+      border: 1px solid var(--r-ui-color-border-standard); background: var(--r-ui-color-surface-elevated);
+      color: var(--r-ui-color-text-primary); cursor: pointer;
+    }
+    .r-ui-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+    .r-ui-calendar-weekday { text-align: center; font-size: 10px; font-weight: 700; color: var(--r-ui-color-text-tertiary); padding: 3px 0; }
+    .r-ui-calendar-day {
+      height: 28px; border-radius: var(--r-ui-radius-xs); border: 1px solid transparent; background: transparent;
+      color: var(--r-ui-color-text-primary); font-family: ui-monospace, monospace; font-size: 12px; cursor: pointer;
+    }
+    .r-ui-calendar-day:hover { background: var(--r-ui-color-surface-elevated); }
+    .r-ui-calendar-day.is-outside { color: var(--r-ui-color-text-muted); }
+    .r-ui-calendar-day.is-in-range { background: rgba(56, 189, 248, 0.16); border-radius: 0; }
+    .r-ui-calendar-day.is-selected,
+    .r-ui-calendar-day.is-range-start,
+    .r-ui-calendar-day.is-range-end {
+      background: var(--r-ui-color-accent-primary); color: var(--r-ui-color-text-inverse); font-weight: 700;
+    }
+    .r-ui-date-footer { display: flex; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--r-ui-color-border-subtle); }
+    .r-ui-radio-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+    .r-ui-radio-card {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; padding: 10px 12px;
+      border-radius: var(--r-ui-radius-xs); border: 1px solid var(--r-ui-color-border-standard);
+      background: var(--r-ui-color-surface-elevated); cursor: pointer;
+    }
+    .r-ui-radio-card.is-selected {
+      border-color: var(--r-ui-color-accent-primary);
+      background: rgba(56, 189, 248, 0.08);
+    }
+    .r-ui-checkbox { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 12px; user-select: none; }
+    .r-ui-checkbox__box {
+      width: 16px; height: 16px; border-radius: 3px; border: 1px solid var(--r-ui-color-border-strong);
+      background: var(--r-ui-color-surface-elevated); display: inline-flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; color: transparent;
+    }
+    .r-ui-checkbox.is-checked .r-ui-checkbox__box {
+      background: var(--r-ui-color-accent-primary); border-color: var(--r-ui-color-accent-primary); color: var(--r-ui-color-text-inverse);
+    }
+    /* Input + Select Combo, TagInput, SwitchField, ColorSwatch, OtpInput */
+    .r-ui-input-select-combo {
+      display: flex; align-items: stretch; width: 100%;
+      height: var(--r-ui-control-h-md, 34px); min-height: var(--r-ui-control-h-md, 34px);
+      background: var(--r-ui-color-surface-elevated); border: 1px solid var(--r-ui-color-border-standard);
+      border-radius: var(--r-ui-radius-xs);
+    }
+    .r-ui-input-select-combo:focus-within {
+      border-color: var(--r-ui-color-accent-primary);
+      box-shadow: 0 0 0 1px var(--r-ui-color-accent-primary);
+    }
+    .r-ui-input-select-combo .r-ui-input { flex: 1 1 auto; min-width: 0; border: none; box-shadow: none; background: transparent; height: 32px; min-height: 32px; }
+    .r-ui-input-select-combo .r-ui-custom-select { width: auto; flex-shrink: 0; }
+    .r-ui-input-select-combo .r-ui-custom-select__trigger {
+      height: 32px; min-height: 32px; border: none; border-radius: 0; padding: 0 10px; font-size: 12px;
+      background: var(--r-ui-color-surface-overlay); border-left: 1px solid var(--r-ui-color-border-standard);
+    }
+    .r-ui-input-select-combo--left .r-ui-custom-select__trigger {
+      border-left: none; border-right: 1px solid var(--r-ui-color-border-standard);
+    }
+    .r-ui-switch-field {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px;
+      border-radius: var(--r-ui-radius-xs); border: 1px solid var(--r-ui-color-border-standard);
+      background: var(--r-ui-color-surface-elevated);
+    }
+    .r-ui-tag-input {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+      min-height: var(--r-ui-control-h-md, 34px); padding: 4px 8px;
+      background: var(--r-ui-color-surface-elevated); border: 1px solid var(--r-ui-color-border-standard);
+      border-radius: var(--r-ui-radius-xs);
+    }
+    .r-ui-tag-input__field {
+      flex: 1 1 100px; min-width: 80px; height: 24px; border: none; background: transparent;
+      color: var(--r-ui-color-text-primary); font-size: 12px; outline: none;
+    }
+    .r-ui-color-swatch-picker { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .r-ui-color-swatch-btn {
+      width: 24px; height: 24px; border-radius: var(--r-ui-radius-xs);
+      border: 1px solid var(--r-ui-color-border-strong); cursor: pointer; padding: 0;
+    }
+    .r-ui-color-swatch-btn.is-selected {
+      box-shadow: 0 0 0 2px var(--r-ui-color-canvas), 0 0 0 4px var(--r-ui-color-accent-primary);
+    }
+    .r-ui-otp-group { display: inline-flex; align-items: center; gap: 6px; }
+    .r-ui-otp-cell {
+      width: 34px; height: 38px; text-align: center; font-family: ui-monospace, monospace; font-size: 14px; font-weight: 700;
+      background: var(--r-ui-color-surface-elevated); border: 1px solid var(--r-ui-color-border-standard);
+      border-radius: var(--r-ui-radius-xs); color: var(--r-ui-color-text-primary); outline: none;
+    }
+    .r-ui-otp-cell:focus { border-color: var(--r-ui-color-accent-primary); box-shadow: 0 0 0 1px var(--r-ui-color-accent-primary); }
+    .r-ui-dual-range { position: relative; width: 100%; height: 24px; display: flex; align-items: center; }
+    .r-ui-dual-range__track { position: relative; width: 100%; height: 6px; border-radius: 9999px; background: var(--r-ui-color-surface-overlay); border: 1px solid var(--r-ui-color-border-subtle); }
+    .r-ui-dual-range__fill { position: absolute; top: -1px; bottom: -1px; border-radius: 9999px; background: var(--r-ui-color-accent-primary); }
+    .r-ui-dual-range__input { position: absolute; inset: 0; width: 100%; margin: 0; background: transparent; pointer-events: none; -webkit-appearance: none; appearance: none; }
+    .r-ui-dual-range__input::-webkit-slider-thumb { pointer-events: auto; -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--r-ui-color-accent-primary); border: 2px solid var(--r-ui-color-canvas); cursor: pointer; }
+    .r-ui-month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .r-ui-month-cell { height: 30px; border-radius: var(--r-ui-radius-xs); border: 1px solid var(--r-ui-color-border-standard); background: var(--r-ui-color-surface-elevated); color: var(--r-ui-color-text-secondary); font-size: 12px; font-weight: 600; cursor: pointer; }
+    .r-ui-month-cell.is-selected { background: var(--r-ui-color-accent-primary); border-color: var(--r-ui-color-accent-primary); color: var(--r-ui-color-text-inverse); }
+    .r-ui-checkbox-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+    .r-ui-checkbox-card { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; padding: 10px 12px; border-radius: var(--r-ui-radius-xs); border: 1px solid var(--r-ui-color-border-standard); background: var(--r-ui-color-surface-elevated); cursor: pointer; }
+    .r-ui-checkbox-card.is-selected { border-color: var(--r-ui-color-accent-primary); background: rgba(56, 189, 248, 0.08); }
+    .r-ui-toggle-group { display: inline-flex; align-items: center; border: 1px solid var(--r-ui-color-border-standard); border-radius: var(--r-ui-radius-xs); background: var(--r-ui-color-surface-elevated); padding: 2px; gap: 2px; width: fit-content; }
+    .r-ui-toggle-group__item { height: 28px; padding: 0 10px; border: none; border-radius: 2px; background: transparent; color: var(--r-ui-color-text-secondary); font-size: 12px; font-weight: 600; cursor: pointer; }
+    .r-ui-toggle-group__item.is-selected { background: var(--r-ui-color-accent-primary); color: var(--r-ui-color-text-inverse); }
+    .r-ui-tooltip-wrap { position: relative; display: inline-flex; }
+    .r-ui-tooltip { position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); padding: 4px 8px; border-radius: var(--r-ui-radius-xs); background: var(--r-ui-color-surface-overlay); border: 1px solid var(--r-ui-color-border-strong); color: var(--r-ui-color-text-primary); font-size: 11px; white-space: nowrap; opacity: 0; pointer-events: none; z-index: 60; }
+    .r-ui-tooltip-wrap:hover .r-ui-tooltip { opacity: 1; }
+    .r-ui-tree { display: flex; flex-direction: column; gap: 2px; }
+    .r-ui-tree-node { display: flex; align-items: center; gap: 6px; min-height: 28px; padding: 4px 8px; border-radius: var(--r-ui-radius-xs); border: 1px solid transparent; font-size: 12px; color: var(--r-ui-color-text-secondary); cursor: pointer; background: transparent; width: 100%; text-align: left; }
+    .r-ui-tree-node.is-selected { border-color: rgba(56, 189, 248, 0.35); background: rgba(56, 189, 248, 0.08); color: var(--r-ui-color-text-primary); font-weight: 600; }
+    .r-ui-tree-children { padding-left: 16px; margin-left: 8px; border-left: 1px solid var(--r-ui-color-border-subtle); display: flex; flex-direction: column; gap: 2px; }
+    .r-ui-spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--r-ui-color-border-strong); border-top-color: var(--r-ui-color-accent-primary); border-radius: 50%; animation: r-ui-spin 0.7s linear infinite; }
+    @keyframes r-ui-spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
@@ -898,18 +1118,24 @@
     <header class="r-ui-navbar">
       <div class="r-ui-brand">
         <span>r-ui</span>
-        <span class="r-ui-badge">v3.5.0 Live</span>
+        <span class="r-ui-badge">v3.6.0 Live</span>
       </div>
 
       <div style="display: flex; align-items: center; gap: var(--r-ui-space-3); flex-wrap: wrap;">
-        <!-- Canvas Theme Selector -->
-        <select id="canvasSelector" aria-label="Select Canvas Theme" style="padding: 6px 12px; border-radius: var(--r-ui-radius-sm); background: var(--r-ui-color-surface-elevated); color: var(--r-ui-color-text-primary); border: 1px solid var(--r-ui-color-border-standard); font-size: 13px; cursor: pointer; outline: none;">
-          <option value="dark-nebula">Dark Nebula</option>
-          <option value="clean-light">Clean Light</option>
-          <option value="slate-obsidian">Slate Obsidian</option>
-          <option value="warm-sepia">Warm Sepia</option>
-          <option value="high-contrast">High Contrast</option>
-        </select>
+        <!-- Canvas Theme Selector (100% Law 9 Custom Select, Zero Native <select>) -->
+        <div class="r-ui-custom-select" id="canvasCustomSelect" style="width: 170px;">
+          <button type="button" class="r-ui-custom-select__trigger" id="canvasSelectTrigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Select Canvas Theme" style="min-height: 34px; height: 34px; padding: 0 10px; font-size: 12px;">
+            <span id="canvasSelectLabel">Dark Nebula</span>
+            <span style="font-size: 10px; color: var(--r-ui-color-text-muted);">▾</span>
+          </button>
+          <div class="r-ui-custom-select__popover" id="canvasSelectPopover" role="listbox">
+            <div class="r-ui-custom-select__option is-selected" role="option" data-value="dark-nebula">Dark Nebula</div>
+            <div class="r-ui-custom-select__option" role="option" data-value="clean-light">Clean Light</div>
+            <div class="r-ui-custom-select__option" role="option" data-value="slate-obsidian">Slate Obsidian</div>
+            <div class="r-ui-custom-select__option" role="option" data-value="warm-sepia">Warm Sepia</div>
+            <div class="r-ui-custom-select__option" role="option" data-value="high-contrast">High Contrast</div>
+          </div>
+        </div>
 
         <!-- 8 Color Accent Swatches -->
         <div id="swatchGroup" style="display: flex; align-items: center; gap: 6px;" role="radiogroup" aria-label="Select Accent Color">
@@ -1423,15 +1649,15 @@
                 </div>
               </div>
 
-              <!-- Form Fields -->
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--r-ui-space-3);">
-                <div style="display: flex; flex-direction: column; gap: 4px;">
-                  <label for="clusterNameInput" style="font-size: 11px; font-weight: 600; color: var(--r-ui-color-text-secondary); text-transform: uppercase;">Cluster ID</label>
-                  <input id="clusterNameInput" type="text" value="us-east-prod-04" style="background: var(--r-ui-color-surface); border: 1px solid var(--r-ui-color-border-standard); border-radius: var(--r-ui-radius-xs); padding: 8px 12px; font-size: 13px; color: var(--r-ui-color-text-primary); outline: none;">
+              <!-- Form Fields (Unified FieldGroup + Input) -->
+              <div class="r-ui-form-grid">
+                <div class="r-ui-field-group">
+                  <label class="r-ui-field-label" for="clusterNameInput">Cluster ID</label>
+                  <input id="clusterNameInput" type="text" class="r-ui-input" value="us-east-prod-04">
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 4px;">
-                  <label for="gatewayPortInput" style="font-size: 11px; font-weight: 600; color: var(--r-ui-color-text-secondary); text-transform: uppercase;">Gateway Port</label>
-                  <input id="gatewayPortInput" type="number" value="8443" style="background: var(--r-ui-color-surface); border: 1px solid var(--r-ui-color-border-standard); border-radius: var(--r-ui-radius-xs); padding: 8px 12px; font-size: 13px; color: var(--r-ui-color-text-primary); outline: none;">
+                <div class="r-ui-field-group">
+                  <label class="r-ui-field-label" for="gatewayPortInput">Gateway Port</label>
+                  <input id="gatewayPortInput" type="number" class="r-ui-input" value="8443">
                 </div>
               </div>
 
@@ -1442,6 +1668,237 @@
             </form>
           </div>
         </div>
+      </article>
+
+      <!-- Card 7: v3.6.0 Unified Componentized Form Suite (Law 9: Zero Native Forms) -->
+      <article class="r-ui-card r-ui-bento-full">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="r-ui-badge">Law 9 • v3.6.0</span>
+            <h3 style="font-size: var(--r-ui-font-h3); font-weight: 700; margin: 0;">Consistent Componentized Form Suite (Zero Native Controls)</h3>
+          </div>
+          <span style="font-size: 12px; color: var(--r-ui-color-text-muted);">Unified 34px control height across Date, Date-Range, Select, Multi-Select, Stepper & Inputs</span>
+        </div>
+
+        <form class="r-ui-form" id="consistentFormDemo" onsubmit="event.preventDefault();">
+          <div class="r-ui-form-grid">
+            <!-- Custom Date Picker -->
+            <div class="r-ui-field-group">
+              <label class="r-ui-field-label">Maintenance Date (Custom DatePicker)</label>
+              <div class="r-ui-date-picker" id="showcaseDatePicker">
+                <button type="button" class="r-ui-date-trigger" id="showcaseDateTrigger" aria-expanded="false">
+                  <span id="showcaseDateValue">2026-11-25</span>
+                  <span>▾</span>
+                </button>
+                <div class="r-ui-date-popover" id="showcaseDatePopover" role="dialog" aria-label="Choose date"></div>
+              </div>
+              <span class="r-ui-field-hint">Bans native &lt;input type="date"&gt;. Supports Today &amp; Clear.</span>
+            </div>
+
+            <!-- Custom Date-Range Picker -->
+            <div class="r-ui-field-group">
+              <label class="r-ui-field-label">Telemetry Window (DateRangePicker)</label>
+              <div class="r-ui-date-range-picker" id="showcaseRangePicker">
+                <button type="button" class="r-ui-date-trigger" id="showcaseRangeTrigger" aria-expanded="false">
+                  <span id="showcaseRangeValue">2026-11-19 → 2026-11-25</span>
+                  <span>▾</span>
+                </button>
+                <div class="r-ui-date-popover" id="showcaseRangePopover" role="dialog" aria-label="Choose date range"></div>
+              </div>
+              <span class="r-ui-field-hint">Includes quick presets (Today, 7D, 30D) + interactive calendar range.</span>
+            </div>
+
+            <!-- Prefix/Suffix Input -->
+            <div class="r-ui-field-group" id="endpointFieldGroup">
+              <label class="r-ui-field-label" for="endpointHostInput">Endpoint Hostname</label>
+              <div class="r-ui-input-group">
+                <span class="r-ui-input-group__addon">https://</span>
+                <input id="endpointHostInput" type="text" class="r-ui-input" value="edge-eu-01.rudy.dev" placeholder="host.domain">
+                <span class="r-ui-input-group__addon">:8443</span>
+              </div>
+              <span class="r-ui-field-error">Hostname cannot be empty.</span>
+            </div>
+
+            <!-- Multi-Select Chips -->
+            <div class="r-ui-field-group">
+              <label class="r-ui-field-label">Target Zones (Multi-Select)</label>
+              <div class="r-ui-multi-select" id="showcaseMultiSelect">
+                <div class="r-ui-multi-trigger" id="showcaseMultiTrigger" tabindex="0"></div>
+                <div class="r-ui-custom-select__popover" id="showcaseMultiPopover" role="listbox"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="r-ui-form-grid">
+            <!-- Number Stepper -->
+            <div class="r-ui-field-group">
+              <label class="r-ui-field-label">Worker Replicas (NumberStepper)</label>
+              <div class="r-ui-number-stepper" id="showcaseStepper">
+                <button type="button" class="r-ui-number-stepper__btn" id="stepperDecBtn" aria-label="Decrease">−</button>
+                <input type="text" class="r-ui-number-stepper__input" id="stepperValInput" value="4" readonly>
+                <button type="button" class="r-ui-number-stepper__btn" id="stepperIncBtn" aria-label="Increase">+</button>
+              </div>
+            </div>
+
+            <!-- Radio Cards -->
+            <div class="r-ui-field-group">
+              <label class="r-ui-field-label">Rollout Strategy (RadioCardGroup)</label>
+              <div class="r-ui-radio-cards" id="showcaseRadioCards">
+                <div class="r-ui-radio-card is-selected" data-val="canary" role="radio" aria-checked="true" tabindex="0">
+                  <div>
+                    <div style="font-size: 12px; font-weight: 600;">Canary 10%</div>
+                    <div class="r-ui-field-hint">Gradual traffic shift</div>
+                  </div>
+                </div>
+                <div class="r-ui-radio-card" data-val="bluegreen" role="radio" aria-checked="false" tabindex="0">
+                  <div>
+                    <div style="font-size: 12px; font-weight: 600;">Blue-Green</div>
+                    <div class="r-ui-field-hint">Instant atomic swap</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="r-ui-form-grid">
+            <!-- Input + Custom Select Combo (Left & Right) -->
+            <div class="r-ui-field-group">
+              <label class="r-ui-field-label" for="quotaAmountInput">Rate Quota (Input + Unit Select)</label>
+              <div class="r-ui-input-select-combo r-ui-input-select-combo--right" id="quotaCombo">
+                <input id="quotaAmountInput" type="number" class="r-ui-input" value="2500">
+                <div class="r-ui-custom-select" id="quotaUnitSelect">
+                  <button type="button" class="r-ui-custom-select__trigger" id="quotaUnitTrigger" aria-expanded="false">
+                    <span id="quotaUnitLabel">req/s</span>
+                    <span>▾</span>
+                  </button>
+                  <div class="r-ui-custom-select__popover" id="quotaUnitPopover" role="listbox">
+                    <div class="r-ui-custom-select__option is-selected" data-val="req/s">req/s</div>
+                    <div class="r-ui-custom-select__option" data-val="Mbps">Mbps</div>
+                    <div class="r-ui-custom-select__option" data-val="Gbps">Gbps</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inline Tag Input -->
+            <div class="r-ui-field-group">
+              <label class="r-ui-field-label">Routing Tags (TagInput — Enter to add)</label>
+              <div class="r-ui-tag-input" id="showcaseTagInput">
+                <span class="r-ui-chip"><span>tls-1.3</span><span class="r-ui-chip__close" data-tag="tls-1.3">✕</span></span>
+                <span class="r-ui-chip"><span>anycast</span><span class="r-ui-chip__close" data-tag="anycast">✕</span></span>
+                <input type="text" class="r-ui-tag-input__field" id="showcaseTagDraft" placeholder="Add tag...">
+              </div>
+            </div>
+          </div>
+
+          <div class="r-ui-form-grid">
+            <!-- SwitchField Row -->
+            <div class="r-ui-field-group">
+              <label class="r-ui-field-label">Policy Guardrail (SwitchField)</label>
+              <div class="r-ui-switch-field">
+                <div>
+                  <div style="font-size: 12px; font-weight: 600;">Zero-Downtime Drain</div>
+                  <div class="r-ui-field-hint">Wait for active HTTP/3 streams before swap</div>
+                </div>
+                <button type="button" class="r-ui-switch is-active" id="showcaseSwitchField" role="switch" aria-checked="true" aria-label="Zero-Downtime Drain">
+                  <span class="r-ui-switch__thumb"></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Color Swatch & OTP -->
+            <div class="r-ui-form-grid" style="gap: 10px;">
+              <div class="r-ui-field-group">
+                <label class="r-ui-field-label">Cluster Badge Color</label>
+                <div class="r-ui-color-swatch-picker" id="showcaseColorSwatches">
+                  <button type="button" class="r-ui-color-swatch-btn is-selected" data-color="#38bdf8" style="background: #38bdf8;" aria-label="Sky"></button>
+                  <button type="button" class="r-ui-color-swatch-btn" data-color="#10b981" style="background: #10b981;" aria-label="Emerald"></button>
+                  <button type="button" class="r-ui-color-swatch-btn" data-color="#f59e0b" style="background: #f59e0b;" aria-label="Amber"></button>
+                  <button type="button" class="r-ui-color-swatch-btn" data-color="#f43f5e" style="background: #f43f5e;" aria-label="Crimson"></button>
+                </div>
+              </div>
+              <div class="r-ui-field-group">
+                <label class="r-ui-field-label">Approval PIN (OtpInput)</label>
+                <div class="r-ui-otp-group" id="showcaseOtpGroup">
+                  <input type="text" maxlength="1" class="r-ui-otp-cell" value="4" aria-label="PIN 1">
+                  <input type="text" maxlength="1" class="r-ui-otp-cell" value="8" aria-label="PIN 2">
+                  <input type="text" maxlength="1" class="r-ui-otp-cell" value="2" aria-label="PIN 3">
+                  <input type="text" maxlength="1" class="r-ui-otp-cell" value="9" aria-label="PIN 4">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="r-ui-form-grid">
+            <div class="r-ui-field-group">
+              <label class="r-ui-field-label">Billing Cycle (MonthPicker — Zero native month)</label>
+              <div class="r-ui-date-picker" id="showcaseMonthPicker">
+                <button type="button" class="r-ui-date-trigger" id="showcaseMonthTrigger" aria-expanded="false">
+                  <span id="showcaseMonthVal">2026-11</span><span>▾</span>
+                </button>
+                <div class="r-ui-date-popover" id="showcaseMonthPopover" role="dialog" aria-label="Choose month"></div>
+              </div>
+            </div>
+            <div class="r-ui-field-group">
+              <label class="r-ui-field-label">Protocol Mode (ToggleGroup)</label>
+              <div class="r-ui-toggle-group" id="showcaseToggleGroup" role="radiogroup">
+                <button type="button" class="r-ui-toggle-group__item is-selected" data-val="http3">HTTP/3</button>
+                <button type="button" class="r-ui-toggle-group__item" data-val="grpc">gRPC</button>
+                <button type="button" class="r-ui-toggle-group__item" data-val="ws">WebSocket</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="r-ui-form-grid">
+            <div class="r-ui-field-group">
+              <label class="r-ui-field-label">Security Modules (CheckboxCardGroup)</label>
+              <div class="r-ui-checkbox-cards" id="showcaseCheckboxCards">
+                <div class="r-ui-checkbox-card is-selected" role="checkbox" aria-checked="true" tabindex="0">
+                  <div><div style="font-size:12px;font-weight:600;">TLS 1.3 Strict</div><div class="r-ui-field-hint">0-RTT handshakes</div></div>
+                  <span class="r-ui-checkbox is-checked"><span class="r-ui-checkbox__box">✓</span></span>
+                </div>
+                <div class="r-ui-checkbox-card" role="checkbox" aria-checked="false" tabindex="0">
+                  <div><div style="font-size:12px;font-weight:600;">WAF Shield</div><div class="r-ui-field-hint">L7 bot mitigation</div></div>
+                  <span class="r-ui-checkbox"><span class="r-ui-checkbox__box">✓</span></span>
+                </div>
+              </div>
+            </div>
+            <div class="r-ui-field-group">
+              <div class="r-ui-field-label">
+                <span>Latency SLA Window (DualRangeSlider)</span>
+                <strong class="r-ui-mono" id="showcaseDualRangeReadout">15ms – 65ms</strong>
+              </div>
+              <div class="r-ui-dual-range">
+                <div class="r-ui-dual-range__track"><div class="r-ui-dual-range__fill" id="showcaseDualFill" style="left: 15%; width: 50%;"></div></div>
+                <input type="range" min="0" max="100" value="15" id="showcaseDualMin" class="r-ui-dual-range__input" aria-label="Min SLA">
+                <input type="range" min="0" max="100" value="65" id="showcaseDualMax" class="r-ui-dual-range__input" aria-label="Max SLA">
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;margin-top:4px;">
+                <span class="r-ui-tooltip-wrap"><span class="r-ui-badge">Hover Tooltip</span><span class="r-ui-tooltip">WCAG 2.2 AA Micro-Tooltip</span></span>
+                <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--r-ui-color-text-secondary);"><span class="r-ui-spinner"></span> Syncing Schema</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Textarea with Character Counter -->
+          <div class="r-ui-field-group">
+            <label class="r-ui-field-label" for="releaseNotesInput">Deployment Notes</label>
+            <textarea id="releaseNotesInput" class="r-ui-textarea" maxlength="160" placeholder="Describe rollout scope...">Zero-downtime TLS & routing policy update.</textarea>
+            <div class="r-ui-textarea-meta">
+              <span>Audit log entry attached to deployment</span>
+              <span class="r-ui-textarea-counter" id="releaseNotesCounter">42 / 160</span>
+            </div>
+          </div>
+
+          <div class="r-ui-form-actions">
+            <label class="r-ui-checkbox is-checked" id="showcaseConfirmCheck" style="margin-right: auto;">
+              <span class="r-ui-checkbox__box">✓</span>
+              <span>Verify checksum before rollout</span>
+            </label>
+            <button type="reset" class="r-ui-btn r-ui-btn--secondary" id="resetConsistentFormBtn">Reset</button>
+            <button type="submit" class="r-ui-btn r-ui-btn--primary" id="submitConsistentFormBtn">Schedule Rollout</button>
+          </div>
+        </form>
       </article>
     </main>
   </div>
@@ -1459,12 +1916,36 @@
   </div>
 
   <script>
-    // Theme Switcher Logic
-    const canvasSelector = document.getElementById('canvasSelector');
+    // Theme Switcher Logic (Custom Select — Zero Native <select>)
+    const canvasCustomSelect = document.getElementById('canvasCustomSelect');
+    const canvasSelectTrigger = document.getElementById('canvasSelectTrigger');
+    const canvasSelectLabel = document.getElementById('canvasSelectLabel');
+    const canvasOptions = document.querySelectorAll('#canvasSelectPopover .r-ui-custom-select__option');
     const swatchButtons = document.querySelectorAll('#swatchGroup button');
 
-    canvasSelector.addEventListener('change', (e) => {
-      document.documentElement.setAttribute('data-r-ui-theme', e.target.value);
+    canvasSelectTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = canvasCustomSelect.classList.toggle('is-open');
+      canvasSelectTrigger.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    canvasOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        const themeVal = opt.getAttribute('data-value');
+        document.documentElement.setAttribute('data-r-ui-theme', themeVal);
+        canvasSelectLabel.textContent = opt.textContent;
+        canvasOptions.forEach(o => o.classList.remove('is-selected'));
+        opt.classList.add('is-selected');
+        canvasCustomSelect.classList.remove('is-open');
+        canvasSelectTrigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!canvasCustomSelect.contains(e.target)) {
+        canvasCustomSelect.classList.remove('is-open');
+        canvasSelectTrigger.setAttribute('aria-expanded', 'false');
+      }
     });
 
     swatchButtons.forEach(btn => {
@@ -1851,6 +2332,313 @@
     dismissFormAlertBtn?.addEventListener('click', () => {
       formAboveAlert.style.display = 'none';
     });
+
+    // ==========================================================================
+    // v3.6.0 Componentized Form Suite (DatePicker, DateRangePicker, MultiSelect, Stepper)
+    // ==========================================================================
+    (function initShowcaseForms() {
+      const toIso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      const buildCells = (year, month) => {
+        const first = new Date(year, month, 1).getDay();
+        const dim = new Date(year, month + 1, 0).getDate();
+        const prevDim = new Date(year, month, 0).getDate();
+        const out = [];
+        for (let i = first - 1; i >= 0; i--) out.push({ iso: toIso(new Date(year, month - 1, prevDim - i)), day: prevDim - i, outside: true });
+        for (let i = 1; i <= dim; i++) out.push({ iso: toIso(new Date(year, month, i)), day: i, outside: false });
+        while (out.length < 42) {
+          const n = out.length - (first + dim) + 1;
+          out.push({ iso: toIso(new Date(year, month + 1, n)), day: n, outside: true });
+        }
+        return out;
+      };
+
+      // 1. DatePicker
+      const dp = document.getElementById('showcaseDatePicker');
+      const dpTrigger = document.getElementById('showcaseDateTrigger');
+      const dpValEl = document.getElementById('showcaseDateValue');
+      const dpPop = document.getElementById('showcaseDatePopover');
+      let dpDate = '2026-11-25', dpYear = 2026, dpMonth = 10;
+
+      function renderDp() {
+        const label = new Date(dpYear, dpMonth, 1).toLocaleString('en-US', { month: 'long', year: 'numeric' });
+        const cells = buildCells(dpYear, dpMonth);
+        dpPop.innerHTML = `
+          <div class="r-ui-calendar-header">
+            <button type="button" class="r-ui-calendar-nav-btn" data-nav="-1">‹</button>
+            <span class="r-ui-calendar-title">${label}</span>
+            <button type="button" class="r-ui-calendar-nav-btn" data-nav="1">›</button>
+          </div>
+          <div class="r-ui-calendar-grid">
+            ${['Su','Mo','Tu','We','Th','Fr','Sa'].map(w => `<span class="r-ui-calendar-weekday">${w}</span>`).join('')}
+            ${cells.map(c => `<button type="button" class="r-ui-calendar-day ${c.outside ? 'is-outside' : ''} ${dpDate === c.iso ? 'is-selected' : ''}" data-iso="${c.iso}">${c.day}</button>`).join('')}
+          </div>
+          <div class="r-ui-date-footer">
+            <button type="button" class="r-ui-btn r-ui-btn--ghost r-ui-btn--xs" data-act="clear">Clear</button>
+            <button type="button" class="r-ui-btn r-ui-btn--secondary r-ui-btn--xs" data-act="today">Today</button>
+          </div>`;
+      }
+      renderDp();
+
+      dpTrigger?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = dp.classList.toggle('is-open');
+        dpTrigger.setAttribute('aria-expanded', String(open));
+      });
+      dpPop?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const nav = e.target.closest('[data-nav]');
+        if (nav) { const d = new Date(dpYear, dpMonth + Number(nav.dataset.nav), 1); dpYear = d.getFullYear(); dpMonth = d.getMonth(); renderDp(); return; }
+        const day = e.target.closest('[data-iso]');
+        if (day) { dpDate = day.dataset.iso; dpValEl.textContent = dpDate; dp.classList.remove('is-open'); renderDp(); return; }
+        const act = e.target.closest('[data-act]');
+        if (act?.dataset.act === 'today') { dpDate = toIso(new Date()); dpValEl.textContent = dpDate; dp.classList.remove('is-open'); renderDp(); }
+        if (act?.dataset.act === 'clear') { dpDate = ''; dpValEl.textContent = 'Select date...'; dp.classList.remove('is-open'); renderDp(); }
+      });
+
+      // 2. DateRangePicker
+      const rp = document.getElementById('showcaseRangePicker');
+      const rpTrigger = document.getElementById('showcaseRangeTrigger');
+      const rpValEl = document.getElementById('showcaseRangeValue');
+      const rpPop = document.getElementById('showcaseRangePopover');
+      let rStart = '2026-11-19', rEnd = '2026-11-25', rPreset = '7d', rpYear = 2026, rpMonth = 10;
+
+      function updateRangeLabel() {
+        rpValEl.textContent = (rStart && rEnd) ? `${rStart} → ${rEnd}` : (rStart ? `${rStart} → ...` : 'Select date range...');
+      }
+      function renderRp() {
+        const label = new Date(rpYear, rpMonth, 1).toLocaleString('en-US', { month: 'long', year: 'numeric' });
+        const cells = buildCells(rpYear, rpMonth);
+        rpPop.innerHTML = `
+          <div class="r-ui-date-presets">
+            <button type="button" class="r-ui-date-preset-btn ${rPreset === 'today' ? 'is-active' : ''}" data-preset="today">Today</button>
+            <button type="button" class="r-ui-date-preset-btn ${rPreset === '7d' ? 'is-active' : ''}" data-preset="7d">Last 7D</button>
+            <button type="button" class="r-ui-date-preset-btn ${rPreset === '30d' ? 'is-active' : ''}" data-preset="30d">Last 30D</button>
+          </div>
+          <div class="r-ui-calendar-header">
+            <button type="button" class="r-ui-calendar-nav-btn" data-nav="-1">‹</button>
+            <span class="r-ui-calendar-title">${label}</span>
+            <button type="button" class="r-ui-calendar-nav-btn" data-nav="1">›</button>
+          </div>
+          <div class="r-ui-calendar-grid">
+            ${['Su','Mo','Tu','We','Th','Fr','Sa'].map(w => `<span class="r-ui-calendar-weekday">${w}</span>`).join('')}
+            ${cells.map(c => {
+              const inRange = rStart && rEnd && c.iso > rStart && c.iso < rEnd;
+              const isStart = c.iso === rStart;
+              const isEnd = c.iso === rEnd;
+              return `<button type="button" class="r-ui-calendar-day ${c.outside ? 'is-outside' : ''} ${inRange ? 'is-in-range' : ''} ${isStart ? 'is-range-start' : ''} ${isEnd ? 'is-range-end' : ''}" data-iso="${c.iso}">${c.day}</button>`;
+            }).join('')}
+          </div>
+          <div class="r-ui-date-footer">
+            <button type="button" class="r-ui-btn r-ui-btn--ghost r-ui-btn--xs" data-act="reset">Reset</button>
+            <button type="button" class="r-ui-btn r-ui-btn--primary r-ui-btn--xs" data-act="apply">Apply</button>
+          </div>`;
+      }
+      renderRp();
+
+      rpTrigger?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = rp.classList.toggle('is-open');
+        rpTrigger.setAttribute('aria-expanded', String(open));
+      });
+      rpPop?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const presetBtn = e.target.closest('[data-preset]');
+        if (presetBtn) {
+          rPreset = presetBtn.dataset.preset;
+          const end = new Date(2026, 10, 25);
+          const start = new Date(end);
+          if (rPreset === '7d') start.setDate(end.getDate() - 6);
+          if (rPreset === '30d') start.setDate(end.getDate() - 29);
+          rStart = toIso(start); rEnd = toIso(end);
+          updateRangeLabel(); renderRp(); rp.classList.remove('is-open'); return;
+        }
+        const nav = e.target.closest('[data-nav]');
+        if (nav) { const d = new Date(rpYear, rpMonth + Number(nav.dataset.nav), 1); rpYear = d.getFullYear(); rpMonth = d.getMonth(); renderRp(); return; }
+        const day = e.target.closest('[data-iso]');
+        if (day) {
+          const iso = day.dataset.iso;
+          rPreset = 'custom';
+          if (!rStart || (rStart && rEnd)) { rStart = iso; rEnd = ''; }
+          else if (iso < rStart) { rEnd = rStart; rStart = iso; }
+          else { rEnd = iso; }
+          updateRangeLabel(); renderRp(); return;
+        }
+        const act = e.target.closest('[data-act]');
+        if (act?.dataset.act === 'reset') { rStart = ''; rEnd = ''; rPreset = ''; updateRangeLabel(); renderRp(); }
+        if (act?.dataset.act === 'apply') { rp.classList.remove('is-open'); }
+      });
+
+      // 3. Multi-Select
+      const ms = document.getElementById('showcaseMultiSelect');
+      const msTrig = document.getElementById('showcaseMultiTrigger');
+      const msPop = document.getElementById('showcaseMultiPopover');
+      const zones = ['US-East', 'EU-Central', 'AP-Southeast', 'SA-East'];
+      let selectedZones = ['US-East', 'EU-Central'];
+
+      function renderMs() {
+        msTrig.innerHTML = selectedZones.length
+          ? selectedZones.map(z => `<span class="r-ui-chip"><span>${z}</span><span class="r-ui-chip__close" data-remove="${z}">✕</span></span>`).join('')
+          : `<span class="r-ui-field-hint">Select zones...</span>`;
+        msPop.innerHTML = zones.map(z => `<div class="r-ui-custom-select__option ${selectedZones.includes(z) ? 'is-selected' : ''}" data-opt="${z}"><span>${z}</span><span>${selectedZones.includes(z) ? '✓' : ''}</span></div>`).join('');
+        msPop.style.display = ms.classList.contains('is-open') ? 'flex' : 'none';
+      }
+      renderMs();
+      msTrig?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const rem = e.target.closest('[data-remove]');
+        if (rem) { selectedZones = selectedZones.filter(z => z !== rem.dataset.remove); renderMs(); return; }
+        ms.classList.toggle('is-open'); renderMs();
+      });
+      msPop?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const opt = e.target.closest('[data-opt]');
+        if (!opt) return;
+        const v = opt.dataset.opt;
+        selectedZones = selectedZones.includes(v) ? selectedZones.filter(z => z !== v) : [...selectedZones, v];
+        renderMs();
+      });
+
+      // 4. Stepper, Radio Cards, Checkbox, Textarea Counter & Form Submit
+      const stepInput = document.getElementById('stepperValInput');
+      document.getElementById('stepperDecBtn')?.addEventListener('click', () => { stepInput.value = Math.max(1, Number(stepInput.value) - 1); });
+      document.getElementById('stepperIncBtn')?.addEventListener('click', () => { stepInput.value = Math.min(32, Number(stepInput.value) + 1); });
+
+      document.querySelectorAll('#showcaseRadioCards .r-ui-radio-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('#showcaseRadioCards .r-ui-radio-card').forEach(c => { c.classList.remove('is-selected'); c.setAttribute('aria-checked', 'false'); });
+          card.classList.add('is-selected'); card.setAttribute('aria-checked', 'true');
+        });
+      });
+
+      // Input + Custom Select Combo (Quota Unit)
+      const qSelect = document.getElementById('quotaUnitSelect');
+      const qTrig = document.getElementById('quotaUnitTrigger');
+      const qLabel = document.getElementById('quotaUnitLabel');
+      qTrig?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = qSelect.classList.toggle('is-open');
+        qTrig.setAttribute('aria-expanded', String(open));
+      });
+      document.querySelectorAll('#quotaUnitPopover .r-ui-custom-select__option').forEach(opt => {
+        opt.addEventListener('click', (e) => {
+          e.stopPropagation();
+          qLabel.textContent = opt.dataset.val;
+          document.querySelectorAll('#quotaUnitPopover .r-ui-custom-select__option').forEach(o => o.classList.remove('is-selected'));
+          opt.classList.add('is-selected');
+          qSelect.classList.remove('is-open');
+        });
+      });
+
+      // TagInput
+      const tagWrap = document.getElementById('showcaseTagInput');
+      const tagDraft = document.getElementById('showcaseTagDraft');
+      tagWrap?.addEventListener('click', (e) => {
+        const closeBtn = e.target.closest('.r-ui-chip__close');
+        if (closeBtn) closeBtn.closest('.r-ui-chip')?.remove();
+      });
+      tagDraft?.addEventListener('keydown', (e) => {
+        if ((e.key === 'Enter' || e.key === ',') && tagDraft.value.trim()) {
+          e.preventDefault();
+          const val = tagDraft.value.trim();
+          const chip = document.createElement('span');
+          chip.className = 'r-ui-chip';
+          chip.innerHTML = `<span>${val}</span><span class="r-ui-chip__close" data-tag="${val}">✕</span>`;
+          tagWrap.insertBefore(chip, tagDraft);
+          tagDraft.value = '';
+        }
+      });
+
+      // SwitchField, ColorSwatch & OTP Auto-Advance
+      document.getElementById('showcaseSwitchField')?.addEventListener('click', (e) => {
+        const on = e.currentTarget.classList.toggle('is-active');
+        e.currentTarget.setAttribute('aria-checked', String(on));
+      });
+      document.querySelectorAll('#showcaseColorSwatches .r-ui-color-swatch-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#showcaseColorSwatches .r-ui-color-swatch-btn').forEach(b => b.classList.remove('is-selected'));
+          btn.classList.add('is-selected');
+        });
+      });
+      const otpCells = Array.from(document.querySelectorAll('#showcaseOtpGroup .r-ui-otp-cell'));
+      otpCells.forEach((cell, idx) => {
+        cell.addEventListener('input', () => { if (cell.value && idx < otpCells.length - 1) otpCells[idx + 1].focus(); });
+        cell.addEventListener('keydown', (e) => { if (e.key === 'Backspace' && !cell.value && idx > 0) otpCells[idx - 1].focus(); });
+      });
+
+      document.getElementById('showcaseConfirmCheck')?.addEventListener('click', (e) => {
+        e.currentTarget.classList.toggle('is-checked');
+      });
+
+      const notesEl = document.getElementById('releaseNotesInput');
+      const notesCount = document.getElementById('releaseNotesCounter');
+      notesEl?.addEventListener('input', () => { notesCount.textContent = `${notesEl.value.length} / 160`; });
+
+      document.getElementById('consistentFormDemo')?.addEventListener('submit', () => {
+        const host = document.getElementById('endpointHostInput').value.trim();
+        const grp = document.getElementById('endpointFieldGroup');
+        if (!host) { grp.classList.add('is-error'); return; }
+        grp.classList.remove('is-error');
+        triggerToast({
+          intent: 'success',
+          title: 'Rollout Scheduled',
+          message: `Target ${host} (${stepInput.value} replicas) scheduled for ${dpDate || 'unscheduled'} (${rStart} → ${rEnd}).`,
+          copyText: `${host} | ${dpDate} | ${rStart}->${rEnd}`
+        });
+      });
+
+      document.addEventListener('click', () => {
+        dp?.classList.remove('is-open');
+        rp?.classList.remove('is-open');
+        ms?.classList.remove('is-open');
+        qSelect?.classList.remove('is-open');
+        mp?.classList.remove('is-open');
+        if (msPop) msPop.style.display = 'none';
+      });
+
+      // MonthPicker, ToggleGroup, CheckboxCardGroup, DualRangeSlider
+      const mp = document.getElementById('showcaseMonthPicker');
+      const mpTrig = document.getElementById('showcaseMonthTrigger');
+      const mpValEl = document.getElementById('showcaseMonthVal');
+      const mpPop = document.getElementById('showcaseMonthPopover');
+      let mpYear = 2026, mpVal = '2026-11';
+      const mpMonths = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      function renderMp() {
+        if (!mpPop) return;
+        mpPop.innerHTML = `<div class="r-ui-calendar-header"><button type="button" class="r-ui-calendar-nav-btn" data-ynav="-1">‹</button><span class="r-ui-calendar-title">${mpYear}</span><button type="button" class="r-ui-calendar-nav-btn" data-ynav="1">›</button></div><div class="r-ui-month-grid">${mpMonths.map((m, i) => { const ym = `${mpYear}-${String(i + 1).padStart(2, '0')}`; return `<button type="button" class="r-ui-month-cell ${mpVal === ym ? 'is-selected' : ''}" data-ym="${ym}">${m}</button>`; }).join('')}</div>`;
+      }
+      renderMp();
+      mpTrig?.addEventListener('click', (e) => { e.stopPropagation(); mp.classList.toggle('is-open'); });
+      mpPop?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const yn = e.target.closest('[data-ynav]'); if (yn) { mpYear += Number(yn.dataset.ynav); renderMp(); return; }
+        const mc = e.target.closest('[data-ym]'); if (mc) { mpVal = mc.dataset.ym; mpValEl.textContent = mpVal; mp.classList.remove('is-open'); renderMp(); }
+      });
+
+      document.querySelectorAll('#showcaseToggleGroup .r-ui-toggle-group__item').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#showcaseToggleGroup .r-ui-toggle-group__item').forEach(b => b.classList.remove('is-selected'));
+          btn.classList.add('is-selected');
+        });
+      });
+      document.querySelectorAll('#showcaseCheckboxCards .r-ui-checkbox-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const on = card.classList.toggle('is-selected');
+          card.setAttribute('aria-checked', String(on));
+          card.querySelector('.r-ui-checkbox')?.classList.toggle('is-checked', on);
+        });
+      });
+      const dMin = document.getElementById('showcaseDualMin'), dMax = document.getElementById('showcaseDualMax');
+      const dFill = document.getElementById('showcaseDualFill'), dOut = document.getElementById('showcaseDualRangeReadout');
+      function syncDual() {
+        if (!dMin || !dMax) return;
+        let a = Number(dMin.value), b = Number(dMax.value);
+        if (a > b - 5) { a = b - 5; dMin.value = a; }
+        if (dFill) { dFill.style.left = `${a}%`; dFill.style.width = `${b - a}%`; }
+        if (dOut) dOut.textContent = `${a}ms – ${b}ms`;
+      }
+      dMin?.addEventListener('input', syncDual);
+      dMax?.addEventListener('input', syncDual);
+    })();
   </script>
 </body>
 </html>

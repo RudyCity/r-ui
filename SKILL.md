@@ -2,7 +2,7 @@
 name: r-ui
 description: Universal UI/UX Design System, Multi-Theme, Modular Color Accent, 9-Pillar Complete Dashboard Kit Architecture (45+ Production Components), Spatial Harmony & Layout Precision Doctrine, Color Science & Palette Architecture (60-30-10, Tonal Ramps, Undertones), Typographic Composition Doctrine (3-Tier Font Pairing, Modular Scale, Leading Ratios, Tracking Inversion, 3-Weight Discipline), Kinetic Physics & Micro-Interactions (Designspells Delight, Spring Curves, Tactile Press), Accessibility & Keyboard Spatial Navigation (WCAG 2.2 AAA Double-Ring Focus, Roving Tabindex, ARIA Live Regions), Actionable Toast Notifications with Tactile Copy Button, Above-Form Contextual In-Page Alert Anchoring, Component State Machine Exhaustiveness (6 Universal Visual States), Unified Canvas & Line-less Workspace Doctrine (Seamless Master-Detail, Unified Title Bar & Floating Action Dock), On-Demand Bespoke SVG Icon Crafting Doctrine (24x24 Optical Grid, 1.5px Geometry, Zero-Dependency Theme Reactivity), Viewport-Fit Single-Screen Cockpit Doctrine (100dvh Zero-Spill Architecture, Internal Pane Bounded Scrolling), Optical Hierarchy Doctrine (Besar-Kecil Text & Multi-Tier Bespoke Icon Sizing 12px-40px), Progressive Disclosure & Interactive Space-Savers (Custom Dropdown Popovers, Searchable Selects), Horizontal Icon & Tab Scroll Rails with Fade Gradient Masks, Project-Adaptive & Live Playground Architecture Skill. Enforces anti-slop aesthetic standards (12 Anti-Slop Visual Laws: zero bloated/oversized buttons, strict button height harmony & optical precision, zero thick asymmetric left borders, crisp 1px uniform perimeter, zero generic purple haze, zero neon, zero heavy shadows), anti-rigid project adaptation (5 project archetypes & 4 visual dials), visual-first density, dual-layer theming (5 Canvas Themes + 8 Calibrated Color Themes), strict componentized form policy (zero raw native forms), headless/unstyled component flexibility, live interactive showcase, multi-framework integration (React, Next.js, Tailwind v3/v4, Vue, Svelte, Ink CLI), fluid cross-platform responsiveness (Web, Windows, macOS, Linux, Android, iOS, Foldables, Smart TV), and integration with curated design references (jiro.build, designspells.com, styles.refero.design, supahero.io, mobbin.com).
 when_to_use: Use whenever designing, building, auditing, refactoring, or reviewing user interfaces (UI), user experiences (UX), dashboard kits, admin consoles, SaaS platforms, responsive layouts, design systems, design tokens, micro-interactions, components, color themes, project adaptation, interactive showcases, or cross-platform web/app experiences.
-version: 3.5.0
+version: 3.6.0
 ---
 
 # r-ui: Universal UI/UX Design System & Visual-First Architecture
@@ -25,7 +25,7 @@ version: 3.5.0
 |  6. BAN MOCK DATA VAGUENESS ---> Realistic domain data, zero "Lorem Ipsum"      |
 |  7. BAN HEAVY MUDDY SHADOWS ---> Zero thick black blur; crisp micro-elevations  |
 |  8. BAN NEON & CYBERPUNK    ---> Calibrated optical tones; zero glow rings      |
-|  9. BAN RAW NATIVE FORMS    ---> Zero unstyled <select>; 100% componentized     |
+|  9. BAN RAW NATIVE FORMS    ---> Zero native <select>/date/time/check/radio; 100% componentized|
 | 10. BAN COLOR HIJACKING     ---> Honor existing color system; zero rogue hex    |
 | 11. BAN THICK LEFT BORDERS  ---> Zero border-l-4/asymmetric strips; 1px uniform  |
 | 12. BAN BLOATED BUTTONS     ---> No oversized/clunky buttons; strict height sync|
@@ -186,7 +186,7 @@ When designing, reviewing, or refactoring UI/UX, verify patterns against the 5 e
 [ ] 14. Modality Awareness: Components distinguish touch input from precision mouse pointers.
 [ ] 15. Unstyled Flexibility: Supports unstyled?: boolean mode for headless consumer customization.
 [ ] 16. Zero-Dependency: No mandatory external third-party UI libraries forced on consumers.
-[ ] 17. Componentized Form Check: 100% free of raw native <select>, checkbox, or radio; fully utilizes r-ui Custom Form Components.
+[ ] 17. Componentized Form Check: 100% free of raw native <select>, <input type="date|time|datetime-local|month|week">, or unstyled checkbox/radio/range/file; 100% uses r-ui Form Components with unified height scale (30/34/40px), FieldGroup labels/hints/errors, and dual-layer theme reactivity.
 [ ] 18. Dashboard Completeness Gate: Covers all 9 pillars of dashboard kit architecture (Shell, Telemetry, Data Tables, Visualization, Custom Forms, Overlays, Navigation, Identity, and DevOps Console).
 [ ] 19. Existing Color & Theme Conformance: Pre-flight audit performed; 100% of new/modified elements strictly conform to existing CSS variables, tokens, and active themes (zero rogue hardcoded hex/rgb).
 [ ] 20. Spatial Rhythm & Layout Harmony: Negative space (macro/micro whitespace) balanced via 4pt/8pt scale; container padding proportionate to content; zero trapped dead-space, zero layout breakages, and precision optical alignment.
@@ -208,21 +208,28 @@ When designing, reviewing, or refactoring UI/UX, verify patterns against the 5 e
 
 ---
 
-## 9. STRICT COMPONENTIZED FORM POLICY (Zero Raw Native Forms)
+## 9. STRICT COMPONENTIZED FORM POLICY (Zero Raw Native Forms & Unified Consistency)
 
-Agents are **STRICTLY PROHIBITED** from using unstyled raw native browser form elements, particularly native `<select>` and `<option>`.
+Agents are **STRICTLY PROHIBITED** from using unstyled raw native browser/OS form widgets anywhere in an interface. Every single form field MUST use a dedicated `r-ui` Form Component so height, border radius, focus rings, validation states, keyboard navigation, and 5-canvas/8-accent theming stay 100% consistent.
 
-### Why Are Raw Native `<select>` Elements Banned?
-1. **OS Popups Break Dark Modes**: Native `<select>` renders an unstyleable OS-level popup window (Win32 / Cocoa) that frequently displays a blinding white background in dark-mode themes.
-2. **Inconsistent Cross-Platform Aesthetics**: Native dropdowns look vastly different across Windows, macOS, Android, and iOS, breaking visual polish.
-3. **Accessibility & Search Deficits**: Native selects lack built-in real-time filtering, fuzzy search, custom item status badges, and custom icons.
+### Banned Raw Native Controls & Mandatory `r-ui` Component Replacements
+1. **Dropdown & Selection**: `<select>` / `<option>` are **STRICTLY BANNED** (OS Win32/Cocoa popups break dark themes and lack search/chips).
+   - **Mandatory**: `Select` / `SearchableSelect` / `Combobox` (creatable, `.r-ui-custom-select`) or `MultiSelect` with removable chips (`.r-ui-multi-select`), all supporting integrated `label`/`hint`/`error`.
+2. **Input + Label & Input + Select Combos**: Writing ad-hoc bare `<label>` + `<input>` without a `FieldGroup`/`TextField` wrapper, or placing misaligned `<input>` next to `<select>`, is **STRICTLY BANNED**.
+   - **Mandatory**: `TextField`, `PasswordField`, `CurrencyInput`, `KeyValueListInput`, `FormErrorSummary`, and `InputWithSelect` (`.r-ui-input-select-combo` — unified 1px-bordered Input + Custom Select on left or right) with exact height parity.
+3. **Date, Date-Range, Month, Time & Schedule**: `<input type="date">`, `<input type="datetime-local">`, `<input type="time">`, `<input type="month">`, `<input type="week">` are **STRICTLY BANNED** (browser-native calendar/clock pickers cannot be themed consistently and differ wildly across Chrome/Safari/Firefox/iOS).
+   - **Mandatory**: `DatePicker` (`.r-ui-date-picker`), `DateRangePicker` (`.r-ui-date-range-picker` with quick presets + interactive calendar range grid), `MonthPicker` (`.r-ui-month-picker`), `TimePicker` (`.r-ui-time-picker`), and `DateTimePicker` (`.r-ui-datetime-picker`).
+4. **Boolean, Choice, Range, Tags, Color & Verification**: Raw unstyled `<input type="checkbox">`, `<input type="radio">`, `<input type="color">`, `<input type="range">`, and `<input type="file">` are **STRICTLY BANNED**.
+   - **Mandatory**: `Checkbox` / `CheckboxGroup` / `CheckboxCardGroup`, `RadioCardGroup`, `ToggleGroup`, `SwitchField`, `NumberStepper`, `Textarea` with live counter, `TagInput`, `SliderField` & `DualRangeSlider`, `ColorSwatchPicker`, `OtpInput`, and `Dropzone`.
 
-### Mandatory Standard: r-ui Custom Accessible Form Components
-Every selection input must use **r-ui Custom Select Components**:
-- **Trigger Button**: Displays active label, status icon, and animated chevron indicator.
-- **Floating Popover Menu**: Elevated surface with hardware-accelerated backdrop blur, subtle 1px border (`--r-ui-color-border-standard`), and smooth spring entrance animation.
-- **Search & Filter Input**: Real-time filtering within popover for lists with more than 6 options.
-- **W3C ARIA & Keyboard Compliance**: Full support for `role="combobox"`, `role="listbox"`, `role="option"`, `aria-expanded`, and keyboard navigation (`ArrowUp`, `ArrowDown`, `Enter`, `Escape`).
+### Unified Form Consistency Rules (Non-Negotiable)
+1. **Identical Control Height Scale**: `Input`, `Select.Trigger`, `MultiSelect` (min-height), `DatePicker.Trigger`, `DateRangePicker.Trigger`, `TimePicker.Trigger`, `NumberStepper`, and `Button` MUST share the exact same height tokens:
+   - `sm`: `30px` (`--r-ui-control-h-sm`)
+   - `md` (default): `34px` (`--r-ui-control-h-md`)
+   - `lg`: `40px` (`--r-ui-control-h-lg`)
+2. **Mandatory `FieldGroup` Envelope**: Every control must sit inside `.r-ui-field-group` with Label above (`font-size: 0.75rem`, optional required `*`), consistent `6px` label-to-control gap, optional `.r-ui-field-hint`, and inline `.r-ui-field-error` / `.r-ui-field-success` tied via `aria-invalid` and `aria-describedby`.
+3. **Structured Form Layout & Action Bar**: Forms use `.r-ui-form` (`display: flex; flex-direction: column; gap: 16px;`), `.r-ui-form-grid` (responsive 12-col / 2-col grid with `gap: 12px-16px`), optional `.r-ui-alert--above-form` summary banner, and `.r-ui-form-actions` where Cancel/Secondary and Primary Submit buttons share identical optical height.
+4. **W3C ARIA & Keyboard Compliance**: Popovers (`Select`, `MultiSelect`, `DatePicker`, `DateRangePicker`, `TimePicker`) must support `aria-expanded`, `aria-haspopup`, `Escape` to close, click-outside dismissal, and keyboard navigation (`ArrowUp`/`ArrowDown`/`Enter`).
 
 *Complete form specifications:* [r-ui-component-specs.md](references/r-ui-component-specs.md).
 

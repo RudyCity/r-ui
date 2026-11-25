@@ -1,4 +1,4 @@
-# r-ui: Complete Component Anatomy & Interaction Specifications (v3.5.0)
+# r-ui: Complete Component Anatomy & Interaction Specifications (v3.6.0)
 
 Comprehensive modular component specifications for production-grade Universal UI/UX Design System.
 **Visual-first**, anti-slop, free of murky dark shadows, free of neon/glow effects, and 100% powered by native --r-ui-* tokens.
@@ -141,18 +141,137 @@ Interactive buttons with tactile spring physics, standardized height rhythm, zer
 
 ---
 
-## 2. Accessible Form Inputs (Text, Password, Search)
+## 2. Unified Form Envelope & Accessible Form Controls (Zero Native Forms)
+All form controls (`Input`, `Textarea`, `NumberStepper`, `Select`, `MultiSelect`, `DatePicker`, `DateRangePicker`, `TimePicker`, `Button`) share `--r-ui-control-h-sm` (30px), `--r-ui-control-h-md` (34px), and `--r-ui-control-h-lg` (40px) for 100% horizontal alignment.
+
 ```css
-.r-ui-input-wrapper {
+/* Form Envelope & Layout Grid */
+.r-ui-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--r-ui-space-4);
+  width: 100%;
+}
+.r-ui-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--r-ui-space-3);
+  padding-top: var(--r-ui-space-3);
+  border-top: 1px solid var(--r-ui-color-border-subtle);
+}
+.r-ui-form-section:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+.r-ui-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--r-ui-space-3);
+}
+@media (max-width: 640px) {
+  .r-ui-form-grid { grid-template-columns: 1fr; }
+}
+.r-ui-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--r-ui-space-2);
+  padding-top: var(--r-ui-space-3);
+  border-top: 1px solid var(--r-ui-color-border-subtle);
+}
+
+/* Field Group Envelope */
+.r-ui-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+.r-ui-field-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--r-ui-space-2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--r-ui-color-text-primary);
+}
+.r-ui-field-required {
+  color: var(--r-ui-color-error);
+  margin-left: 2px;
+}
+.r-ui-field-hint {
+  font-size: 0.6875rem;
+  color: var(--r-ui-color-text-tertiary);
+}
+.r-ui-field-error {
+  font-size: 0.6875rem;
+  color: var(--r-ui-color-error);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.r-ui-field-success {
+  font-size: 0.6875rem;
+  color: var(--r-ui-color-success);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Input, Prefix/Suffix Group & Textarea */
+.r-ui-input-wrapper,
+.r-ui-input-group {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
+  min-height: var(--r-ui-control-h-md, 34px);
+  background-color: var(--r-ui-color-surface-elevated);
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-xs);
+  transition: border-color var(--r-ui-duration-fast) var(--r-ui-ease-spring),
+              box-shadow var(--r-ui-duration-fast) var(--r-ui-ease-spring),
+              background-color var(--r-ui-duration-fast) ease;
+}
+.r-ui-input-group:focus-within {
+  border-color: var(--r-ui-color-accent-primary);
+  box-shadow: 0 0 0 1px var(--r-ui-color-focus-ring);
+  background-color: var(--r-ui-color-surface);
+}
+.r-ui-input-group.is-error {
+  border-color: var(--r-ui-color-error);
+  box-shadow: 0 0 0 1px var(--r-ui-color-error);
+}
+.r-ui-input-group.is-success {
+  border-color: var(--r-ui-color-success);
+}
+.r-ui-input-group__addon {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  color: var(--r-ui-color-text-tertiary);
+  font-size: 0.75rem;
+  font-family: var(--r-ui-font-family-mono);
+  white-space: nowrap;
+  user-select: none;
+}
+.r-ui-input-group .r-ui-input {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  min-height: calc(var(--r-ui-control-h-md, 34px) - 2px);
+}
+.r-ui-input-group .r-ui-input:focus {
+  border: none;
+  box-shadow: none;
+  background: transparent;
 }
 .r-ui-input {
   width: 100%;
-  min-height: 34px;
-  padding: 6px var(--r-ui-space-3);
+  height: var(--r-ui-control-h-md, 34px);
+  min-height: var(--r-ui-control-h-md, 34px);
+  padding: 0 var(--r-ui-space-3);
   background-color: var(--r-ui-color-surface-elevated);
   border: 1px solid var(--r-ui-color-border-standard);
   border-radius: var(--r-ui-radius-xs);
@@ -162,6 +281,8 @@ Interactive buttons with tactile spring physics, standardized height rhythm, zer
   outline: none;
   transition: all var(--r-ui-duration-fast) var(--r-ui-ease-spring);
 }
+.r-ui-input--sm { height: var(--r-ui-control-h-sm, 30px); min-height: var(--r-ui-control-h-sm, 30px); font-size: 0.75rem; }
+.r-ui-input--lg { height: var(--r-ui-control-h-lg, 40px); min-height: var(--r-ui-control-h-lg, 40px); font-size: 0.875rem; }
 .r-ui-input:focus {
   border-color: var(--r-ui-color-accent-primary);
   box-shadow: 0 0 0 1px var(--r-ui-color-focus-ring);
@@ -170,6 +291,86 @@ Interactive buttons with tactile spring physics, standardized height rhythm, zer
 .r-ui-input.is-error {
   border-color: var(--r-ui-color-error);
   box-shadow: 0 0 0 1px var(--r-ui-color-error);
+}
+.r-ui-input.is-success {
+  border-color: var(--r-ui-color-success);
+}
+
+/* Textarea with Character Counter */
+.r-ui-textarea {
+  width: 100%;
+  min-height: 84px;
+  padding: 8px var(--r-ui-space-3);
+  background-color: var(--r-ui-color-surface-elevated);
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-xs);
+  color: var(--r-ui-color-text-primary);
+  font-size: 0.8125rem;
+  font-family: inherit;
+  line-height: 1.45;
+  resize: vertical;
+  outline: none;
+  transition: all var(--r-ui-duration-fast) var(--r-ui-ease-spring);
+}
+.r-ui-textarea:focus {
+  border-color: var(--r-ui-color-accent-primary);
+  box-shadow: 0 0 0 1px var(--r-ui-color-focus-ring);
+  background-color: var(--r-ui-color-surface);
+}
+.r-ui-textarea-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.6875rem;
+  color: var(--r-ui-color-text-tertiary);
+}
+.r-ui-textarea-counter {
+  font-family: var(--r-ui-font-family-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Number Stepper */
+.r-ui-number-stepper {
+  display: inline-flex;
+  align-items: center;
+  height: var(--r-ui-control-h-md, 34px);
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-xs);
+  background-color: var(--r-ui-color-surface-elevated);
+  overflow: hidden;
+}
+.r-ui-number-stepper__btn {
+  width: 32px;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--r-ui-color-text-secondary);
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color var(--r-ui-duration-fast) ease, color var(--r-ui-duration-fast) ease;
+}
+.r-ui-number-stepper__btn:hover:not(:disabled) {
+  background-color: var(--r-ui-color-surface-hover);
+  color: var(--r-ui-color-text-primary);
+}
+.r-ui-number-stepper__btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.r-ui-number-stepper__input {
+  width: 64px;
+  height: 100%;
+  border: none;
+  border-left: 1px solid var(--r-ui-color-border-subtle);
+  border-right: 1px solid var(--r-ui-color-border-subtle);
+  background: transparent;
+  color: var(--r-ui-color-text-primary);
+  text-align: center;
+  font-family: var(--r-ui-font-family-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8125rem;
+  outline: none;
 }
 ```
 
@@ -1452,5 +1653,650 @@ Accessible W3C compliant dropdown maintaining pristine screen real-estate.
   font-weight: 600;
 }
 ```
+
+---
+
+## 20. Componentized Date, Date-Range & Time Pickers (Law 9 Mandatory)
+Replaces all native `<input type="date">`, `<input type="datetime-local">`, and `<input type="time">` with theme-reactive, accessible popovers.
+
+```css
+.r-ui-date-picker,
+.r-ui-date-range-picker,
+.r-ui-time-picker {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.r-ui-date-trigger {
+  width: 100%;
+  min-height: var(--r-ui-control-h-md, 34px);
+  padding: 4px 10px;
+  background-color: var(--r-ui-color-surface-elevated);
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-xs);
+  color: var(--r-ui-color-text-primary);
+  font-size: 0.8125rem;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--r-ui-space-2);
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--r-ui-duration-fast) var(--r-ui-ease-spring);
+}
+.r-ui-date-trigger:hover {
+  border-color: var(--r-ui-color-border-strong);
+  background-color: var(--r-ui-color-surface-overlay);
+}
+.r-ui-date-trigger:focus-visible,
+.r-ui-date-picker.is-open .r-ui-date-trigger,
+.r-ui-date-range-picker.is-open .r-ui-date-trigger,
+.r-ui-time-picker.is-open .r-ui-date-trigger {
+  border-color: var(--r-ui-color-accent-primary);
+  box-shadow: 0 0 0 1px var(--r-ui-color-focus-ring);
+  outline: none;
+}
+.r-ui-date-trigger__value {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--r-ui-font-family-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.75rem;
+}
+
+.r-ui-date-popover {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: var(--r-ui-z-popover, 60);
+  min-width: 280px;
+  background-color: var(--r-ui-color-surface);
+  border: 1px solid var(--r-ui-color-border-strong);
+  border-radius: var(--r-ui-radius-sm);
+  box-shadow: var(--r-ui-shadow-lg);
+  padding: 12px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  animation: r-ui-popover-in 0.16s var(--r-ui-ease-spring);
+}
+.r-ui-date-range-picker .r-ui-date-popover {
+  min-width: 320px;
+}
+.r-ui-date-picker.is-open .r-ui-date-popover,
+.r-ui-date-range-picker.is-open .r-ui-date-popover,
+.r-ui-time-picker.is-open .r-ui-date-popover {
+  display: flex;
+}
+
+.r-ui-date-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--r-ui-color-border-subtle);
+}
+.r-ui-date-preset-btn {
+  height: 24px;
+  padding: 0 8px;
+  border-radius: var(--r-ui-radius-xs);
+  border: 1px solid var(--r-ui-color-border-standard);
+  background: var(--r-ui-color-surface-elevated);
+  color: var(--r-ui-color-text-secondary);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--r-ui-duration-fast) ease;
+}
+.r-ui-date-preset-btn:hover {
+  border-color: var(--r-ui-color-border-strong);
+  color: var(--r-ui-color-text-primary);
+}
+.r-ui-date-preset-btn.is-active {
+  background-color: rgba(var(--r-ui-color-accent-primary-rgb, 56, 189, 248), 0.14);
+  border-color: var(--r-ui-color-accent-primary);
+  color: var(--r-ui-color-accent-primary);
+}
+
+.r-ui-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.r-ui-calendar-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--r-ui-color-text-primary);
+}
+.r-ui-calendar-nav-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--r-ui-radius-xs);
+  border: 1px solid var(--r-ui-color-border-standard);
+  background: var(--r-ui-color-surface-elevated);
+  color: var(--r-ui-color-text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.r-ui-calendar-nav-btn:hover {
+  color: var(--r-ui-color-text-primary);
+  border-color: var(--r-ui-color-border-strong);
+}
+
+.r-ui-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.r-ui-calendar-weekday {
+  text-align: center;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--r-ui-color-text-tertiary);
+  padding: 4px 0;
+}
+.r-ui-calendar-day {
+  height: 30px;
+  border-radius: var(--r-ui-radius-xs);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--r-ui-color-text-primary);
+  font-family: var(--r-ui-font-family-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--r-ui-duration-instant) ease;
+}
+.r-ui-calendar-day:hover:not(:disabled) {
+  background-color: var(--r-ui-color-surface-elevated);
+  border-color: var(--r-ui-color-border-standard);
+}
+.r-ui-calendar-day.is-outside {
+  color: var(--r-ui-color-text-muted);
+}
+.r-ui-calendar-day.is-today {
+  border-color: rgba(var(--r-ui-color-accent-primary-rgb, 56, 189, 248), 0.45);
+}
+.r-ui-calendar-day.is-in-range {
+  background-color: rgba(var(--r-ui-color-accent-primary-rgb, 56, 189, 248), 0.14);
+  color: var(--r-ui-color-text-primary);
+  border-radius: 0;
+}
+.r-ui-calendar-day.is-selected,
+.r-ui-calendar-day.is-range-start,
+.r-ui-calendar-day.is-range-end {
+  background-color: var(--r-ui-color-accent-primary);
+  color: var(--r-ui-color-text-inverse);
+  font-weight: 700;
+}
+.r-ui-calendar-day:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.r-ui-date-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--r-ui-color-border-subtle);
+}
+
+/* Radio Card Selector (100% Uniform 1px Perimeter, Zero Thick Left Border) */
+.r-ui-radio-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--r-ui-space-2);
+}
+.r-ui-radio-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--r-ui-space-2);
+  padding: 10px 12px;
+  border-radius: var(--r-ui-radius-xs);
+  border: 1px solid var(--r-ui-color-border-standard);
+  background-color: var(--r-ui-color-surface-elevated);
+  cursor: pointer;
+  transition: all var(--r-ui-duration-fast) var(--r-ui-ease-spring);
+}
+.r-ui-radio-card:hover {
+  border-color: var(--r-ui-color-border-strong);
+}
+.r-ui-radio-card.is-selected {
+  border-color: rgba(var(--r-ui-color-accent-primary-rgb, 56, 189, 248), 0.5);
+  background-color: rgba(var(--r-ui-color-accent-primary-rgb, 56, 189, 248), 0.08);
+  box-shadow: 0 0 0 1px rgba(var(--r-ui-color-accent-primary-rgb, 56, 189, 248), 0.2);
+}
+
+/* Input + Custom Select Combo (.r-ui-input-select-combo) */
+.r-ui-input-select-combo {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: var(--r-ui-control-h-md, 34px);
+  min-height: var(--r-ui-control-h-md, 34px);
+  background-color: var(--r-ui-color-surface-elevated);
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-xs);
+  transition: border-color var(--r-ui-duration-fast) var(--r-ui-ease-spring),
+              box-shadow var(--r-ui-duration-fast) var(--r-ui-ease-spring);
+}
+.r-ui-input-select-combo:focus-within {
+  border-color: var(--r-ui-color-accent-primary);
+  box-shadow: 0 0 0 1px var(--r-ui-color-focus-ring);
+}
+.r-ui-input-select-combo.is-error {
+  border-color: var(--r-ui-color-error);
+  box-shadow: 0 0 0 1px var(--r-ui-color-error);
+}
+.r-ui-input-select-combo .r-ui-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: calc(var(--r-ui-control-h-md, 34px) - 2px);
+  min-height: calc(var(--r-ui-control-h-md, 34px) - 2px);
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+.r-ui-input-select-combo .r-ui-input:focus {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+.r-ui-input-select-combo .r-ui-custom-select {
+  width: auto;
+  flex-shrink: 0;
+}
+.r-ui-input-select-combo .r-ui-select-trigger {
+  height: calc(var(--r-ui-control-h-md, 34px) - 2px);
+  min-height: calc(var(--r-ui-control-h-md, 34px) - 2px);
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  background: var(--r-ui-color-surface-overlay);
+  padding: 0 10px;
+  gap: 6px;
+}
+.r-ui-input-select-combo--left .r-ui-custom-select .r-ui-select-trigger {
+  border-right: 1px solid var(--r-ui-color-border-standard);
+  border-top-left-radius: var(--r-ui-radius-xs);
+  border-bottom-left-radius: var(--r-ui-radius-xs);
+}
+.r-ui-input-select-combo--right .r-ui-custom-select .r-ui-select-trigger {
+  border-left: 1px solid var(--r-ui-color-border-standard);
+  border-top-right-radius: var(--r-ui-radius-xs);
+  border-bottom-right-radius: var(--r-ui-radius-xs);
+}
+
+/* Searchable Select Input inside Popover */
+.r-ui-select-search {
+  position: sticky;
+  top: 0;
+  padding: 4px;
+  background-color: var(--r-ui-color-surface);
+  border-bottom: 1px solid var(--r-ui-color-border-subtle);
+  margin-bottom: 2px;
+}
+
+/* Switch Field Row (Label + Description + Spring Switch) */
+.r-ui-switch-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--r-ui-space-3);
+  padding: 10px 12px;
+  border-radius: var(--r-ui-radius-xs);
+  border: 1px solid var(--r-ui-color-border-standard);
+  background-color: var(--r-ui-color-surface-elevated);
+}
+.r-ui-switch-field__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.r-ui-switch-field__title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--r-ui-color-text-primary);
+}
+
+/* Checkbox Group */
+.r-ui-checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--r-ui-space-3);
+}
+.r-ui-checkbox-group--vertical {
+  flex-direction: column;
+  gap: var(--r-ui-space-2);
+}
+
+/* Inline Tag Input */
+.r-ui-tag-input {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  min-height: var(--r-ui-control-h-md, 34px);
+  padding: 4px 8px;
+  background-color: var(--r-ui-color-surface-elevated);
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-xs);
+}
+.r-ui-tag-input:focus-within {
+  border-color: var(--r-ui-color-accent-primary);
+  box-shadow: 0 0 0 1px var(--r-ui-color-focus-ring);
+}
+.r-ui-tag-input__field {
+  flex: 1 1 100px;
+  min-width: 80px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: var(--r-ui-color-text-primary);
+  font-size: 0.8125rem;
+  outline: none;
+}
+
+/* Color Swatch Picker (Bans native <input type="color">) */
+.r-ui-color-swatch-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.r-ui-color-swatch-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--r-ui-radius-xs);
+  border: 1px solid var(--r-ui-color-border-strong);
+  cursor: pointer;
+  padding: 0;
+  transition: transform var(--r-ui-duration-instant) ease;
+}
+.r-ui-color-swatch-btn:hover { transform: scale(1.1); }
+.r-ui-color-swatch-btn.is-selected {
+  box-shadow: 0 0 0 2px var(--r-ui-color-canvas), 0 0 0 4px var(--r-ui-color-accent-primary);
+}
+
+/* Segmented OTP / PIN Input */
+.r-ui-otp-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.r-ui-otp-cell {
+  width: 34px;
+  height: var(--r-ui-control-h-lg, 40px);
+  text-align: center;
+  font-family: var(--r-ui-font-family-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  background-color: var(--r-ui-color-surface-elevated);
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-xs);
+  color: var(--r-ui-color-text-primary);
+  outline: none;
+}
+.r-ui-otp-cell:focus {
+  border-color: var(--r-ui-color-accent-primary);
+  box-shadow: 0 0 0 1px var(--r-ui-color-focus-ring);
+}
+```
+
+---
+
+## 21. Extended Form & Dashboard Suite (DualRangeSlider, Combobox, MonthPicker, CheckboxCardGroup, ToggleGroup, Tooltip, TreeView, ConfirmDialog, Spinner)
+Completes full 9-Pillar parity across form controls, overlays, navigation, and feedback states.
+
+```css
+/* Dual-Thumb Range Slider */
+.r-ui-slider-field { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+.r-ui-dual-range {
+  position: relative;
+  width: 100%;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+.r-ui-dual-range__track {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--r-ui-radius-full);
+  background-color: var(--r-ui-color-surface-overlay);
+  border: 1px solid var(--r-ui-color-border-subtle);
+}
+.r-ui-dual-range__fill {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  border-radius: var(--r-ui-radius-full);
+  background-color: var(--r-ui-color-accent-primary);
+}
+.r-ui-dual-range__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  margin: 0;
+  background: transparent;
+  pointer-events: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.r-ui-dual-range__input::-webkit-slider-thumb {
+  pointer-events: auto;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--r-ui-color-accent-primary);
+  border: 2px solid var(--r-ui-color-canvas);
+  box-shadow: var(--r-ui-shadow-xs);
+  cursor: pointer;
+}
+
+/* Month Picker Grid */
+.r-ui-month-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.r-ui-month-cell {
+  height: 30px;
+  border-radius: var(--r-ui-radius-xs);
+  border: 1px solid var(--r-ui-color-border-standard);
+  background: var(--r-ui-color-surface-elevated);
+  color: var(--r-ui-color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.r-ui-month-cell:hover { border-color: var(--r-ui-color-border-strong); color: var(--r-ui-color-text-primary); }
+.r-ui-month-cell.is-selected {
+  background-color: var(--r-ui-color-accent-primary);
+  border-color: var(--r-ui-color-accent-primary);
+  color: var(--r-ui-color-text-inverse);
+}
+
+/* Checkbox Card Group & Toggle Group */
+.r-ui-checkbox-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--r-ui-space-2);
+}
+.r-ui-checkbox-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--r-ui-space-2);
+  padding: 10px 12px;
+  border-radius: var(--r-ui-radius-xs);
+  border: 1px solid var(--r-ui-color-border-standard);
+  background-color: var(--r-ui-color-surface-elevated);
+  cursor: pointer;
+  transition: all var(--r-ui-duration-fast) var(--r-ui-ease-spring);
+}
+.r-ui-checkbox-card:hover { border-color: var(--r-ui-color-border-strong); }
+.r-ui-checkbox-card.is-selected {
+  border-color: rgba(var(--r-ui-color-accent-primary-rgb, 56, 189, 248), 0.5);
+  background-color: rgba(var(--r-ui-color-accent-primary-rgb, 56, 189, 248), 0.08);
+}
+
+.r-ui-toggle-group {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--r-ui-color-border-standard);
+  border-radius: var(--r-ui-radius-xs);
+  background-color: var(--r-ui-color-surface-elevated);
+  padding: 2px;
+  gap: 2px;
+}
+.r-ui-toggle-group__item {
+  height: calc(var(--r-ui-control-h-md, 34px) - 6px);
+  padding: 0 10px;
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--r-ui-color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--r-ui-duration-fast) ease;
+}
+.r-ui-toggle-group__item:hover { color: var(--r-ui-color-text-primary); }
+.r-ui-toggle-group__item.is-selected {
+  background-color: var(--r-ui-color-accent-primary);
+  color: var(--r-ui-color-text-inverse);
+}
+
+/* Key-Value List Editor & Form Error Summary */
+.r-ui-kv-editor { display: flex; flex-direction: column; gap: 8px; }
+.r-ui-kv-editor__row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; align-items: center; }
+.r-ui-form-error-summary {
+  border: 1px solid rgba(239, 68, 68, 0.38);
+  background-color: rgba(239, 68, 68, 0.08);
+  border-radius: var(--r-ui-radius-sm);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.r-ui-form-error-summary__list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+}
+.r-ui-form-error-summary__link {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--r-ui-color-error);
+  font-size: 0.75rem;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Tooltip */
+.r-ui-tooltip-wrap { position: relative; display: inline-flex; }
+.r-ui-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(2px);
+  padding: 4px 8px;
+  border-radius: var(--r-ui-radius-xs);
+  background-color: var(--r-ui-color-surface-overlay);
+  border: 1px solid var(--r-ui-color-border-strong);
+  color: var(--r-ui-color-text-primary);
+  font-size: 0.6875rem;
+  white-space: nowrap;
+  box-shadow: var(--r-ui-shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  z-index: var(--r-ui-z-popover, 60);
+  transition: opacity var(--r-ui-duration-fast) ease, transform var(--r-ui-duration-fast) var(--r-ui-ease-spring);
+}
+.r-ui-tooltip--bottom { bottom: auto; top: calc(100% + 6px); }
+.r-ui-tooltip-wrap:hover .r-ui-tooltip,
+.r-ui-tooltip-wrap:focus-within .r-ui-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Dropdown Menu Divider & Shortcut */
+.r-ui-dropdown-divider {
+  height: 1px;
+  background-color: var(--r-ui-color-border-subtle);
+  margin: 4px 0;
+}
+.r-ui-dropdown-item--destructive { color: var(--r-ui-color-error); }
+.r-ui-dropdown-item--destructive:hover { background-color: var(--r-ui-color-error-bg); color: var(--r-ui-color-error); }
+.r-ui-dropdown-shortcut {
+  margin-left: auto;
+  font-family: var(--r-ui-font-family-mono);
+  font-size: 0.625rem;
+  color: var(--r-ui-color-text-muted);
+}
+
+/* Hierarchical TreeView */
+.r-ui-tree { display: flex; flex-direction: column; gap: 2px; }
+.r-ui-tree-node {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 4px 8px;
+  border-radius: var(--r-ui-radius-xs);
+  border: 1px solid transparent;
+  font-size: 0.8125rem;
+  color: var(--r-ui-color-text-secondary);
+  cursor: pointer;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+}
+.r-ui-tree-node:hover { background-color: var(--r-ui-color-surface-elevated); color: var(--r-ui-color-text-primary); }
+.r-ui-tree-node.is-selected {
+  border-color: rgba(var(--r-ui-color-accent-primary-rgb, 56, 189, 248), 0.35);
+  background-color: rgba(var(--r-ui-color-accent-primary-rgb, 56, 189, 248), 0.08);
+  color: var(--r-ui-color-text-primary);
+  font-weight: 600;
+}
+.r-ui-tree-children {
+  padding-left: 16px;
+  margin-left: 8px;
+  border-left: 1px solid var(--r-ui-color-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Spinner */
+.r-ui-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--r-ui-color-border-strong);
+  border-top-color: var(--r-ui-color-accent-primary);
+  border-radius: 50%;
+  animation: r-ui-spin 0.7s linear infinite;
+}
+@keyframes r-ui-spin { to { transform: rotate(360deg); } }
 ```
 

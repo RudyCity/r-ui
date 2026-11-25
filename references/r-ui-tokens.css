@@ -164,7 +164,16 @@
   --r-ui-action-dock-h: 44px;
 
   /* ==========================================================================
-     10. HORIZONTAL SCROLL & FADE GRADIENT MASKS
+     10. UNIFIED FORM CONTROL HEIGHT SCALE (100% COMPONENT PARITY)
+     Input, Select, MultiSelect, DatePicker, DateRangePicker, TimePicker, Stepper, Button
+     ========================================================================== */
+  --r-ui-control-h-xs: 24px;
+  --r-ui-control-h-sm: 30px;
+  --r-ui-control-h-md: 34px;
+  --r-ui-control-h-lg: 40px;
+
+  /* ==========================================================================
+     11. HORIZONTAL SCROLL & FADE GRADIENT MASKS
      Clean overflow handling for icon rails, tabs, and filter chip carousels.
      ========================================================================== */
   --r-ui-mask-fade-start: linear-gradient(to right, transparent, black 24px);

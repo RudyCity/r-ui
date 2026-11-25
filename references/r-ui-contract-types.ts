@@ -1,12 +1,14 @@
 /**
- * r-ui Contract Types & Variant Engine (v3.5.0)
+ * r-ui Contract Types & Variant Engine (v3.6.0)
  * Namespace: r-ui-*
- * Principles: Zero-Dependency, Type-Safe, Multi-Theme, Anti-Slop
+ * Principles: Zero-Dependency, Type-Safe, Multi-Theme, Anti-Slop, 100% Componentized Forms
  */
 
 export type RUiVariant = 'primary' | 'secondary' | 'ghost' | 'destructive' | 'outline';
-export type RUiSize = 'sm' | 'md' | 'lg';
+export type RUiSize = 'xs' | 'sm' | 'md' | 'lg';
+export type RUiControlSize = 'sm' | 'md' | 'lg';
 export type RUiIntent = 'default' | 'info' | 'success' | 'warning' | 'error';
+export type RUiValidationState = 'default' | 'error' | 'warning' | 'success';
 export type RUiState = 'idle' | 'loading' | 'disabled';
 
 export type RUiCanvasTheme =
@@ -76,6 +78,110 @@ export interface RUiAlertProps extends React.HTMLAttributes<HTMLDivElement> {
   onDismiss?: () => void;
   dismissible?: boolean;
   unstyled?: boolean;
+}
+
+/**
+ * Unified Componentized Form Contracts (v3.6.0 - Law 9)
+ * 100% zero raw native widgets (select, date, date-range, time, checkbox, radio, slider, file).
+ */
+export interface RUiSelectOption {
+  value: string;
+  label: string;
+  description?: string;
+  badge?: string;
+  disabled?: boolean;
+}
+
+export interface RUiDateRangeValue {
+  start: string | null; // ISO YYYY-MM-DD
+  end: string | null;   // ISO YYYY-MM-DD
+  preset?: string;
+}
+
+export interface RUiDatePreset {
+  id: string;
+  label: string;
+  getRange: () => { start: string; end: string };
+}
+
+export interface RUiFormFieldBaseProps {
+  id?: string;
+  label?: string;
+  hint?: string;
+  error?: string;
+  successMessage?: string;
+  required?: boolean;
+  disabled?: boolean;
+  controlSize?: RUiControlSize;
+  unstyled?: boolean;
+}
+
+export interface RUiDropzoneFile {
+  id: string;
+  name: string;
+  size: number;
+  type?: string;
+  status?: 'ready' | 'uploading' | 'done' | 'error';
+}
+
+export interface RUiDateTimeValue {
+  date: string | null; // ISO YYYY-MM-DD
+  time: string;        // HH:mm
+}
+
+export interface RUiInputWithSelectValue {
+  text: string;
+  selected: string;
+}
+
+export interface RUiColorSwatchOption {
+  value: string;
+  label: string;
+}
+
+export interface RUiKeyValuePair {
+  id: string;
+  key: string;
+  value: string;
+  secret?: boolean;
+}
+
+export interface RUiFormErrorItem {
+  fieldId: string;
+  label: string;
+  message: string;
+}
+
+export interface RUiTreeNode {
+  id: string;
+  label: string;
+  badge?: string;
+  children?: RUiTreeNode[];
+}
+
+export interface RUiBreadcrumbItem {
+  id: string;
+  label: string;
+  href?: string;
+  onClick?: () => void;
+}
+
+export interface RUiDropdownItem {
+  id: string;
+  label: string;
+  shortcut?: string;
+  destructive?: boolean;
+  dividerBefore?: boolean;
+  disabled?: boolean;
+  onSelect: () => void;
+}
+
+export interface RUiTableColumn<T = Record<string, unknown>> {
+  key: keyof T & string;
+  header: string;
+  sortable?: boolean;
+  numeric?: boolean;
+  render?: (row: T) => React.ReactNode;
 }
 
 /**

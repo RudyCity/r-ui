@@ -161,35 +161,37 @@ Integrated SVG charts respecting canvas and accent theme tokens.
 
 ---
 
-## PILLAR 5: COMPONENTIZED FORM CONTROLS (ZERO NATIVE FORMS)
+## PILLAR 5: COMPONENTIZED FORM CONTROLS (ZERO NATIVE FORMS & UNIFIED CONSISTENCY)
 
-Per **r-ui Law 9**: All form controls must utilize custom, isolated, and accessible DOM components.
+Per **r-ui Law 9**: 100% of form controls MUST utilize custom, isolated, accessible `r-ui` DOM components sharing unified height tokens (`--r-ui-control-h-sm: 30px`, `--r-ui-control-h-md: 34px`, `--r-ui-control-h-lg: 40px`), `FieldGroup` envelopes, and dual-layer theme reactivity. Raw native `<select>`, `<input type="date|time|datetime-local|month|week">`, and unstyled checkboxes/radios/range/file inputs are strictly banned.
 
-### 5.1 Custom Accessible Select (`.r-ui-custom-select`)
-- Trigger button displaying active selection, status indicator, and rotating SVG chevron.
-- Floating popover menu matching active canvas theme, micro-elevated, scrollable, with full keyboard navigation and W3C ARIA combobox/listbox attributes.
+### 5.1 Structured Form Envelope & Layout (`.r-ui-form`, `.r-ui-form-grid`, `.r-ui-form-actions`)
+- **Form Container**: Vertical rhythm (`gap: 16px`), optional `.r-ui-alert--above-form` summary banner, logical `.r-ui-form-section` headers, responsive 1–2 column `.r-ui-form-grid`, and aligned `.r-ui-form-actions` footer where all buttons share identical height.
 
-### 5.2 Multi-Select with Removable Chips (`.r-ui-multi-select`)
-- Selected items rendered as compact removable chips (`×`) inside trigger button.
-- Popover menu with real-time search, "Select All" toggle, and individual option checkboxes.
+### 5.2 Custom Accessible Select & Searchable Select (`.r-ui-custom-select`)
+- Trigger button displaying active selection, optional leading icon, clear button, and rotating SVG chevron.
+- Floating popover menu matching active canvas theme, micro-elevated, optional real-time search input, scrollable, with full keyboard navigation and W3C ARIA combobox/listbox attributes.
 
-### 5.3 Date & Date-Range Picker (`.r-ui-date-picker`)
-- Quick preset range buttons: *"Today"*, *"Last 7 Days"*, *"Last 30 Days"*, *"This Month"*, *"Custom"*.
-- Dual calendar popover for start and end date selection with highlighted visual range.
+### 5.3 Multi-Select with Removable Chips (`.r-ui-multi-select`)
+- Selected items rendered as compact removable chips (`×`) inside trigger button (matching `34px` min-height).
+- Popover menu with real-time search, "Select All / Clear" bar, and individual option checkboxes.
 
-### 5.4 Text, Search & Number Inputs (`.r-ui-input`)
-- Prefix slots (icons / currency symbols) and suffix slots (clear button, copy action, unit indicators `ms`, `GB`).
-- Precision number steppers with increment/decrement buttons.
-- Standardized visual validation states: `.is-error`, `.is-warning`, `.is-success` with helper micro-text.
+### 5.4 Custom Date, Date-Range, Time & DateTime Pickers (`.r-ui-date-picker`, `.r-ui-date-range-picker`, `.r-ui-time-picker`, `.r-ui-datetime-picker`)
+- **Date Picker**: Custom trigger (`34px` default) with calendar icon, formatted tabular date (`YYYY-MM-DD`), clear action, and interactive calendar popover (month/year navigation, Today/Clear footer, `minDate`/`maxDate` constraints).
+- **Date-Range Picker**: Custom trigger displaying `Start → End` range, quick preset pills (*Today*, *Last 7D*, *Last 30D*, *This Month*, *Quarter*), and interactive calendar range grid with start/in-range/end visual band, hover preview, and Apply/Reset footer.
+- **Time & DateTime Picker**: Custom popover with hour/minute selection columns (`.r-ui-time-picker`) or combined date calendar + time selector (`.r-ui-datetime-picker`).
 
-### 5.5 Tactile Spring Switch, Checkbox & Radio Cards
-- **Spring Switch**: Tactile toggle slider with physical spring curve.
-- **Custom Checkbox**: Accessible checkbox with crisp SVG checkmark and indeterminate state.
-- **Radio Cards**: Outlined card options featuring title, description, badge, and integrated radio ring.
+### 5.5 TextField, InputWithSelect Combo, Number Stepper, TagInput & Textarea
+- **TextField & PasswordField**: Integrated `FieldGroup` wrapper combining Label, required `*`, prefix/suffix addons, clear button, password visibility eye toggle, hint, and inline validation (`.is-error`, `.is-success`).
+- **InputWithSelect (`.r-ui-input-select-combo`)**: Unified single-border container attaching an Input cleanly to a Custom Select trigger on either left or right (e.g., Protocol `https://` | `host` | Port, Amount + Currency `USD`/`IDR`, Phone + Country Code `+62`, Search + Scope) with exact 34px height parity.
+- **NumberStepper & Textarea**: Precision `NumberStepper` (`-` / tabular numeric input / `+`) and `Textarea` with live tabular character counter (`0 / 280`).
+- **TagInput (`.r-ui-tag-input`)**: Inline chip editor supporting `Enter`/comma creation and `Backspace`/click removal.
 
-### 5.6 Drag-and-Drop File Upload Zone (`.r-ui-dropzone`)
-- Dashed border dropzone with upload icon, allowed MIME type descriptions, and size limits.
-- Uploaded file list with progress bar, filename, file size, and remove/cancel action.
+### 5.6 SwitchField, CheckboxGroup, Radio Cards, Slider, ColorSwatchPicker, OtpInput & Dropzone
+- **SwitchField (`.r-ui-switch-field`)**: 1px bordered row pairing Label + helper description with a tactile spring switch (`role="switch"`).
+- **CheckboxGroup & RadioCardGroup**: Accessible checkbox groups (with indeterminate support) and 1px uniform perimeter Radio Cards (zero thick left border).
+- **RangeSlider & ColorSwatchPicker**: Custom track slider with tabular readout; calibrated color swatch selector + hex input replacing `<input type="color">`.
+- **OtpInput (`.r-ui-otp-group`) & Dropzone (`.r-ui-dropzone`)**: Segmented verification boxes with auto-advance and paste support; drag-and-drop file zone with file list & remove actions.
 
 ---
 
